@@ -1,0 +1,21 @@
+version: "3.7"
+services:
+  server:
+    build: 
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: arqueo-server-1
+    image: arqueo-server
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=./server/.env
+
+  client:
+    build: ./client
+    image: arqueo-client
+    container_name: arqueo-client-1
+    ports:
+      - "5173:5173"
+    depends_on:
+      - server
