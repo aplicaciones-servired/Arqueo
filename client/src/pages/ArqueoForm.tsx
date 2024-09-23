@@ -8,7 +8,7 @@ import { Card } from "@tremor/react";
 import { BottonExportItems } from "../components/XportExcel";
 import { PDF } from '../components/PDF';
 import { PDFDownloadLink } from '@react-pdf/renderer';
-
+import { API_URL } from '../utils/constans'
 
 function ArqueoForm(): JSX.Element {
 
@@ -20,7 +20,7 @@ function ArqueoForm(): JSX.Element {
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
       try {
-        const response = await axios.get(`http://localhost:3000/arqueos/${company}/${id}`);
+        const response = await axios.get(`${API_URL}/API/arqueos/${company}/${id}`);
         setData(response.data as Arqueos);
 
         if (response && response.data) {

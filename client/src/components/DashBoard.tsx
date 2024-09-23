@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom'
 import { RiSearchEyeLine } from '@remixicon/react'
 import { type Empresa } from '../types/user'
 import { exportarAExcel } from "../components/Export";
+import { API_URL } from '../utils/constans'
 
 const DahsBoard = ({ company }: { company: Empresa }): JSX.Element => {
   const [data, setData] = useState<Arqueos>([])
@@ -22,7 +23,7 @@ const DahsBoard = ({ company }: { company: Empresa }): JSX.Element => {
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
       try {
-        const response = await axios.get(`http://localhost:3000/arqueos/${company}`);
+        const response = await axios.get(`${API_URL}/API/arqueos/${company}`);
         setData(response.data as Arqueos);
 
       } catch (error) {

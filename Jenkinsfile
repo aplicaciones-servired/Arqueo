@@ -7,6 +7,7 @@ pipeline {
 
   environment {
     ENV_SERVER_ARQUEO = credentials('ENV_SERVER_ARQUEO')
+    ENV_SERVER_CLIENT = credentials('ENV_SERVER_CLIENT')
     
   }
     
@@ -15,8 +16,9 @@ pipeline {
       steps {
         script {
             def env_server = readFile(ENV_SERVER_ARQUEO)
+            def env_client = readFile(ENV_SERVER_CLIENT)
             writeFile file: './server/.env', text: env_server
-           
+            writeFile file: './client/.env', text: env_client
           }
         }
       }
@@ -25,7 +27,6 @@ pipeline {
         steps {
           script {
             sh 'cd ./server && yarn'
-            sh 'cd ./server && yarn build'
           }
         }
       }
@@ -46,6 +47,7 @@ pipeline {
           }
         }
       }
+
       stage('delete images server'){
         steps{
           script {
@@ -59,19 +61,7 @@ pipeline {
           }
         }
       }
-      stage('delete images client'){
-        steps{
-          script {
-          def images = 'arqueo-client'
-            if (sh(script: "docker images -q ${images}", returnStdout: true).trim()) {
-              sh "docker rmi ${images}"
-            } else {
-              echo "Image ${images} does not exist."
-              echo "continuing... executing next steps"
-            }
-          }
-        }
-      }
+    
       stage('run docker compose'){
         steps {
           script {

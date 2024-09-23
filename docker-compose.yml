@@ -8,14 +8,12 @@ services:
     image: arqueo-server
     ports:
       - "3000:3000"
-    environment:
-      - NODE_ENV=./server/.env
 
-  client:
-    build: ./client
-    image: arqueo-client
-    container_name: arqueo-client-1
-    ports:
-      - "5173:5173"
+  web-metas:
+    image: nginx:stable-alpine3.19-slim
+    container_name: web_arqueo
+    volumes:
+      - ./client/dist:/usr/share/nginx/html
+      - ./nginx.conf:/etc/nginx/nginx.conf
     depends_on:
       - server
