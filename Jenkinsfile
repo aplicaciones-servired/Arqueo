@@ -21,7 +21,7 @@ pipeline {
         }
       }
 
-      stage('install dependencies') {
+      stage('install dependencies server') {
         steps {
           script {
             sh 'cd ./server && yarn'
@@ -30,7 +30,7 @@ pipeline {
         }
       }
 
-      stage('install dependencies') {
+      stage('install dependencies client') {
         steps {
           script {
             sh 'cd ./client && yarn'
@@ -46,7 +46,7 @@ pipeline {
           }
         }
       }
-      stage('delete images'){
+      stage('delete images server'){
         steps{
           script {
           def images = 'arqueo-server'
@@ -59,7 +59,7 @@ pipeline {
           }
         }
       }
-      stage('delete images'){
+      stage('delete images client'){
         steps{
           script {
           def images = 'arqueo-client'
