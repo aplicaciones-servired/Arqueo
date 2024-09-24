@@ -9,7 +9,7 @@ services:
     ports:
       - "3000:3000"
     networks:
-      - desplieguearqueo_default
+      - red-gane-int
 
   web-metas:
     image: nginx:stable-alpine3.19-slim
@@ -20,8 +20,8 @@ services:
     depends_on:
       - server
     networks:
-      - desplieguearqueo_default
+      - red-gane-int
 
 networks:
-  desplieguearqueo_default:
+  red-gane-int:
     external: true
