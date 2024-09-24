@@ -23,7 +23,7 @@ const DahsBoard = ({ company }: { company: Empresa }): JSX.Element => {
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
       try {
-        const response = await axios.get(`${API_URL}/API/arqueos/${company}`);
+        const response = await axios.get(`${API_URL}/arqueos/${company}`);
         setData(response.data as Arqueos);
 
       } catch (error) {

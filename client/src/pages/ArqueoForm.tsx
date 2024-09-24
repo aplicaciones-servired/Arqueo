@@ -20,7 +20,7 @@ function ArqueoForm(): JSX.Element {
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
       try {
-        const response = await axios.get(`${API_URL}/API/arqueos/${company}/${id}`);
+        const response = await axios.get(`${API_URL}/arqueos/${company}/${id}`);
         setData(response.data as Arqueos);
 
         if (response && response.data) {
