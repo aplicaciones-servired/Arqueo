@@ -10,8 +10,9 @@ interface FilterPDV {
 }
 
 function filterByPDV (pdv: Arqueos, searchPDV: string): Arqueos {
-  return pdv.filter(({ fechavisita }) =>
-    ((fechavisita != null) ? fechavisita.toLowerCase().includes(searchPDV.toLowerCase()) : false)
+  return pdv.filter(({ fechavisita, supervisor }) =>
+    ((fechavisita != null) ? fechavisita.toLowerCase().includes(searchPDV.toLowerCase()) : false) ||
+    ((supervisor != null) ? supervisor.toLowerCase().includes(searchPDV.toLowerCase()) : false)
   )
 }
 
