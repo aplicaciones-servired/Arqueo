@@ -14,7 +14,7 @@ import { API_URL } from '../utils/constans'
 const DahsBoard = ({ company }: { company: Empresa }): JSX.Element => {
   const [data, setData] = useState<Arqueos>([])
   const [currentPage, setCurrentPage] = useState(1)
-  const { filteredPDV, setSearchPDV, searchPDV } = useFilter(data)
+  const { filteredPDV, setSearchPDV, setSearchPDS, searchPDV, searchPDS } = useFilter(data)
   const [fechaInicio, setFechaInicio] = useState("");
   const [fechaFin, setFechaFin] = useState("");
 
@@ -24,14 +24,21 @@ const DahsBoard = ({ company }: { company: Empresa }): JSX.Element => {
     const fetchData = async (): Promise<void> => {
       try {
         const response = await axios.get(`${API_URL}/arqueos/${company}`);
+        //const response = await axios.get(`http://localhost:3000/arqueos/${company}`);
         setData(response.data as Arqueos);
+
 
       } catch (error) {
         console.error('Error al obtener los datos:', error);
       }
     };
-
     void fetchData()
+    const intervalId = setInterval(() => {
+      fetchData();
+    }, 300000);
+
+
+    return () => clearInterval(intervalId);
   }, [])
 
   const itemsPerPage = 10
@@ -66,36 +73,39 @@ const DahsBoard = ({ company }: { company: Empresa }): JSX.Element => {
     });
 
     exportarAExcel({ registros: registrosFiltrados })
-  
+
   }
 
   return (
     <>
-      <section className='flex items-center gap-2 bg-blue-200 dark:bg-dark-tremor-brand-muted dark:text-white fixed z-50 left-6 mt-1 p-2 px-8 rounded-lg'>
-        <Label>Filtrar Por Fecha:</Label>
-        <Input type="date" value={searchPDV} onChange={ev => { setSearchPDV(ev.target.value) }} />
-      </section>
+      <div className="flex gap-4 fixed z-50 left-6 mt-1">
+        <section className='flex items-center gap-2 bg-blue-200 dark:bg-dark-tremor-brand-muted dark:text-white p-2 px-8 rounded-lg'>
+          <Label>Filtrar Por Fecha:</Label>
+          <Input type="date" value={searchPDV} onChange={ev => setSearchPDV(ev.target.value)} />
+        </section>
 
-      <section className='flex items-center gap-2 bg-blue-200 dark:bg-dark-tremor-brand-muted dark:text-white fixed z-50 left-96 mt-1 p-2 px-8 rounded-lg'>
-        <Label>exportar por fecha:</Label>
-        <Input
-          type="date"
-          value={fechaInicio}
-          onChange={(e) => setFechaInicio(e.target.value)}
-        />
-      
-        <Input
-          type="date"
-          value={fechaFin}
-          onChange={(e) => setFechaFin(e.target.value)}
-        />
-        <Button
-          onClick={exportarRegistros}
-        >
-          Exportar a Excel
-        </Button>
+        <section className='flex items-center gap-2 bg-blue-200 dark:bg-dark-tremor-brand-muted dark:text-white p-2 px-8 rounded-lg'>
+          <Label>Filtrar Por Supervisor:</Label>
+          <Input type="text" value={searchPDS} onChange={ev => setSearchPDS(ev.target.value)} />
+        </section>
 
-      </section>
+        <section className='flex items-center gap-2 bg-blue-200 dark:bg-dark-tremor-brand-muted dark:text-white p-2 px-8 rounded-lg'>
+          <Label>Exportar por Fecha:</Label>
+          <Input
+            type="date"
+            value={fechaInicio}
+            onChange={(e) => setFechaInicio(e.target.value)}
+          />
+          <Input
+            type="date"
+            value={fechaFin}
+            onChange={(e) => setFechaFin(e.target.value)}
+          />
+          <Button onClick={exportarRegistros}>
+            Exportar a Excel
+          </Button>
+        </section>
+      </div>
 
 
       <Card>
