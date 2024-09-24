@@ -6,8 +6,6 @@ services:
       dockerfile: Dockerfile
     container_name: arqueo-server-1
     image: arqueo-server
-    ports:
-      - "3000:3000"
     networks:
       - red-gane-int
 
