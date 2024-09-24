@@ -8,6 +8,8 @@ services:
     image: arqueo-server
     ports:
       - "3000:3000"
+    networks:
+      - desplieguearqueo_default
 
   web-metas:
     image: nginx:stable-alpine3.19-slim
@@ -17,3 +19,9 @@ services:
       - ./conf/nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
       - server
+    networks:
+      - desplieguearqueo_default
+
+networks:
+  desplieguearqueo_default:
+    external: true
