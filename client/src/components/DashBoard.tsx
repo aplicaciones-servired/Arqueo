@@ -45,10 +45,17 @@ const DahsBoard = ({ company }: { company: Empresa }): JSX.Element => {
   const offset = (currentPage - 1) * itemsPerPage
 
   const getFormattedDate = (dateString: string): string => {
-    const date: Date = new Date(dateString);
-    // Ajustar la fecha para la zona horaria local
-    date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
-    return date.toLocaleDateString();
+    const date = new Date(dateString);
+    
+    // Ajustar la fecha a la zona horaria local
+    const localDate = new Date(date.getTime() - (date.getTimezoneOffset() * 60000));
+    
+    // Formatear la fecha como dd/mm/yyyy
+    return localDate.toLocaleDateString('es-ES', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    });
   }
   
 
