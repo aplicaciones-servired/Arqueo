@@ -14,7 +14,7 @@ import { API_URL } from '../utils/constans'
 const DahsBoard = ({ company }: { company: Empresa }): JSX.Element => {
   const [data, setData] = useState<Arqueos>([])
   const [currentPage, setCurrentPage] = useState(1)
-  const { filteredPDV, setSearchPDV, setSearchPDS, searchPDV, searchPDS } = useFilter(data)
+  const { filteredPDV, setSearchPDV, searchPDV } = useFilter(data)
   const [fechaInicio, setFechaInicio] = useState("");
   const [fechaFin, setFechaFin] = useState("");
 
@@ -137,7 +137,7 @@ const DahsBoard = ({ company }: { company: Empresa }): JSX.Element => {
                 <TableCell className='text-center'>{pdv.nombres}</TableCell>
                 <TableCell className='text-center'>{pdv.sucursal}</TableCell>
                 <TableCell className='text-center'>{pdv.puntodeventa}</TableCell>
-                <TableCell className='text-center'>{pdv.fechavisita}</TableCell>
+                <TableCell className='text-center'>{getFormattedDate(pdv.fechavisita)}</TableCell>
                 <TableCell className='text-center'>
                   <button>
                     <Icon
