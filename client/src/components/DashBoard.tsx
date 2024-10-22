@@ -10,6 +10,8 @@ import { RiSearchEyeLine } from '@remixicon/react'
 import { type Empresa } from '../types/user'
 import { exportarAExcel } from "../components/Export";
 import { API_URL } from '../utils/constans'
+import { format, parseISO } from 'date-fns'
+import { es } from 'date-fns/locale'
 
 const DahsBoard = ({ company }: { company: Empresa }): JSX.Element => {
   const [data, setData] = useState<Arqueos>([])
@@ -45,19 +47,10 @@ const DahsBoard = ({ company }: { company: Empresa }): JSX.Element => {
   const offset = (currentPage - 1) * itemsPerPage
 
   const getFormattedDate = (dateString: string): string => {
-    const date = new Date(dateString);
-    
-    // Ajustar la fecha a la zona horaria local
-    const localDate = new Date(date.getTime() - (date.getTimezoneOffset() * 60000));
-    
-    // Formatear la fecha como dd/mm/yyyy
-    return localDate.toLocaleDateString('es-ES', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric'
-    });
+    const date = parseISO(dateString);
+    return format(date, 'dd/MM/yyyy', { locale: es });
   }
-  
+
 
   const handleClicks = (id: number) => {
     return () => {
@@ -88,13 +81,13 @@ const DahsBoard = ({ company }: { company: Empresa }): JSX.Element => {
 
   return (
     <>
-      
+
       <section className='flex items-center gap-2 bg-blue-200 dark:bg-dark-tremor-brand-muted dark:text-white fixed z-50 left-6 mt-1 p-2 px-8 rounded-lg'>
         <Label>Filtrar Por Fecha:</Label>
         <Input type="date" value={searchPDV} onChange={ev => { setSearchPDV(ev.target.value) }} />
       </section>
 
-      
+
       <section className='flex items-center gap-2 bg-blue-200 dark:bg-dark-tremor-brand-muted dark:text-white fixed z-50 left-96 mt-1 p-2 px-8 rounded-lg'>
         <Label>exportar por fecha:</Label>
         <Input
@@ -102,7 +95,7 @@ const DahsBoard = ({ company }: { company: Empresa }): JSX.Element => {
           value={fechaInicio}
           onChange={(e) => setFechaInicio(e.target.value)}
         />
-      
+
         <Input
           type="date"
           value={fechaFin}
