@@ -137,7 +137,7 @@ const DahsBoard = ({ company }: { company: Empresa }): JSX.Element => {
                 <TableCell className='text-center'>{pdv.nombres}</TableCell>
                 <TableCell className='text-center'>{pdv.sucursal}</TableCell>
                 <TableCell className='text-center'>{pdv.puntodeventa}</TableCell>
-                <TableCell className='text-center'>{getFormattedDate(pdv.fechavisita)}</TableCell>
+                <TableCell className='text-center'>{pdv.fechavisita}</TableCell>
                 <TableCell className='text-center'>
                   <button>
                     <Icon
