@@ -21,13 +21,15 @@ function ArqueoForm(): JSX.Element {
     const fetchData = async (): Promise<void> => {
       try {
         const response = await axios.get(`${API_URL}/arqueos/${company}/${id}`);
-        
+        setData(response.data as Arqueos);
+
         if (response && response.data) {
           const dataWithBase64Images = response.data.map((item: { firma_auditoria: any, firma_colocadora: any, imagen_observacion: any }) => ({
             ...item,
+
             firma_auditoria: item.firma_auditoria ? Buffer.from(item.firma_auditoria).toString('base64') : null,
             firma_colocadora: item.firma_colocadora ? Buffer.from(item.firma_colocadora).toString('base64') : null,
-            imagen_observacion: item.imagen_observacion ? Buffer.from(item.imagen_observacion).toString('base64') : null
+            imagen_observacion: item.imagen_observacion ? Buffer.from(item.imagen_observacion).toString() : null
           }));
 
           setData(dataWithBase64Images as Arqueos);
@@ -38,7 +40,7 @@ function ArqueoForm(): JSX.Element {
     };
 
     void fetchData()
-  }, [company, id])
+  }, [])
 
   return (
 
