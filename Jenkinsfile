@@ -26,7 +26,7 @@ pipeline {
       stage('install dependencies server') {
         steps {
           script {
-            sh 'cd ./server && yarn'
+            sh 'cd ./server && npm install'
           }
         }
       }
@@ -34,8 +34,8 @@ pipeline {
       stage('install dependencies client') {
         steps {
           script {
-            sh 'cd ./client && yarn'
-            sh 'cd ./client && yarn build'
+            sh 'cd client && npm install'
+            sh 'cd client && npm run build'
           }
         }
       }
