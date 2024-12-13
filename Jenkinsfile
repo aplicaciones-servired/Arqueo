@@ -6,8 +6,8 @@ pipeline {
   }
 
   environment {
-    ENV_SERVER_ARQUEO = credentials('ENV_SERVER_ARQUEO')
-    ENV_SERVER_CLIENT = credentials('ENV_SERVER_CLIENT')
+    ENV_CLIENT_ARQUEOS = credentials('ENV_CLIENT_ARQUEOS')
+    ENV_SERVER_ARQUEOS = credentials('ENV_SERVER_ARQUEOS')
     
   }
     
@@ -15,8 +15,8 @@ pipeline {
     stage('Copy .env files') {
       steps {
         script {
-            def env_server = readFile(ENV_SERVER_ARQUEO)
-            def env_client = readFile(ENV_SERVER_CLIENT)
+            def env_server = readFile(ENV_CLIENT_ARQUEOS)
+            def env_client = readFile(ENV_SERVER_ARQUEOS)
             writeFile file: './server/.env', text: env_server
             writeFile file: './client/.env', text: env_client
           }
@@ -26,7 +26,7 @@ pipeline {
       stage('install dependencies server') {
         steps {
           script {
-            sh 'cd ./server && yarn'
+            sh 'cd ./server && npm install'
           }
         }
       }
@@ -34,8 +34,8 @@ pipeline {
       stage('install dependencies client') {
         steps {
           script {
-            sh 'cd ./client && yarn'
-            sh 'cd ./client && yarn build'
+            sh 'cd ./client && npm install'
+            sh 'cd ./client && node --run build'
           }
         }
       }
