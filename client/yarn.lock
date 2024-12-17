@@ -601,12 +601,48 @@
   resolved "https://registry.npmjs.org/@rtsao/scc/-/scc-1.1.0.tgz"
   integrity sha512-zt6OdqaDoOnJ1ZYsCYGt9YmWzDXl4vQdKTyJev62gFhRGKdx7mcT54V9KIjg+d2wi9EXsPvAPKe7i7WjfVWB8g==
 
+"@swc/core-win32-x64-msvc@1.10.1":
+  version "1.10.1"
+  resolved "https://registry.npmjs.org/@swc/core-win32-x64-msvc/-/core-win32-x64-msvc-1.10.1.tgz"
+  integrity sha512-JWobfQDbTnoqaIwPKQ3DVSywihVXlQMbDuwik/dDWlj33A8oEHcjPOGs4OqcA3RHv24i+lfCQpM3Mn4FAMfacA==
+
+"@swc/core@^1.7.26":
+  version "1.10.1"
+  resolved "https://registry.npmjs.org/@swc/core/-/core-1.10.1.tgz"
+  integrity sha512-rQ4dS6GAdmtzKiCRt3LFVxl37FaY1cgL9kSUTnhQ2xc3fmHOd7jdJK/V4pSZMG1ruGTd0bsi34O2R0Olg9Zo/w==
+  dependencies:
+    "@swc/counter" "^0.1.3"
+    "@swc/types" "^0.1.17"
+  optionalDependencies:
+    "@swc/core-darwin-arm64" "1.10.1"
+    "@swc/core-darwin-x64" "1.10.1"
+    "@swc/core-linux-arm-gnueabihf" "1.10.1"
+    "@swc/core-linux-arm64-gnu" "1.10.1"
+    "@swc/core-linux-arm64-musl" "1.10.1"
+    "@swc/core-linux-x64-gnu" "1.10.1"
+    "@swc/core-linux-x64-musl" "1.10.1"
+    "@swc/core-win32-arm64-msvc" "1.10.1"
+    "@swc/core-win32-ia32-msvc" "1.10.1"
+    "@swc/core-win32-x64-msvc" "1.10.1"
+
+"@swc/counter@^0.1.3":
+  version "0.1.3"
+  resolved "https://registry.npmjs.org/@swc/counter/-/counter-0.1.3.tgz"
+  integrity sha512-e2BR4lsJkkRlKZ/qCHPw9ZaSxc0MVUd7gtbtaB7aMvHeJVYe8sOB8DBZkP2DtISHGSku9sCK6T6cnY0CtXrOCQ==
+
 "@swc/helpers@^0.5.0", "@swc/helpers@^0.5.12":
   version "0.5.13"
   resolved "https://registry.npmjs.org/@swc/helpers/-/helpers-0.5.13.tgz"
   integrity sha512-UoKGxQ3r5kYI9dALKJapMmuK+1zWM/H17Z1+iwnNmzcJRnfFuevZs375TA5rW31pu4BS4NoSy1fRsexDXfWn5w==
   dependencies:
     tslib "^2.4.0"
+
+"@swc/types@^0.1.17":
+  version "0.1.17"
+  resolved "https://registry.npmjs.org/@swc/types/-/types-0.1.17.tgz"
+  integrity sha512-V5gRru+aD8YVyCOMAjMpWR1Ui577DD5KSJsHP8RAxopAH22jFz6GZd/qxqjO6MJHQhcsjvjOFXyDhyLQUnMveQ==
+  dependencies:
+    "@swc/counter" "^0.1.3"
 
 "@tailwindcss/forms@^0.5.7":
   version "0.5.9"
@@ -893,6 +929,13 @@
   version "1.2.0"
   resolved "https://registry.npmjs.org/@ungap/structured-clone/-/structured-clone-1.2.0.tgz"
   integrity sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==
+
+"@vitejs/plugin-react-swc@^3.7.2":
+  version "3.7.2"
+  resolved "https://registry.npmjs.org/@vitejs/plugin-react-swc/-/plugin-react-swc-3.7.2.tgz"
+  integrity sha512-y0byko2b2tSVVf5Gpng1eEhX1OvPC7x8yns1Fx8jDzlJp4LS6CMkCPfLw47cjyoMrshQDoQw4qcgjsU9VvlCew==
+  dependencies:
+    "@swc/core" "^1.7.26"
 
 "@vitejs/plugin-react@^4.3.4":
   version "4.3.4"
