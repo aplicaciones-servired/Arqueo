@@ -1,3 +1,4 @@
+import React from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
 import { type FC } from 'react'
 import NavBar from './NavBar'

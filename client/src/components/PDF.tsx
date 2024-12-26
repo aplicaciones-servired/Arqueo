@@ -1,62 +1,232 @@
-import { Document, Text, Page, StyleSheet, View, Image } from '@react-pdf/renderer';
-import servired from '../components/img/servired.png';
-import multired from '../components/img/multired.png';
+import React from 'react'
+import { Document, Text, Page, StyleSheet, View, Image } from '@react-pdf/renderer'
+import servired from '../components/img/servired.png'
+import multired from '../components/img/multired.png'
 
 const styles = StyleSheet.create({
-    Page: {
-        padding: '10px',
-    },
-    header: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-    },
-    title: {
-        fontSize: '24',
-        textAlign: 'center',
-        color: 'black',
-        marginTop: '5px',
-        fontWeight: 'bold',
-        textTransform: 'uppercase',
-    },
-    text: {
-        fontSize: '13',
-        color: 'black',
-        fontWeight: 'bold',
-        marginTop: '10px',
-    },
-    image: {
-        width: '200px',
-        height: '100px',
-    },
-    images: {
-        width: '200px',
-        height: '200px',
-    },
-    hr: {
-        backgroundColor: 'black',
-        height: '2px',
-    },
-    footer: {
-        position: 'absolute',
-        bottom: 10,
-        left: 0,
-        right: 10,
-        textAlign: 'center',
-        fontSize: 12,
-    },
+  Page: {
+    padding: '10px'
+  },
+  header: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  title: {
+    fontSize: '24',
+    textAlign: 'center',
+    color: 'black',
+    marginTop: '5px',
+    fontWeight: 'bold',
+    textTransform: 'uppercase'
+  },
+  text: {
+    fontSize: '13',
+    color: 'black',
+    fontWeight: 'bold',
+    marginTop: '10px'
+  },
+  image: {
+    width: '200px',
+    height: '100px'
+  },
+  images: {
+    width: '200px',
+    height: '200px'
+  },
+  hr: {
+    backgroundColor: 'black',
+    height: '2px'
+  },
+  footer: {
+    position: 'absolute',
+    bottom: 10,
+    left: 0,
+    right: 10,
+    textAlign: 'center',
+    fontSize: 12
+  }
 }
 )
 
+interface Datos {
+  supervisor: string
+  nombre_supervisor: string
+  documento: string
+  ip: string
+  nombres: string
+  sucursal: string
+  puntodeventa: string
+  ventabruta: string
+  baseefectivo: string
+  totalingreso: string
+  chancesabonados: string
+  chancespreimpresos: string
+  premiospagados: string
+  efectivocajafuerte: string
+  tirillarecaudo: string
+  totalegresos: string
+  totalbilletes: string
+  totalmonedas: string
+  totalarqueo: string
+  sobrantefaltante: string
+  canti_billete_cienmil: string
+  total_billete_cienmil: string
+  canti_billete_cincuentamil: string
+  total_billete_cincuentamil: string
+  canti_billete_veintemil: string
+  total_billete_veintemil: string
+  canti_billete_diezmil: string
+  total_billete_diezmil: string
+  canti_billete_cincomil: string
+  total_billete_cincomil: string
+  canti_billete_dosmil: string
+  total_billete_dosmil: string
+  canti_billete_mil: string
+  canti_moneda_mil: string
+  total_moneda_mil: string
+  canti_moneda_quinientos: string
+  total_moneda_quinientos: string
+  canti_moneda_docientos: string
+  total_moneda_docientos: string
+  canti_moneda_cien: string
+  total_moneda_cien: string
+  canti_moneda_cincuenta: string
+  total_moneda_ciencuenta: string
+  total_efectivo: string
+  canti_billete_cienmil1: string
+  total_billete_cienmil1: string
+  canti_billete_cincuentamil1: string
+  total_billete_cincuentamil1: string
+  canti_billete_veintemil1: string
+  total_billete_veintemil1: string
+  canti_billete_diezmil1: string
+  total_billete_diezmil1: string
+  canti_billete_cincomil1: string
+  total_billete_cincomil1: string
+  canti_billete_dosmil1: string
+  total_billete_dosmil1: string
+  canti_billete_mil1: string
+  canti_moneda_mil1: string
+  total_moneda_mil1: string
+  canti_moneda_quinientos1: string
+  total_moneda_quinientos1: string
+  canti_moneda_docientos1: string
+  total_moneda_docientos1: string
+  canti_moneda_cien1: string
+  total_moneda_cien1: string
+  canti_moneda_cincuenta1: string
+  total_moneda_ciencuenta1: string
+  total_efectivo1: string
+  total_premios_pagados1: string
+  total: string
+  total_premios_pagados: string
+  entrega_colocador: string
+  sobrantefaltante_caja: string
+  base_efectivos: string
+  tirilla_recaudos: string
+  colocador_cajafuerte: string
+  rollos_bnet: string
+  rollos_fisicos: string
+  diferencia: string
+  nombre_juego?: string
+  cantidad_bnet?: string
+  cantidad_fisicos?: string
+  cantidad_faltante?: string
+  cantidad_tiquete?: string
+  descargado?: string
+  nombre_juego2?: string
+  cantidad_bnet2?: string
+  cantidad_fisicos2?: string
+  cantidad_faltante2?: string
+  cantidad_tiquete2?: string
+  descargado2?: string
+  nombre_juego3?: string
+  cantidad_bnet3?: string
+  cantidad_fisicos3?: string
+  cantidad_faltante3?: string
+  cantidad_tiquete3?: string
+  descargado3?: string
+  nombre_juego4?: string
+  cantidad_bnet4?: string
+  cantidad_fisicos4?: string
+  cantidad_faltante4?: string
+  cantidad_tiquete4?: string
+  descargado4?: string
+  totaldescargados?: string
+  totalvalor?: string
+  requisito1: string
+  observacion1?: string
+  requisito2: string
+  observacion2?: string
+  requisito3: string
+  observacion3?: string
+  requisito4: string
+  observacion4?: string
+  requisito5: string
+  observacion5?: string
+  requisito6: string
+  observacion6?: string
+  requisito7: string
+  observacion7?: string
+  requisito8: string
+  observacion8?: string
+  requisito9: string
+  observacion9?: string
+  requisito10: string
+  observacion10?: string
+  requisito11: string
+  observacion11?: string
+  requisito12: string
+  observacion112?: string
+  requisito13: string
+  observacion13?: string
+  requisito14: string
+  observacion14?: string
+  requisito15: string
+  observacion15?: string
+  requisito16: string
+  observacion16?: string
+  requisito17: string
+  observacion17?: string
+  requisito18: string
+  observacion18?: string
+  requisito19: string
+  observacion19?: string
+  requisito20: string
+  observacion20?: string
+  requisito21: string
+  observacion21?: string
+  requisito22: string
+  observacion22?: string
+  requisito23: string
+  observacion23?: string
+  requisito24: string
+  observacion24?: string
+  requisito25: string
+  observacion25?: string
+  requisito26: string
+  observacion26?: string
+  requisito27: string
+  observacion27?: string
+  requisito28: string
+  observacion28?: string
+  requisito29: string
+  requisito30: string
+  fechavisita: string
+  horavisita: string
+  nombre_observacion?: string
+  imagen_observacion: string
+  firma_auditoria: string
+  firma_colocadora: string
+}
 
+export const PDF: React.FC<{ datos: Datos, company: string }> = ({ datos, company }) => {
+  if (company === 'Multired') { company = multired }
+  if (company === 'Servired') { company = servired }
 
-export const PDF = ({ datos, company }: { datos: any, company: any }) => {
-
-    if (company === 'Multired') { company = multired }
-    if (company === 'Servired') { company = servired }
-
-    return (
+  return (
         <Document>
             <Page style={styles.Page}>
                 <View style={styles.header}>
@@ -362,5 +532,5 @@ export const PDF = ({ datos, company }: { datos: any, company: any }) => {
                 )} fixed />
             </Page >
         </Document >
-    );
-};
+  )
+}

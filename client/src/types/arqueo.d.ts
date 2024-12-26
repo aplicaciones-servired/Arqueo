@@ -1,5 +1,5 @@
 interface Arqueo {
-  id : number
+  id: number
   supervisor: string
   nombres: string
   nombre_supervisor: string
@@ -47,7 +47,6 @@ interface Arqueo {
   total_efectivo1: number
   total_premios_pagados1: number
   total: number
-  
   canti_billete_cienmil: number
   total_billete_cienmil: number
   canti_billete_cincuentamil: number

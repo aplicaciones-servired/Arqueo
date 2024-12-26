@@ -1,3 +1,4 @@
+import React from 'react'
 import { ProtectedRoute } from './components/ProtectedRoutes'
 import { Route, Routes } from 'react-router-dom'
 import { useAuth } from './auth/AuthProvider'

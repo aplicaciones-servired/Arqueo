@@ -1,14 +1,14 @@
 import { Card, Table, TableBody, TableHead, TableCell, TableHeaderCell, TableRow, Icon } from '@tremor/react'
 import { Input, Label, Button } from '../components/iu'
 import { type Arqueos } from '../types/arqueo'
-import { useEffect, useState } from 'react'
+import { React, useEffect, useState } from 'react'
 import axios from 'axios'
 import ReactPaginate from 'react-paginate'
 import { useFilter } from '../hooks/useFilters'
 import { useNavigate } from 'react-router-dom'
 import { RiSearchEyeLine } from '@remixicon/react'
 import { type Empresa } from '../types/user'
-import { exportarAExcel } from "../components/Export";
+import { exportarAExcel } from '../components/Export'
 import { API_URL } from '../utils/constans'
 import { format, parseISO } from 'date-fns'
 import { es } from 'date-fns/locale'
@@ -17,40 +17,36 @@ const DahsBoard = ({ company }: { company: Empresa }): JSX.Element => {
   const [data, setData] = useState<Arqueos>([])
   const [currentPage, setCurrentPage] = useState(1)
   const { filteredPDV, setSearchPDV, searchPDV } = useFilter(data)
-  const [fechaInicio, setFechaInicio] = useState("");
-  const [fechaFin, setFechaFin] = useState("");
+  const [fechaInicio, setFechaInicio] = useState('')
+  const [fechaFin, setFechaFin] = useState('')
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
       try {
-        const response = await axios.get(`${API_URL}/arqueos/${company}`);
-        //const response = await axios.get(`http://localhost:3000/arqueos/${company}`);
-        setData(response.data as Arqueos);
-
-
+        const response = await axios.get(`${API_URL}/arqueos/${company}`)
+        // const response = await axios.get(`http://localhost:3000/arqueos/${company}`);
+        setData(response.data as Arqueos)
       } catch (error) {
-        console.error('Error al obtener los datos:', error);
+        console.error('Error al obtener los datos:', error)
       }
-    };
+    }
     void fetchData()
     const intervalId = setInterval(() => {
-      fetchData();
-    }, 300000);
+      void fetchData()
+    }, 300000)
 
-
-    return () => clearInterval(intervalId);
+    return () => { clearInterval(intervalId) }
   }, [])
 
   const itemsPerPage = 10
   const offset = (currentPage - 1) * itemsPerPage
 
   const getFormattedDate = (dateString: string): string => {
-    const date = parseISO(dateString);
-    return format(date, 'dd/MM/yyyy', { locale: es });
+    const date = parseISO(dateString)
+    return format(date, 'dd/MM/yyyy', { locale: es })
   }
-
 
   const handleClicks = (id: number) => {
     return () => {
@@ -58,11 +54,11 @@ const DahsBoard = ({ company }: { company: Empresa }): JSX.Element => {
     }
   }
 
-  const exportarRegistros = () => {
+  const exportarRegistros = (): void => {
     // Verificar que las fechas de inicio y fin estén definidas
-    if (!fechaInicio || !fechaFin) {
-      alert("Fechas de inicio y fin deben ser seleccionadas");
-      return;
+    if (fechaInicio === '' || fechaFin === '') {
+      alert('Fechas de inicio y fin deben ser seleccionadas')
+      return
     }
 
     // Convertir las cadenas de texto de las fechas a objetos de tipo Date
@@ -73,10 +69,9 @@ const DahsBoard = ({ company }: { company: Empresa }): JSX.Element => {
     const registrosFiltrados = data.filter((data) => {
       const fechaArqueo = new Date(data.fechavisita)
       return fechaArqueo >= fechaInicioObj && fechaArqueo <= fechaFinObj
-    });
+    })
 
     exportarAExcel({ registros: registrosFiltrados })
-
   }
 
   return (
@@ -87,19 +82,18 @@ const DahsBoard = ({ company }: { company: Empresa }): JSX.Element => {
         <Input type="date" value={searchPDV} onChange={ev => { setSearchPDV(ev.target.value) }} />
       </section>
 
-
       <section className='flex items-center gap-2 bg-blue-200 dark:bg-dark-tremor-brand-muted dark:text-white fixed z-50 left-96 mt-1 p-2 px-8 rounded-lg'>
         <Label>exportar por fecha:</Label>
         <Input
           type="date"
           value={fechaInicio}
-          onChange={(e) => setFechaInicio(e.target.value)}
+          onChange={(e) => { setFechaInicio(e.target.value) }}
         />
 
         <Input
           type="date"
           value={fechaFin}
-          onChange={(e) => setFechaFin(e.target.value)}
+          onChange={(e) => { setFechaFin(e.target.value) }}
         />
         <Button
           onClick={exportarRegistros}
@@ -107,7 +101,6 @@ const DahsBoard = ({ company }: { company: Empresa }): JSX.Element => {
           Exportar a Excel
         </Button>
       </section>
-
 
       <Card>
         <Table className="mt-12 shadow-lg">

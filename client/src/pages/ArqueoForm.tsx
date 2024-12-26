@@ -1,43 +1,42 @@
-import axios from "axios";
-import { Buffer } from "buffer";
-import { useEffect, useState } from "react";
-import { useAuth } from "../auth/AuthProvider";
-import { useParams } from "react-router-dom";
-import { Arqueos } from "../types/arqueo";
-import { Card } from "@tremor/react";
-import { BottonExportItems } from "../components/XportExcel";
-import { PDF } from '../components/PDF';
-import { PDFDownloadLink } from '@react-pdf/renderer';
+import axios from 'axios'
+import { Buffer } from 'buffer'
+import { useEffect, useState } from 'react'
+import { useAuth } from '../auth/AuthProvider'
+import { useParams } from 'react-router-dom'
+import { type Arqueos } from '../types/arqueo'
+import { Card } from '@tremor/react'
+import { BottonExportItems } from '../components/XportExcel'
+import { PDF } from '../components/PDF'
+import { PDFDownloadLink } from '@react-pdf/renderer'
 import { API_URL } from '../utils/constans'
 
-function ArqueoForm(): JSX.Element {
-
-  const { username } = useAuth();
-  const company = username.nombre_empresa;
-  const [data, setData] = useState<any[]>([]);
-  const { id } = useParams<{ id: string }>();
+function ArqueoForm (): JSX.Element {
+  const { username } = useAuth()
+  const company = username.nombre_empresa
+  const [data, setData] = useState<unknown[]>([])
+  const { id } = useParams<{ id: string }>()
 
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
       try {
-        const response = await axios.get(`${API_URL}/arqueos/${company}/${id}`);
-        setData(response.data as Arqueos);
+        const response = await axios.get(`${API_URL}/arqueos/${company}/${id}`)
+        setData(response.data as Arqueos)
 
-        if (response && response.data) {
-          const dataWithBase64Images = response.data.map((item: { firma_auditoria: any, firma_colocadora: any, imagen_observacion: any }) => ({
+        if (response.data != null) {
+          const dataWithBase64Images = response.data.map((item: { firma_auditoria: unknown, firma_colocadora: unknown, imagen_observacion: unknown }) => ({
             ...item,
 
             firma_auditoria: item.firma_auditoria ? Buffer.from(item.firma_auditoria).toString('base64') : null,
             firma_colocadora: item.firma_colocadora ? Buffer.from(item.firma_colocadora).toString('base64') : null,
             imagen_observacion: item.imagen_observacion ? Buffer.from(item.imagen_observacion).toString() : null
-          }));
+          }))
 
-          setData(dataWithBase64Images as Arqueos);
+          setData(dataWithBase64Images as Arqueos)
         }
       } catch (error) {
-        console.error('Error al obtener los datos:', error);
+        console.error('Error al obtener los datos:', error)
       }
-    };
+    }
 
     void fetchData()
   }, [])
@@ -114,7 +113,7 @@ function ArqueoForm(): JSX.Element {
             />
 
             <label className="block text-center mt-5 uppercase">
-              sucursal{" "}
+              sucursal{' '}
             </label>
             <input
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -564,7 +563,6 @@ function ArqueoForm(): JSX.Element {
               name="total_premios_pagados1"
             />
 
-
             <label className="block text-center mt-5 uppercase">
               total
             </label>
@@ -575,7 +573,6 @@ function ArqueoForm(): JSX.Element {
               defaultValue={values.total}
               name="total"
             />
-
 
             <label className="block text-center mt-5 uppercase">
               cantidad billete cienmil
@@ -954,7 +951,7 @@ function ArqueoForm(): JSX.Element {
             {values.nombre_juego && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  nombre del juego1{" "}
+                  nombre del juego1{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -969,7 +966,7 @@ function ArqueoForm(): JSX.Element {
             {values.cantidad_bnet && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  cantidad en bnet1{" "}
+                  cantidad en bnet1{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -984,7 +981,7 @@ function ArqueoForm(): JSX.Element {
             {values.cantidad_fisicos && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  cantidad en fisicos1{" "}
+                  cantidad en fisicos1{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -999,7 +996,7 @@ function ArqueoForm(): JSX.Element {
             {values.cantidad_faltante && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  cantidad faltante a descargar1{" "}
+                  cantidad faltante a descargar1{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1014,8 +1011,8 @@ function ArqueoForm(): JSX.Element {
             {values.cantidad_tiquete && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  {" "}
-                  valor del tiquete1{" "}
+                  {' '}
+                  valor del tiquete1{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1030,7 +1027,7 @@ function ArqueoForm(): JSX.Element {
             {values.descargado && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  valor descargado por juego1{" "}
+                  valor descargado por juego1{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1045,7 +1042,7 @@ function ArqueoForm(): JSX.Element {
             {values.nombre_juego2 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  nombre del juego2{" "}
+                  nombre del juego2{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1060,7 +1057,7 @@ function ArqueoForm(): JSX.Element {
             {values.cantidad_bnet2 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  cantidad en bnet2{" "}
+                  cantidad en bnet2{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1075,7 +1072,7 @@ function ArqueoForm(): JSX.Element {
             {values.cantidad_fisicos2 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  cantidad en fisicos2{" "}
+                  cantidad en fisicos2{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1090,7 +1087,7 @@ function ArqueoForm(): JSX.Element {
             {values.cantidad_faltante2 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  cantidad faltante a descargar2{" "}
+                  cantidad faltante a descargar2{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1105,8 +1102,8 @@ function ArqueoForm(): JSX.Element {
             {values.cantidad_tiquete2 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  {" "}
-                  valor del tiquete2{" "}
+                  {' '}
+                  valor del tiquete2{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1121,7 +1118,7 @@ function ArqueoForm(): JSX.Element {
             {values.descargado2 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  valor descargado por juego2{" "}
+                  valor descargado por juego2{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1136,7 +1133,7 @@ function ArqueoForm(): JSX.Element {
             {values.nombre_juego3 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  nombre del juego3{" "}
+                  nombre del juego3{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1151,7 +1148,7 @@ function ArqueoForm(): JSX.Element {
             {values.cantidad_bnet3 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  cantidad en bnet3{" "}
+                  cantidad en bnet3{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1166,7 +1163,7 @@ function ArqueoForm(): JSX.Element {
             {values.cantidad_fisicos3 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  cantidad en fisicos3{" "}
+                  cantidad en fisicos3{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1181,7 +1178,7 @@ function ArqueoForm(): JSX.Element {
             {values.cantidad_faltante3 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  cantidad faltante a descargar3{" "}
+                  cantidad faltante a descargar3{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1196,8 +1193,8 @@ function ArqueoForm(): JSX.Element {
             {values.cantidad_tiquete3 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  {" "}
-                  valor del tiquete3{" "}
+                  {' '}
+                  valor del tiquete3{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1212,7 +1209,7 @@ function ArqueoForm(): JSX.Element {
             {values.descargado3 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  valor descargado por juego3{" "}
+                  valor descargado por juego3{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1227,7 +1224,7 @@ function ArqueoForm(): JSX.Element {
             {values.nombre_juego4 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  nombre del juego4{" "}
+                  nombre del juego4{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1242,7 +1239,7 @@ function ArqueoForm(): JSX.Element {
             {values.cantidad_bnet4 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  cantidad en bnet4{" "}
+                  cantidad en bnet4{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1257,7 +1254,7 @@ function ArqueoForm(): JSX.Element {
             {values.cantidad_fisicos4 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  cantidad en fisicos4{" "}
+                  cantidad en fisicos4{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1272,7 +1269,7 @@ function ArqueoForm(): JSX.Element {
             {values.cantidad_faltante4 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  cantidad faltante a descargar4{" "}
+                  cantidad faltante a descargar4{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1287,8 +1284,8 @@ function ArqueoForm(): JSX.Element {
             {values.cantidad_tiquete3 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  {" "}
-                  valor del tiquete4{" "}
+                  {' '}
+                  valor del tiquete4{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1303,7 +1300,7 @@ function ArqueoForm(): JSX.Element {
             {values.descargado4 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  valor descargado por juego4{" "}
+                  valor descargado por juego4{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1316,8 +1313,8 @@ function ArqueoForm(): JSX.Element {
             )}
 
             <label className="block text-center mt-5 uppercase">
-              {" "}
-              total cantidad descargados{" "}
+              {' '}
+              total cantidad descargados{' '}
             </label>
             <input
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1328,7 +1325,7 @@ function ArqueoForm(): JSX.Element {
             />
 
             <label className="block text-center mt-5 uppercase">
-              valor total descargado{" "}
+              valor total descargado{' '}
             </label>
             <input
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1356,7 +1353,7 @@ function ArqueoForm(): JSX.Element {
             {values.observacion1 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  observacion{" "}
+                  observacion{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1386,7 +1383,7 @@ function ArqueoForm(): JSX.Element {
             {values.observacion2 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  observacion{" "}
+                  observacion{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1416,7 +1413,7 @@ function ArqueoForm(): JSX.Element {
             {values.observacion3 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  observacion{" "}
+                  observacion{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1447,7 +1444,7 @@ function ArqueoForm(): JSX.Element {
             {values.observacion4 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  observacion{" "}
+                  observacion{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1477,7 +1474,7 @@ function ArqueoForm(): JSX.Element {
             {values.observacion5 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  observacion{" "}
+                  observacion{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1507,7 +1504,7 @@ function ArqueoForm(): JSX.Element {
             {values.observacion6 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  observacion{" "}
+                  observacion{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1538,7 +1535,7 @@ function ArqueoForm(): JSX.Element {
             {values.observacion7 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  observacion{" "}
+                  observacion{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1569,7 +1566,7 @@ function ArqueoForm(): JSX.Element {
             {values.observacion8 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  observacion{" "}
+                  observacion{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1583,7 +1580,7 @@ function ArqueoForm(): JSX.Element {
 
             {values.requisito9 && (
               <>
-                {" "}
+                {' '}
                 <label className="block text-center mt-5 uppercase">
                   ¿El colocador solicita el documento de identificación al
                   cliente?
@@ -1599,9 +1596,9 @@ function ArqueoForm(): JSX.Element {
             )}
             {values.observacion9 && (
               <>
-                {" "}
+                {' '}
                 <label className="block text-center mt-5 uppercase">
-                  observacion{" "}
+                  observacion{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1615,7 +1612,7 @@ function ArqueoForm(): JSX.Element {
 
             {values.requisito10 && (
               <>
-                {" "}
+                {' '}
                 <label className="block text-center mt-5 uppercase">
                   ¿El uso del sistema biométrico esta activo?
                 </label>
@@ -1630,9 +1627,9 @@ function ArqueoForm(): JSX.Element {
             )}
             {values.observacion10 && (
               <>
-                {" "}
+                {' '}
                 <label className="block text-center mt-5 uppercase">
-                  observacion{" "}
+                  observacion{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1646,7 +1643,7 @@ function ArqueoForm(): JSX.Element {
 
             {values.requisito11 && (
               <>
-                {" "}
+                {' '}
                 <label className="block text-center mt-5 uppercase">
                   ¿El colocador conoce de Supervoucher, y esta en
                   funcionamiento?
@@ -1662,9 +1659,9 @@ function ArqueoForm(): JSX.Element {
             )}
             {values.observacion11 && (
               <>
-                {" "}
+                {' '}
                 <label className="block text-center mt-5 uppercase">
-                  observacion{" "}
+                  observacion{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1678,7 +1675,7 @@ function ArqueoForm(): JSX.Element {
 
             {values.requisito12 && (
               <>
-                {" "}
+                {' '}
                 <label className="block text-center mt-5 uppercase">
                   ¿El Colocador conoce el procedimiento que debe realizar a
                   remitentes y destinatarios menores de edad?
@@ -1694,9 +1691,9 @@ function ArqueoForm(): JSX.Element {
             )}
             {values.observacion12 && (
               <>
-                {" "}
+                {' '}
                 <label className="block text-center mt-5 uppercase">
-                  observacion{" "}
+                  observacion{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1710,7 +1707,7 @@ function ArqueoForm(): JSX.Element {
 
             {values.requisito13 && (
               <>
-                {" "}
+                {' '}
                 <label className="block text-center mt-5 uppercase">
                   ¿El colocador conoce los reportes de operaciones en efectivo
                   (R.O.E) firmas, huellas. (Transacciones &gt;=$10.000.000)?
@@ -1726,9 +1723,9 @@ function ArqueoForm(): JSX.Element {
             )}
             {values.observacion9 && (
               <>
-                {" "}
+                {' '}
                 <label className="block text-center mt-5 uppercase">
-                  observacion{" "}
+                  observacion{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1742,7 +1739,7 @@ function ArqueoForm(): JSX.Element {
 
             {values.requisito14 && (
               <>
-                {" "}
+                {' '}
                 <label className="block text-center mt-5 uppercase">
                   ¿Tiene aviso externo que indica Vigilado y Controlado Mintic y
                   Colaborador Autorizado?
@@ -1758,9 +1755,9 @@ function ArqueoForm(): JSX.Element {
             )}
             {values.observacion14 && (
               <>
-                {" "}
+                {' '}
                 <label className="block text-center mt-5 uppercase">
-                  observacion{" "}
+                  observacion{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1774,7 +1771,7 @@ function ArqueoForm(): JSX.Element {
 
             {values.requisito15 && (
               <>
-                {" "}
+                {' '}
                 <label className="block text-center mt-5 uppercase">
                   ¿Tiene cuadro Banner con la marca SuperGIROS (aviso de canales
                   de comunicación)?
@@ -1790,9 +1787,9 @@ function ArqueoForm(): JSX.Element {
             )}
             {values.observacion15 && (
               <>
-                {" "}
+                {' '}
                 <label className="block text-center mt-5 uppercase">
-                  observacion{" "}
+                  observacion{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1806,10 +1803,10 @@ function ArqueoForm(): JSX.Element {
 
             {values.requisito16 && (
               <>
-                {" "}
+                {' '}
                 <label className="block text-center mt-5 uppercase">
                   ¿Tiene afiche normativo visible o tarifario con las
-                  condiciones del servicio?{" "}
+                  condiciones del servicio?{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1822,9 +1819,9 @@ function ArqueoForm(): JSX.Element {
             )}
             {values.observacion16 && (
               <>
-                {" "}
+                {' '}
                 <label className="block text-center mt-5 uppercase">
-                  observacion{" "}
+                  observacion{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1838,7 +1835,7 @@ function ArqueoForm(): JSX.Element {
 
             {values.requisito17 && (
               <>
-                {" "}
+                {' '}
                 <label className="block text-center mt-5 uppercase">
                   ¿Cuenta con sticker tirilla electronica CRC ?
                 </label>
@@ -1853,9 +1850,9 @@ function ArqueoForm(): JSX.Element {
             )}
             {values.observacion17 && (
               <>
-                {" "}
+                {' '}
                 <label className="block text-center mt-5 uppercase">
-                  observacion{" "}
+                  observacion{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1869,7 +1866,7 @@ function ArqueoForm(): JSX.Element {
 
             {values.requisito18 && (
               <>
-                {" "}
+                {' '}
                 <label className="block text-center mt-5 uppercase">
                   ¿Tiene normativa Giros Internacionales, camara o lector five y
                   Sticker de pagos internacionales?
@@ -1885,9 +1882,9 @@ function ArqueoForm(): JSX.Element {
             )}
             {values.observacion18 && (
               <>
-                {" "}
+                {' '}
                 <label className="block text-center mt-5 uppercase">
-                  observacion{" "}
+                  observacion{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1901,7 +1898,7 @@ function ArqueoForm(): JSX.Element {
 
             {values.requisito19 && (
               <>
-                {" "}
+                {' '}
                 <label className="block text-center mt-5 uppercase">
                   ¿El Supervisor Comercial realiza las visitas constantemente,
                   da buen trato y suministra los insumos a tiempo? Cantidad de
@@ -1919,7 +1916,7 @@ function ArqueoForm(): JSX.Element {
             {values.observacion19 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  observacion{" "}
+                  observacion{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1933,7 +1930,7 @@ function ArqueoForm(): JSX.Element {
 
             {values.requisito20 && (
               <>
-                {" "}
+                {' '}
                 <label className="block text-center mt-5 uppercase">
                   ¿Las recargas efectuadas por el Colocador se trasmiten a
                   través de la red propia de la empresa?
@@ -1950,7 +1947,7 @@ function ArqueoForm(): JSX.Element {
             {values.observacion20 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  observacion{" "}
+                  observacion{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1964,7 +1961,7 @@ function ArqueoForm(): JSX.Element {
 
             {values.requisito21 && (
               <>
-                {" "}
+                {' '}
                 <label className="block text-center mt-5 uppercase">
                   ¿La lotería física tiene impreso el nombre de la empresa, de
                   no ser asi reportar inmediatamente?
@@ -1981,7 +1978,7 @@ function ArqueoForm(): JSX.Element {
             {values.observacion21 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  observacion{" "}
+                  observacion{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1995,7 +1992,7 @@ function ArqueoForm(): JSX.Element {
 
             {values.requisito22 && (
               <>
-                {" "}
+                {' '}
                 <label className="block text-center mt-5 uppercase">
                   ¿El punto de venta tiene caja fuerte y caja digital? el
                   responsable tiene conocimiento sobre las bases de efectivo
@@ -2013,7 +2010,7 @@ function ArqueoForm(): JSX.Element {
             {values.observacion22 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  observacion{" "}
+                  observacion{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -2027,7 +2024,7 @@ function ArqueoForm(): JSX.Element {
 
             {values.requisito23 && (
               <>
-                {" "}
+                {' '}
                 <label className="block text-center mt-5 uppercase">
                   ¿Se cumple con los topes de efectivo establecidos para la caja
                   digital y caja auxiliar (ptos de venta con giros)?
@@ -2044,7 +2041,7 @@ function ArqueoForm(): JSX.Element {
             {values.observacion23 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  observacion{" "}
+                  observacion{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -2058,7 +2055,7 @@ function ArqueoForm(): JSX.Element {
 
             {values.requisito24 && (
               <>
-                {" "}
+                {' '}
                 <label className="block text-center mt-5 uppercase">
                   ¿El colocador tiene conocimiento sobre los montos máximos para
                   pago de premios?
@@ -2075,7 +2072,7 @@ function ArqueoForm(): JSX.Element {
             {values.observacion24 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  observacion{" "}
+                  observacion{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -2089,7 +2086,7 @@ function ArqueoForm(): JSX.Element {
 
             {values.requisito25 && (
               <>
-                {" "}
+                {' '}
                 <label className="block text-center mt-5 uppercase">
                   ¿El colocador conoce los requisitos para pago de premios?
                 </label>
@@ -2105,7 +2102,7 @@ function ArqueoForm(): JSX.Element {
             {values.observacion25 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  observacion{" "}
+                  observacion{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -2119,9 +2116,9 @@ function ArqueoForm(): JSX.Element {
 
             {values.requisito26 && (
               <>
-                {" "}
+                {' '}
                 <label className="block text-center mt-5 uppercase">
-                  ¿Tiene buzon de PQR, formato de gane y de giros?{" "}
+                  ¿Tiene buzon de PQR, formato de gane y de giros?{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -2135,7 +2132,7 @@ function ArqueoForm(): JSX.Element {
             {values.observacion26 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  observacion{" "}
+                  observacion{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -2149,7 +2146,7 @@ function ArqueoForm(): JSX.Element {
 
             {values.requisito27 && (
               <>
-                {" "}
+                {' '}
                 <label className="block text-center mt-5 uppercase">
                   ¿El Colocador cuenta con las bases acerca del SARL, SARLAFT,
                   SARO?
@@ -2166,7 +2163,7 @@ function ArqueoForm(): JSX.Element {
             {values.observacion27 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  observacion{" "}
+                  observacion{' '}
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -2180,7 +2177,7 @@ function ArqueoForm(): JSX.Element {
 
             {values.requisito28 && (
               <>
-                {" "}
+                {' '}
                 <label className="block text-center mt-5 uppercase">
                   ¿El Colocador conoce la definición de operación inusual y
                   operación sospechosa?
@@ -2211,7 +2208,7 @@ function ArqueoForm(): JSX.Element {
 
             {values.requisito30 && (
               <>
-                {" "}
+                {' '}
                 <label className="block text-center mt-5 uppercase">
                   ¿Tapabocas?
                 </label>
@@ -2327,11 +2324,7 @@ function ArqueoForm(): JSX.Element {
 
       }
     </>
-  );
+  )
 }
 
-export default ArqueoForm;
-
-
-
-
+export default ArqueoForm

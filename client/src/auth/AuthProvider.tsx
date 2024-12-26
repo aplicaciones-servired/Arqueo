@@ -1,17 +1,17 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { type User } from '../types/user';
+import React, { createContext, useContext, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { type User } from '../types/user'
 
 interface IAuthContext {
-  isAuthenticated: boolean;
-  login: () => void;
-  logout: () => void;
-  username: User;
-  setUsernames: React.Dispatch<React.SetStateAction<User>>;
+  isAuthenticated: boolean
+  login: () => void
+  logout: () => void
+  username: User
+  setUsernames: React.Dispatch<React.SetStateAction<User>>
 }
 
 interface Props {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 const InitialUser: User = {
@@ -23,85 +23,83 @@ const InitialUser: User = {
   nombre_proceso: '',
   nombre_rol: '',
   password: '',
-  username: '',
-};
+  username: ''
+}
 
-const AuthContext = createContext<IAuthContext | undefined>(undefined);
+const AuthContext = createContext<IAuthContext | undefined>(undefined)
 
 export const AuthProvider = ({ children }: Props): JSX.Element => {
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    const storedAuth = localStorage.getItem('isAuthenticated');
-    return (storedAuth != null) ? JSON.parse(storedAuth) : false;
-  });
+    const storedAuth = localStorage.getItem('isAuthenticated')
+    return (storedAuth != null) ? JSON.parse(storedAuth) : false
+  })
   const [username, setUsernames] = useState<User>(() => {
-    const storedUser = localStorage.getItem('username');
-    return (storedUser != null) ? JSON.parse(storedUser) : InitialUser;
-  });
+    const storedUser = localStorage.getItem('username')
+    return (storedUser != null) ? JSON.parse(storedUser) : InitialUser
+  })
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
-  let inactivityTimer: ReturnType<typeof setTimeout>;
+  let inactivityTimer: ReturnType<typeof setTimeout>
 
-  const resetInactivityTimer = () => {
-    clearTimeout(inactivityTimer);
+  const resetInactivityTimer = (): void => {
+    clearTimeout(inactivityTimer)
     inactivityTimer = setTimeout(() => {
-      logout();
-    }, 10 * 60 * 1000);
-  };
+      logout()
+    }, 10 * 60 * 1000)
+  }
 
   useEffect(() => {
-    const events = ['click', 'keydown', 'mousemove', 'scroll'];
+    const events = ['click', 'keydown', 'mousemove', 'scroll']
     events.forEach(event => {
-      window.addEventListener(event, resetInactivityTimer);
-    });
+      window.addEventListener(event, resetInactivityTimer)
+    })
 
-
-    resetInactivityTimer();
-
+    resetInactivityTimer()
 
     return () => {
       events.forEach(event => {
-        window.removeEventListener(event, resetInactivityTimer);
-      });
-      clearTimeout(inactivityTimer);
-    };
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('isAuthenticated', JSON.stringify(isAuthenticated));
-  }, [isAuthenticated]);
-
-  useEffect(() => {
-    localStorage.setItem('username', JSON.stringify(username));
-  }, [username]);
-
-  useEffect(() => {
-    if (isAuthenticated && location.pathname === '/') {
-      logout();
+        window.removeEventListener(event, resetInactivityTimer)
+      })
+      clearTimeout(inactivityTimer)
     }
-  }, [isAuthenticated, location.pathname]);
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem('isAuthenticated', JSON.stringify(isAuthenticated))
+  }, [isAuthenticated])
+
+  useEffect(() => {
+    localStorage.setItem('username', JSON.stringify(username))
+  }, [username])
+
+  useEffect(() => {
+    if ((Boolean(isAuthenticated)) && location.pathname === '/') {
+      logout()
+    }
+  }, [isAuthenticated, location.pathname])
 
   const login = (): void => {
-    setIsAuthenticated(true);
-    navigate('/home');
-  };
+    setIsAuthenticated(true)
+    navigate('/home')
+  }
 
   const logout = (): void => {
-    setIsAuthenticated(false);
-    navigate('/');
-  };
+    setIsAuthenticated(false)
+    navigate('/')
+  }
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, login, logout, username, setUsernames }}>
       {children}
     </AuthContext.Provider>
-  );
-};
+  )
+}
 
 export const useAuth = (): IAuthContext => {
-  const context = useContext(AuthContext);
+  const context = useContext(AuthContext)
   if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error('useAuth must be used within an AuthProvider')
   }
-  return context;
-};
+  return context
+}

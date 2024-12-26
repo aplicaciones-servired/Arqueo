@@ -9,19 +9,19 @@ interface FilterPDV {
   setSearchPDS: React.Dispatch<React.SetStateAction<string>>
 }
 
-function filterByPDV(pdv: Arqueos, searchPDV: string): Arqueos {
+function filterByPDV (pdv: Arqueos, searchPDV: string): Arqueos {
   return pdv.filter(({ fechavisita }) =>
-    fechavisita ? fechavisita.toLowerCase().includes(searchPDV.toLowerCase()) : false
+    (fechavisita.length > 0) ? fechavisita.toLowerCase().includes(searchPDV.toLowerCase()) : false
   )
 }
 
-function filterByPDS(pdv: Arqueos, searchPDS: string): Arqueos {
+function filterByPDS (pdv: Arqueos, searchPDS: string): Arqueos {
   return pdv.filter(({ supervisor }) =>
-    supervisor ? supervisor.toLowerCase().includes(searchPDS.toLowerCase()) : false
+    (supervisor.length > 0) ? supervisor.toLowerCase().includes(searchPDS.toLowerCase()) : false
   )
 }
 
-export function useFilter(pdv: Arqueos): FilterPDV {
+export function useFilter (pdv: Arqueos): FilterPDV {
   const [searchPDV, setSearchPDV] = useState('')
   const [searchPDS, setSearchPDS] = useState('')
 
@@ -29,12 +29,12 @@ export function useFilter(pdv: Arqueos): FilterPDV {
     let filtered = pdv
 
     // Aplica el filtro por fecha si hay un valor de búsqueda
-    if (searchPDV) {
+    if (searchPDV.length > 0) {
       filtered = filterByPDV(filtered, searchPDV)
     }
 
     // Aplica el filtro por supervisor si hay un valor de búsqueda
-    if (searchPDS) {
+    if (searchPDS.length > 0) {
       filtered = filterByPDS(filtered, searchPDS)
     }
 
