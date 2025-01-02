@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
 }
 )
 
-interface Datos {
+export interface Datos {
   supervisor: string
   nombre_supervisor: string
   documento: string

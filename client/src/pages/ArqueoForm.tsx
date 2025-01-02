@@ -1,37 +1,38 @@
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Buffer } from 'buffer'
-import { useEffect, useState } from 'react'
 import { useAuth } from '../auth/AuthProvider'
 import { useParams } from 'react-router-dom'
 import { type Arqueos } from '../types/arqueo'
+import { type Datos } from '../components/PDF'
 import { Card } from '@tremor/react'
 import { BottonExportItems } from '../components/XportExcel'
 import { PDF } from '../components/PDF'
 import { PDFDownloadLink } from '@react-pdf/renderer'
 import { API_URL } from '../utils/constans'
 
-function ArqueoForm (): JSX.Element {
+const ArqueoForm = ({ arqueos }: { arqueos: Arqueos }): JSX.Element => {
   const { username } = useAuth()
   const company = username.nombre_empresa
-  const [data, setData] = useState<unknown[]>([])
+  const [data, setData] = useState<Arqueos[]>([])
   const { id } = useParams<{ id: string }>()
 
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
       try {
         const response = await axios.get(`${API_URL}/arqueos/${company}/${id}`)
-        setData(response.data as Arqueos)
+        setData(response.data as Arqueos[])
 
         if (response.data != null) {
           const dataWithBase64Images = response.data.map((item: { firma_auditoria: unknown, firma_colocadora: unknown, imagen_observacion: unknown }) => ({
             ...item,
 
-            firma_auditoria: item.firma_auditoria ? Buffer.from(item.firma_auditoria).toString('base64') : null,
-            firma_colocadora: item.firma_colocadora ? Buffer.from(item.firma_colocadora).toString('base64') : null,
-            imagen_observacion: item.imagen_observacion ? Buffer.from(item.imagen_observacion).toString() : null
+            firma_auditoria: item.firma_auditoria != null ? Buffer.from(item.firma_auditoria as string).toString('base64') : null,
+            firma_colocadora: item.firma_colocadora != null ? Buffer.from(item.firma_colocadora as string).toString('base64') : null,
+            imagen_observacion: item.imagen_observacion != null ? Buffer.from(item.imagen_observacion as string).toString() : null
           }))
 
-          setData(dataWithBase64Images as Arqueos)
+          setData(dataWithBase64Images as Arqueos[])
         }
       } catch (error) {
         console.error('Error al obtener los datos:', error)
@@ -45,16 +46,16 @@ function ArqueoForm (): JSX.Element {
 
     <>
       {
-        data.map((values, index) => (
+        arqueos.map((arqueo, index) => (
           <Card key={index} className='dark:bg-dark-tremor-brand-muted dark:text-white'>
             <div className=" bg-blue-500 h-20  rounded-lg ">
               <h1 className="font-bold uppercase text-white text-2xl translate-y-5 translate-x-3 flex flex-col items-center">
                 arqueo
               </h1>
               <div className="flex justify-end  -translate-y-3 -translate-x-3 space-x-2">
-                <BottonExportItems datos={values} />
+                <BottonExportItems datos={arqueo} />
 
-                <PDFDownloadLink document={<PDF datos={values} company={company} />} fileName="PRUEBA.PDF">
+                <PDFDownloadLink document={<PDF datos={arqueo as unknown as Datos} company={company ?? ''} />} fileName="PRUEBA.PDF">
                   <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg pl-2 " >descargar PDF</button>
                 </PDFDownloadLink>
               </div>
@@ -69,7 +70,7 @@ function ArqueoForm (): JSX.Element {
               type="text"
               name="supervisor"
               disabled
-              defaultValue={values.supervisor}
+              defaultValue={arqueo.supervisor}
             />
 
             <label className="block text-center mt-5 uppercase">
@@ -80,7 +81,7 @@ function ArqueoForm (): JSX.Element {
               type="text"
               name="nombre_supervisor"
               disabled
-              defaultValue={values.nombre_supervisor}
+              defaultValue={arqueo.nombre_supervisor}
             />
 
             <label className="block text-center mt-5 uppercase">
@@ -91,7 +92,7 @@ function ArqueoForm (): JSX.Element {
               type="text"
               name="documento"
               disabled
-              defaultValue={values.documento}
+              defaultValue={arqueo.documento}
             />
 
             <label className="block text-center mt-5 uppercase">ip</label>
@@ -100,7 +101,7 @@ function ArqueoForm (): JSX.Element {
               type="text"
               name="ip"
               disabled
-              defaultValue={values.ip}
+              defaultValue={arqueo.ip}
             />
 
             <label className="block text-center mt-5 uppercase">nombres</label>
@@ -109,7 +110,7 @@ function ArqueoForm (): JSX.Element {
               type="text"
               name="nombres"
               disabled
-              defaultValue={values.nombres}
+              defaultValue={arqueo.nombres}
             />
 
             <label className="block text-center mt-5 uppercase">
@@ -120,7 +121,7 @@ function ArqueoForm (): JSX.Element {
               type="text"
               name="sucursal "
               disabled
-              defaultValue={values.sucursal}
+              defaultValue={arqueo.sucursal}
             />
 
             <label className="block text-center mt-5 uppercase">
@@ -131,7 +132,7 @@ function ArqueoForm (): JSX.Element {
               type="text"
               name="puntodeventa"
               disabled
-              defaultValue={values.puntodeventa}
+              defaultValue={arqueo.puntodeventa}
             />
 
             <label className="block text-center mt-5 uppercase">
@@ -142,7 +143,7 @@ function ArqueoForm (): JSX.Element {
               type="text"
               name="ventabruta"
               disabled
-              defaultValue={values.ventabruta}
+              defaultValue={arqueo.ventabruta}
             />
 
             <label className="block text-center mt-5 uppercase">
@@ -153,7 +154,7 @@ function ArqueoForm (): JSX.Element {
               type="text"
               name="baseefectivo"
               disabled
-              defaultValue={values.baseefectivo}
+              defaultValue={arqueo.baseefectivo}
             />
 
             <label className="block text-center mt-5 uppercase">
@@ -164,7 +165,7 @@ function ArqueoForm (): JSX.Element {
               type="text"
               name="totalingreso"
               disabled
-              defaultValue={values.totalingreso}
+              defaultValue={arqueo.totalingreso}
             />
 
             <label className="block text-center mt-5 uppercase">
@@ -175,7 +176,7 @@ function ArqueoForm (): JSX.Element {
               type="text"
               name="chancesabonados"
               disabled
-              defaultValue={values.chancesabonados}
+              defaultValue={arqueo.chancesabonados}
             />
 
             <label className="block text-center mt-5 uppercase">
@@ -186,7 +187,7 @@ function ArqueoForm (): JSX.Element {
               type="text"
               name="chancespreimpresos "
               disabled
-              defaultValue={values.chancespreimpresos}
+              defaultValue={arqueo.chancespreimpresos}
             />
 
             <label className="block text-center mt-5 uppercase">
@@ -197,7 +198,7 @@ function ArqueoForm (): JSX.Element {
               type="text"
               name="premiospagados"
               disabled
-              defaultValue={values.premiospagados}
+              defaultValue={arqueo.premiospagados}
             />
 
             <label className="block text-center mt-5 uppercase">
@@ -208,7 +209,7 @@ function ArqueoForm (): JSX.Element {
               type="text"
               name="efectivocajafuerte"
               disabled
-              defaultValue={values.efectivocajafuerte}
+              defaultValue={arqueo.efectivocajafuerte}
             />
 
             <label className="block text-center mt-5 uppercase">
@@ -219,7 +220,7 @@ function ArqueoForm (): JSX.Element {
               type="text"
               name="tirillarecaudo"
               disabled
-              defaultValue={values.tirillarecaudo}
+              defaultValue={arqueo.tirillarecaudo}
             />
 
             <label className="block text-center mt-5 uppercase">
@@ -230,7 +231,7 @@ function ArqueoForm (): JSX.Element {
               type="text"
               name="totalegresos"
               disabled
-              defaultValue={values.totalegresos}
+              defaultValue={arqueo.totalegresos}
             />
 
             <label className="block text-center mt-5 uppercase">
@@ -241,7 +242,7 @@ function ArqueoForm (): JSX.Element {
               type="text"
               name="totalbilletes"
               disabled
-              defaultValue={values.totalbilletes}
+              defaultValue={arqueo.totalbilletes}
             />
 
             <label className="block text-center mt-5 uppercase">
@@ -252,7 +253,7 @@ function ArqueoForm (): JSX.Element {
               type="text"
               name="totalmonedas"
               disabled
-              defaultValue={values.totalmonedas}
+              defaultValue={arqueo.totalmonedas}
             />
 
             <label className="block text-center mt-5 uppercase">
@@ -263,7 +264,7 @@ function ArqueoForm (): JSX.Element {
               type="text"
               name="totalarqueo"
               disabled
-              defaultValue={values.totalarqueo}
+              defaultValue={arqueo.totalarqueo}
             />
 
             <label className="block text-center mt-5 uppercase">
@@ -274,7 +275,7 @@ function ArqueoForm (): JSX.Element {
               type="text"
               name="sobrantefaltante"
               disabled
-              defaultValue={values.sobrantefaltante}
+              defaultValue={arqueo.sobrantefaltante}
             />
 
             <label className="block text-center mt-5 uppercase">
@@ -285,7 +286,7 @@ function ArqueoForm (): JSX.Element {
               type="text"
               name="canti_billete_cienmil1"
               disabled
-              defaultValue={values.canti_billete_cienmil1}
+              defaultValue={arqueo.canti_billete_cienmil1}
             />
 
             <label className="block text-center mt-5 uppercase">
@@ -296,7 +297,7 @@ function ArqueoForm (): JSX.Element {
               type="text"
               name="total_billete_cienmil1"
               disabled
-              defaultValue={values.total_billete_cienmil1}
+              defaultValue={arqueo.total_billete_cienmil1}
             />
 
             <label className="block text-center mt-5 uppercase">
@@ -307,7 +308,7 @@ function ArqueoForm (): JSX.Element {
               type="text"
               name="canti_billete_cincuentamil1"
               disabled
-              defaultValue={values.canti_billete_cincuentamil1}
+              defaultValue={arqueo.canti_billete_cincuentamil1}
             />
 
             <label className="block text-center mt-5 uppercase">
@@ -318,7 +319,7 @@ function ArqueoForm (): JSX.Element {
               type="text"
               name="total_billete_cincuentamil1"
               disabled
-              defaultValue={values.total_billete_cincuentamil1}
+              defaultValue={arqueo.total_billete_cincuentamil1}
             />
 
             <label className="block text-center mt-5 uppercase">
@@ -328,7 +329,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.canti_billete_veintemil1}
+              defaultValue={arqueo.canti_billete_veintemil1}
               name="canti_billete_veintemil1"
             />
 
@@ -339,7 +340,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.total_billete_veintemil1}
+              defaultValue={arqueo.total_billete_veintemil1}
               name="total_billete_veintemil1"
             />
 
@@ -350,7 +351,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.canti_billete_diezmil1}
+              defaultValue={arqueo.canti_billete_diezmil1}
               name="canti_billete_diezmil1"
             />
 
@@ -361,7 +362,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.total_billete_diezmil1}
+              defaultValue={arqueo.total_billete_diezmil1}
               name="total_billete_diezmil1"
             />
 
@@ -372,7 +373,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.canti_billete_cincomil1}
+              defaultValue={arqueo.canti_billete_cincomil1}
               name="canti_billete_cincomil1"
             />
 
@@ -383,7 +384,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.total_billete_cincomil1}
+              defaultValue={arqueo.total_billete_cincomil1}
               name="total_billete_cincomil1"
             />
 
@@ -394,7 +395,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.canti_billete_dosmil}
+              defaultValue={arqueo.canti_billete_dosmil}
               name="canti_billete_dosmil"
             />
 
@@ -405,7 +406,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.total_billete_dosmil1}
+              defaultValue={arqueo.total_billete_dosmil1}
               name="total_billete_dosmil1"
             />
 
@@ -416,7 +417,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.canti_billete_mil1}
+              defaultValue={arqueo.canti_billete_mil1}
               name="canti_billete_mil1"
             />
 
@@ -427,7 +428,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.total_billete_mil1}
+              defaultValue={arqueo.total_billete_mil1}
               name="total_billete_mil1"
             />
 
@@ -438,7 +439,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.canti_moneda_mil1}
+              defaultValue={arqueo.canti_moneda_mil1}
               name="canti_moneda_mil1"
             />
 
@@ -449,7 +450,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.total_moneda_mil1}
+              defaultValue={arqueo.total_moneda_mil1}
               name="total_moneda_mil1"
             />
 
@@ -460,7 +461,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.canti_moneda_quinientos1}
+              defaultValue={arqueo.canti_moneda_quinientos1}
               name="canti_moneda_quinientos1"
             />
 
@@ -471,7 +472,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.total_moneda_quinientos1}
+              defaultValue={arqueo.total_moneda_quinientos1}
               name="total_moneda_quinientos1"
             />
 
@@ -482,7 +483,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.canti_moneda_docientos1}
+              defaultValue={arqueo.canti_moneda_docientos1}
               name="canti_moneda_docientos1"
             />
 
@@ -493,7 +494,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.total_moneda_docientos1}
+              defaultValue={arqueo.total_moneda_docientos1}
               name="total_moneda_docientos1"
             />
 
@@ -504,7 +505,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.canti_moneda_cien1}
+              defaultValue={arqueo.canti_moneda_cien1}
               name="canti_moneda_cien1"
             />
 
@@ -515,7 +516,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.total_moneda_cien1}
+              defaultValue={arqueo.total_moneda_cien1}
               name="total_moneda_cien1"
             />
 
@@ -526,7 +527,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.canti_moneda_cincuenta1}
+              defaultValue={arqueo.canti_moneda_cincuenta1}
               name="canti_moneda_cincuenta1"
             />
 
@@ -537,7 +538,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.total_moneda_ciencuenta1}
+              defaultValue={arqueo.total_moneda_ciencuenta1}
               name="total_moneda_ciencuenta1"
             />
 
@@ -548,7 +549,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.total_efectivo1}
+              defaultValue={arqueo.total_efectivo1}
               name="total_efectivo"
             />
 
@@ -559,7 +560,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.total_premios_pagados1}
+              defaultValue={arqueo.total_premios_pagados1}
               name="total_premios_pagados1"
             />
 
@@ -570,7 +571,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.total}
+              defaultValue={arqueo.total}
               name="total"
             />
 
@@ -582,7 +583,7 @@ function ArqueoForm (): JSX.Element {
               type="text"
               name="canti_billete_cienmil"
               disabled
-              defaultValue={values.canti_billete_cienmil}
+              defaultValue={arqueo.canti_billete_cienmil}
             />
 
             <label className="block text-center mt-5 uppercase">
@@ -593,7 +594,7 @@ function ArqueoForm (): JSX.Element {
               type="text"
               name="total_billete_cienmil"
               disabled
-              defaultValue={values.total_billete_cienmil}
+              defaultValue={arqueo.total_billete_cienmil}
             />
 
             <label className="block text-center mt-5 uppercase">
@@ -604,7 +605,7 @@ function ArqueoForm (): JSX.Element {
               type="text"
               name="canti_billete_cincuentamil"
               disabled
-              defaultValue={values.canti_billete_cincuentamil}
+              defaultValue={arqueo.canti_billete_cincuentamil}
             />
 
             <label className="block text-center mt-5 uppercase">
@@ -615,7 +616,7 @@ function ArqueoForm (): JSX.Element {
               type="text"
               name="total_billete_cincuentamil"
               disabled
-              defaultValue={values.total_billete_cincuentamil}
+              defaultValue={arqueo.total_billete_cincuentamil}
             />
 
             <label className="block text-center mt-5 uppercase">
@@ -625,7 +626,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.canti_billete_veintemil}
+              defaultValue={arqueo.canti_billete_veintemil}
               name="canti_billete_veintemil"
             />
 
@@ -636,7 +637,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.total_billete_veintemil}
+              defaultValue={arqueo.total_billete_veintemil}
               name="total_billete_veintemil"
             />
 
@@ -647,7 +648,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.canti_billete_diezmil}
+              defaultValue={arqueo.canti_billete_diezmil}
               name="canti_billete_diezmil"
             />
 
@@ -658,7 +659,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.total_billete_diezmil}
+              defaultValue={arqueo.total_billete_diezmil}
               name="total_billete_diezmil"
             />
 
@@ -669,7 +670,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.canti_billete_cincomil}
+              defaultValue={arqueo.canti_billete_cincomil}
               name="canti_billete_cincomil"
             />
 
@@ -680,7 +681,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.total_billete_cincomil}
+              defaultValue={arqueo.total_billete_cincomil}
               name="total_billete_cincomil"
             />
 
@@ -691,7 +692,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.canti_billete_dosmil}
+              defaultValue={arqueo.canti_billete_dosmil}
               name="canti_billete_dosmil"
             />
 
@@ -702,7 +703,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.total_billete_dosmil}
+              defaultValue={arqueo.total_billete_dosmil}
               name="total_billete_dosmil"
             />
 
@@ -713,7 +714,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.canti_billete_mil}
+              defaultValue={arqueo.canti_billete_mil}
               name="canti_billete_mil"
             />
 
@@ -724,7 +725,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.total_billete_mil}
+              defaultValue={arqueo.total_billete_mil}
               name="total_billete_mil"
             />
 
@@ -735,7 +736,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.canti_moneda_mil}
+              defaultValue={arqueo.canti_moneda_mil}
               name="canti_moneda_mil"
             />
 
@@ -746,7 +747,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.total_moneda_mil}
+              defaultValue={arqueo.total_moneda_mil}
               name="total_moneda_mil"
             />
 
@@ -757,7 +758,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.canti_moneda_quinientos}
+              defaultValue={arqueo.canti_moneda_quinientos}
               name="canti_moneda_quinientos"
             />
 
@@ -768,7 +769,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.total_moneda_quinientos}
+              defaultValue={arqueo.total_moneda_quinientos}
               name="total_moneda_quinientos"
             />
 
@@ -779,7 +780,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.canti_moneda_docientos}
+              defaultValue={arqueo.canti_moneda_docientos}
               name="canti_moneda_docientos"
             />
 
@@ -790,7 +791,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.total_moneda_docientos}
+              defaultValue={arqueo.total_moneda_docientos}
               name="total_moneda_docientos"
             />
 
@@ -801,7 +802,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.canti_moneda_cien}
+              defaultValue={arqueo.canti_moneda_cien}
               name="canti_moneda_cien"
             />
 
@@ -812,7 +813,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.total_moneda_cien}
+              defaultValue={arqueo.total_moneda_cien}
               name="total_moneda_cien"
             />
 
@@ -823,7 +824,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.canti_moneda_cincuenta}
+              defaultValue={arqueo.canti_moneda_cincuenta}
               name="canti_moneda_cincuenta"
             />
 
@@ -834,7 +835,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.total_moneda_ciencuenta}
+              defaultValue={arqueo.total_moneda_ciencuenta}
               name="total_moneda_ciencuenta"
             />
 
@@ -845,7 +846,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.total_efectivo}
+              defaultValue={arqueo.total_efectivo}
               name="total_efectivo"
             />
 
@@ -856,7 +857,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.año_total_premios_pagadosla}
+              defaultValue={arqueo.total_premios_pagados}
               name="año_total_premios_pagadosla"
             />
 
@@ -867,7 +868,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.base_efectivos}
+              defaultValue={arqueo.base_efectivos}
               name="base_efectivos"
             />
 
@@ -878,7 +879,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.tirilla_recaudos}
+              defaultValue={arqueo.tirilla_recaudos}
               name="tirilla_recaudos"
             />
 
@@ -889,7 +890,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.entrega_colocador}
+              defaultValue={arqueo.entrega_colocador}
               name="entrega_colocador"
             />
 
@@ -900,7 +901,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.sobrantefaltante_caja}
+              defaultValue={arqueo.sobrantefaltante_caja}
               name="sobrantefaltante_caja"
             />
 
@@ -911,7 +912,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.colocador_cajafuerte}
+              defaultValue={arqueo.colocador_cajafuerte}
               name="colocador_cajafuerte"
             />
 
@@ -922,7 +923,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.rollos_bnet}
+              defaultValue={arqueo.rollos_bnet}
               name="rollos_bnet"
             />
 
@@ -933,7 +934,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.rollos_fisicos}
+              defaultValue={arqueo.rollos_fisicos}
               name="rollos_fisicos"
             />
 
@@ -944,11 +945,11 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.diferencia}
+              defaultValue={arqueo.diferencia}
               name="diferencia"
             />
 
-            {values.nombre_juego && (
+            {(arqueo.nombre_juego !== 0) && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   nombre del juego1{' '}
@@ -957,13 +958,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.nombre_juego}
+                  defaultValue={arqueo.nombre_juego}
                   name="nombre_juego"
                 />
               </>
             )}
 
-            {values.cantidad_bnet && (
+            {(arqueo.cantidad_bnet !== 0) && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   cantidad en bnet1{' '}
@@ -972,13 +973,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.cantidad_bnet}
+                  defaultValue={arqueo.cantidad_bnet}
                   name="cantidad_bnet"
                 />
               </>
             )}
 
-            {values.cantidad_fisicos && (
+            {(arqueo.cantidad_fisicos !== 0) && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   cantidad en fisicos1{' '}
@@ -987,13 +988,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.cantidad_fisicos}
+                  defaultValue={arqueo.cantidad_fisicos}
                   name="cantidad_fisicos"
                 />
               </>
             )}
 
-            {values.cantidad_faltante && (
+            {(arqueo.cantidad_faltante !== 0) && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   cantidad faltante a descargar1{' '}
@@ -1002,13 +1003,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.cantidad_faltante}
+                  defaultValue={arqueo.cantidad_faltante}
                   name="cantidad_faltante"
                 />
               </>
             )}
 
-            {values.cantidad_tiquete && (
+            {(arqueo.cantidad_tiquete !== 0) && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   {' '}
@@ -1018,13 +1019,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.cantidad_tiquete}
+                  defaultValue={arqueo.cantidad_tiquete}
                   name="cantidad_tiquete"
                 />
               </>
             )}
 
-            {values.descargado && (
+            {arqueo.descargado != null && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   valor descargado por juego1{' '}
@@ -1033,13 +1034,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.descargado}
+                  defaultValue={arqueo.descargado}
                   name="descargado"
                 />
               </>
             )}
 
-            {values.nombre_juego2 && (
+            {(arqueo.nombre_juego2 !== 0) && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   nombre del juego2{' '}
@@ -1048,13 +1049,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.nombre_juego2}
+                  defaultValue={arqueo.nombre_juego2}
                   name="nombre_juego2"
                 />
               </>
             )}
 
-            {values.cantidad_bnet2 && (
+            {(arqueo.cantidad_bnet2 !== 0) && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   cantidad en bnet2{' '}
@@ -1063,13 +1064,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.cantidad_bnet2}
+                  defaultValue={arqueo.cantidad_bnet2}
                   name="cantidad_bnet"
                 />
               </>
             )}
 
-            {values.cantidad_fisicos2 && (
+            {(arqueo.cantidad_fisicos2 !== 0) && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   cantidad en fisicos2{' '}
@@ -1078,13 +1079,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.cantidad_fisicos2}
+                  defaultValue={arqueo.cantidad_fisicos2}
                   name="cantidad_fisicos"
                 />
               </>
             )}
 
-            {values.cantidad_faltante2 && (
+            {(arqueo.cantidad_faltante2 !== 0) && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   cantidad faltante a descargar2{' '}
@@ -1093,13 +1094,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.cantidad_faltante2}
+                  defaultValue={arqueo.cantidad_faltante2}
                   name="cantidad_faltante"
                 />
               </>
             )}
 
-            {values.cantidad_tiquete2 && (
+            {(arqueo.cantidad_tiquete2 !== 0) && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   {' '}
@@ -1109,13 +1110,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.cantidad_tiquete2}
+                  defaultValue={arqueo.cantidad_tiquete2}
                   name="cantidad_tiquete"
                 />
               </>
             )}
 
-            {values.descargado2 && (
+            {(arqueo.descargado2 !== 0) && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   valor descargado por juego2{' '}
@@ -1124,13 +1125,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.descargado2}
+                  defaultValue={arqueo.descargado2}
                   name="descargado"
                 />
               </>
             )}
 
-            {values.nombre_juego3 && (
+            {arqueo.nombre_juego3 !== 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   nombre del juego3{' '}
@@ -1139,13 +1140,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.nombre_juego3}
+                  defaultValue={arqueo.nombre_juego3}
                   name="nombre_juego2"
                 />
               </>
             )}
 
-            {values.cantidad_bnet3 && (
+            {arqueo.cantidad_bnet3 !== 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   cantidad en bnet3{' '}
@@ -1154,13 +1155,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.cantidad_bnet3}
+                  defaultValue={arqueo.cantidad_bnet3}
                   name="cantidad_bnet"
                 />
               </>
             )}
 
-            {values.cantidad_fisicos3 && (
+            {arqueo.cantidad_fisicos3 !== 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   cantidad en fisicos3{' '}
@@ -1169,13 +1170,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.cantidad_fisicos3}
+                  defaultValue={arqueo.cantidad_fisicos3}
                   name="cantidad_fisicos"
                 />
               </>
             )}
 
-            {values.cantidad_faltante3 && (
+            {arqueo.cantidad_faltante3 !== 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   cantidad faltante a descargar3{' '}
@@ -1184,13 +1185,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.cantidad_faltante3}
+                  defaultValue={arqueo.cantidad_faltante3}
                   name="cantidad_faltante"
                 />
               </>
             )}
 
-            {values.cantidad_tiquete3 && (
+            {arqueo.cantidad_tiquete3 !== 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   {' '}
@@ -1200,13 +1201,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.cantidad_tiquete3}
+                  defaultValue={arqueo.cantidad_tiquete3}
                   name="cantidad_tiquete"
                 />
               </>
             )}
 
-            {values.descargado3 && (
+            {arqueo.descargado3 !== 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   valor descargado por juego3{' '}
@@ -1215,13 +1216,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.descargado3}
+                  defaultValue={arqueo.descargado3}
                   name="descargado"
                 />
               </>
             )}
 
-            {values.nombre_juego4 && (
+            {arqueo.nombre_juego4 !== 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   nombre del juego4{' '}
@@ -1230,13 +1231,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.nombre_juego4}
+                  defaultValue={arqueo.nombre_juego4}
                   name="nombre_juego2"
                 />
               </>
             )}
 
-            {values.cantidad_bnet4 && (
+            {arqueo.cantidad_bnet4 !== 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   cantidad en bnet4{' '}
@@ -1245,13 +1246,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.cantidad_bnet4}
+                  defaultValue={arqueo.cantidad_bnet4}
                   name="cantidad_bnet"
                 />
               </>
             )}
 
-            {values.cantidad_fisicos4 && (
+            {arqueo.cantidad_fisicos4 !== 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   cantidad en fisicos4{' '}
@@ -1260,13 +1261,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.cantidad_fisicos4}
+                  defaultValue={arqueo.cantidad_fisicos4}
                   name="cantidad_fisicos"
                 />
               </>
             )}
 
-            {values.cantidad_faltante4 && (
+            {arqueo.cantidad_faltante4 !== 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   cantidad faltante a descargar4{' '}
@@ -1275,13 +1276,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.cantidad_faltante4}
+                  defaultValue={arqueo.cantidad_faltante4}
                   name="cantidad_faltante"
                 />
               </>
             )}
 
-            {values.cantidad_tiquete3 && (
+            {arqueo.cantidad_tiquete3 !== 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   {' '}
@@ -1291,13 +1292,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.cantidad_tiquete3}
+                  defaultValue={arqueo.cantidad_tiquete3}
                   name="cantidad_tiquete"
                 />
               </>
             )}
 
-            {values.descargado4 && (
+            {arqueo.descargado4 !== 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   valor descargado por juego4{' '}
@@ -1306,7 +1307,7 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.descargado4}
+                  defaultValue={arqueo.descargado4}
                   name="descargado"
                 />
               </>
@@ -1320,7 +1321,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.totaldescargados}
+              defaultValue={arqueo.totaldescargados}
               name="totaldescargados"
             />
 
@@ -1331,11 +1332,11 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.totalvalor}
+              defaultValue={arqueo.totalvalor}
               name="totalvalor"
             />
 
-            {values.requisito1 && (
+            {(arqueo.requisito1.length > 0) && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   ¿El punto de venta tiene puertacerrada con candado y/o seguro?
@@ -1344,13 +1345,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.requisito1}
+                  defaultValue={arqueo.requisito1}
                   name="requisito1"
                 />
               </>
             )}
 
-            {values.observacion1 && (
+            {(arqueo.observacion1.length > 0) && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   observacion{' '}
@@ -1359,13 +1360,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.observacion1}
+                  defaultValue={arqueo.observacion1}
                   name="observacion1"
                 />
               </>
             )}
 
-            {values.requisito2 && (
+            {arqueo.requisito2.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   ¿Tiene elementos de aseo, sillas en buen estado?
@@ -1374,13 +1375,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.requisito2}
+                  defaultValue={arqueo.requisito2}
                   name="requisito2"
                 />
               </>
             )}
 
-            {values.observacion2 && (
+            {arqueo.observacion2.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   observacion{' '}
@@ -1389,13 +1390,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.observacion2}
+                  defaultValue={arqueo.observacion2}
                   name="observacion2"
                 />
               </>
             )}
 
-            {values.requisito3 && (
+            {arqueo.requisito3.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   ¿Tiene aviso de videovigilancia y camaras?
@@ -1404,13 +1405,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.requisito3}
+                  defaultValue={arqueo.requisito3}
                   name="requisito3"
                 />
               </>
             )}
 
-            {values.observacion3 && (
+            {arqueo.observacion3.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   observacion{' '}
@@ -1419,13 +1420,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.observacion3}
+                  defaultValue={arqueo.observacion3}
                   name="observacion3"
                 />
               </>
             )}
 
-            {values.requisito4 && (
+            {arqueo.requisito4.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   ¿El Colocador cuenta con prendas emblematicas y presentación
@@ -1435,13 +1436,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.requisito4}
+                  defaultValue={arqueo.requisito4}
                   name="requisito4"
                 />
               </>
             )}
 
-            {values.observacion4 && (
+            {arqueo.observacion4.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   observacion{' '}
@@ -1450,13 +1451,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.observacion4}
+                  defaultValue={arqueo.observacion4}
                   name="observacion4"
                 />
               </>
             )}
 
-            {values.requisito5 && (
+            {arqueo.requisito5.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   ¿El usuario del colocador corresponde a la cedula del mismo?
@@ -1465,13 +1466,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.requisito5}
+                  defaultValue={arqueo.requisito5}
                   name="requisito4"
                 />
               </>
             )}
 
-            {values.observacion5 && (
+            {arqueo.observacion5.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   observacion{' '}
@@ -1480,13 +1481,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.observacion5}
+                  defaultValue={arqueo.observacion5}
                   name="observacion5"
                 />
               </>
             )}
 
-            {values.requisito6 && (
+            {arqueo.requisito6.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   ¿La versión del aplicativo BNET esta actualizada?
@@ -1495,13 +1496,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.requisito6}
+                  defaultValue={arqueo.requisito6}
                   name="requisito6"
                 />
               </>
             )}
 
-            {values.observacion6 && (
+            {arqueo.observacion6.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   observacion{' '}
@@ -1510,13 +1511,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.observacion6}
+                  defaultValue={arqueo.observacion6}
                   name="observacion6"
                 />
               </>
             )}
 
-            {values.requisito7 && (
+            {arqueo.requisito7.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   ¿El colocador ofrece los productos y servicios comercializados
@@ -1526,13 +1527,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.requisito7}
+                  defaultValue={arqueo.requisito7}
                   name="requisito7"
                 />
               </>
             )}
 
-            {values.observacion7 && (
+            {arqueo.observacion7.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   observacion{' '}
@@ -1541,13 +1542,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.observacion7}
+                  defaultValue={arqueo.observacion7}
                   name="observacion7"
                 />
               </>
             )}
 
-            {values.requisito8 && (
+            {arqueo.requisito8.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   ¿La publicidad exhibida en el punto de venta se encuentra
@@ -1557,13 +1558,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.requisito8}
+                  defaultValue={arqueo.requisito8}
                   name="requisito8"
                 />
               </>
             )}
 
-            {values.observacion8 && (
+            {arqueo.observacion8.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   observacion{' '}
@@ -1572,13 +1573,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.observacion8}
+                  defaultValue={arqueo.observacion8}
                   name="observacion8"
                 />
               </>
             )}
 
-            {values.requisito9 && (
+            {arqueo.requisito9.length > 0 && (
               <>
                 {' '}
                 <label className="block text-center mt-5 uppercase">
@@ -1589,12 +1590,12 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.requisito9}
+                  defaultValue={arqueo.requisito9}
                   name="requisito9"
                 />
               </>
             )}
-            {values.observacion9 && (
+            {arqueo.observacion9.length > 0 && (
               <>
                 {' '}
                 <label className="block text-center mt-5 uppercase">
@@ -1604,13 +1605,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.observacion9}
+                  defaultValue={arqueo.observacion9}
                   name="observacion9"
                 />
               </>
             )}
 
-            {values.requisito10 && (
+            {arqueo.requisito10.length > 0 && (
               <>
                 {' '}
                 <label className="block text-center mt-5 uppercase">
@@ -1620,12 +1621,12 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.requisito10}
+                  defaultValue={arqueo.requisito10}
                   name="requisito10"
                 />
               </>
             )}
-            {values.observacion10 && (
+            {arqueo.observacion10.length > 0 && (
               <>
                 {' '}
                 <label className="block text-center mt-5 uppercase">
@@ -1635,13 +1636,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.observacion10}
+                  defaultValue={arqueo.observacion10}
                   name="observacion10"
                 />
               </>
             )}
 
-            {values.requisito11 && (
+            {arqueo.requisito11.length > 0 && (
               <>
                 {' '}
                 <label className="block text-center mt-5 uppercase">
@@ -1652,12 +1653,12 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.requisito11}
+                  defaultValue={arqueo.requisito11}
                   name="requisito11"
                 />
               </>
             )}
-            {values.observacion11 && (
+            {arqueo.observacion11.length > 0 && (
               <>
                 {' '}
                 <label className="block text-center mt-5 uppercase">
@@ -1667,13 +1668,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.requisito11}
+                  defaultValue={arqueo.requisito11}
                   name="observacion11"
                 />
               </>
             )}
 
-            {values.requisito12 && (
+            {arqueo.requisito12.length > 0 && (
               <>
                 {' '}
                 <label className="block text-center mt-5 uppercase">
@@ -1684,12 +1685,12 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.requisito12}
+                  defaultValue={arqueo.requisito12}
                   name="requisito12"
                 />
               </>
             )}
-            {values.observacion12 && (
+            {arqueo.observacion12.length > 0 && (
               <>
                 {' '}
                 <label className="block text-center mt-5 uppercase">
@@ -1699,13 +1700,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.observacion12}
+                  defaultValue={arqueo.observacion12}
                   name="observacion12"
                 />
               </>
             )}
 
-            {values.requisito13 && (
+            {arqueo.requisito13.length > 0 && (
               <>
                 {' '}
                 <label className="block text-center mt-5 uppercase">
@@ -1716,12 +1717,12 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.requisito13}
+                  defaultValue={arqueo.requisito13}
                   name="requisito13"
                 />
               </>
             )}
-            {values.observacion9 && (
+            {arqueo.observacion9.length > 0 && (
               <>
                 {' '}
                 <label className="block text-center mt-5 uppercase">
@@ -1731,13 +1732,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.observacion13}
+                  defaultValue={arqueo.observacion13}
                   name="observacion13"
                 />
               </>
             )}
 
-            {values.requisito14 && (
+            {arqueo.requisito14.length > 0 && (
               <>
                 {' '}
                 <label className="block text-center mt-5 uppercase">
@@ -1748,12 +1749,12 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.requisito14}
+                  defaultValue={arqueo.requisito14}
                   name="requisito14"
                 />
               </>
             )}
-            {values.observacion14 && (
+            {arqueo.observacion14.length > 0 && (
               <>
                 {' '}
                 <label className="block text-center mt-5 uppercase">
@@ -1763,13 +1764,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.observacion14}
+                  defaultValue={arqueo.observacion14}
                   name="observacion14"
                 />
               </>
             )}
 
-            {values.requisito15 && (
+            {arqueo.requisito15.length > 0 && (
               <>
                 {' '}
                 <label className="block text-center mt-5 uppercase">
@@ -1780,12 +1781,12 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.requisito15}
+                  defaultValue={arqueo.requisito15}
                   name="requisito15"
                 />
               </>
             )}
-            {values.observacion15 && (
+            {arqueo.observacion15.length > 0 && (
               <>
                 {' '}
                 <label className="block text-center mt-5 uppercase">
@@ -1795,13 +1796,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.requisito15}
+                  defaultValue={arqueo.requisito15}
                   name="observacion15"
                 />
               </>
             )}
 
-            {values.requisito16 && (
+            {arqueo.requisito16.length > 0 && (
               <>
                 {' '}
                 <label className="block text-center mt-5 uppercase">
@@ -1812,12 +1813,12 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.requisito16}
+                  defaultValue={arqueo.requisito16}
                   name="requisito16"
                 />
               </>
             )}
-            {values.observacion16 && (
+            {arqueo.observacion16.length > 0 && (
               <>
                 {' '}
                 <label className="block text-center mt-5 uppercase">
@@ -1827,13 +1828,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.observacion16}
+                  defaultValue={arqueo.observacion16}
                   name="observacion16"
                 />
               </>
             )}
 
-            {values.requisito17 && (
+            {arqueo.requisito17.length > 0 && (
               <>
                 {' '}
                 <label className="block text-center mt-5 uppercase">
@@ -1843,12 +1844,12 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.requisito17}
+                  defaultValue={arqueo.requisito17}
                   name="requisito17"
                 />
               </>
             )}
-            {values.observacion17 && (
+            {arqueo.observacion17.length > 0 && (
               <>
                 {' '}
                 <label className="block text-center mt-5 uppercase">
@@ -1858,13 +1859,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.observacion17}
+                  defaultValue={arqueo.observacion17}
                   name="observacion17"
                 />
               </>
             )}
 
-            {values.requisito18 && (
+            {arqueo.requisito18.length > 0 && (
               <>
                 {' '}
                 <label className="block text-center mt-5 uppercase">
@@ -1875,12 +1876,12 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.requisito18}
+                  defaultValue={arqueo.requisito18}
                   name="requisito18"
                 />
               </>
             )}
-            {values.observacion18 && (
+            {arqueo.observacion18.length > 0 && (
               <>
                 {' '}
                 <label className="block text-center mt-5 uppercase">
@@ -1890,13 +1891,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.observacion18}
+                  defaultValue={arqueo.observacion18}
                   name="observacion18"
                 />
               </>
             )}
 
-            {values.requisito19 && (
+            {arqueo.requisito19.length > 0 && (
               <>
                 {' '}
                 <label className="block text-center mt-5 uppercase">
@@ -1908,12 +1909,12 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.requisito19}
+                  defaultValue={arqueo.requisito19}
                   name="requisito19"
                 />
               </>
             )}
-            {values.observacion19 && (
+            {arqueo.observacion19.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   observacion{' '}
@@ -1922,13 +1923,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.observacion19}
+                  defaultValue={arqueo.observacion19}
                   name="observacion19"
                 />
               </>
             )}
 
-            {values.requisito20 && (
+            {arqueo.requisito20.length > 0 && (
               <>
                 {' '}
                 <label className="block text-center mt-5 uppercase">
@@ -1939,12 +1940,12 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.requisito20}
+                  defaultValue={arqueo.requisito20}
                   name="requisito20"
                 />
               </>
             )}
-            {values.observacion20 && (
+            {arqueo.observacion20.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   observacion{' '}
@@ -1953,13 +1954,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.observacion20}
+                  defaultValue={arqueo.observacion20}
                   name="observacion20"
                 />
               </>
             )}
 
-            {values.requisito21 && (
+            {arqueo.requisito21.length > 0 && (
               <>
                 {' '}
                 <label className="block text-center mt-5 uppercase">
@@ -1970,12 +1971,12 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.requisito21}
+                  defaultValue={arqueo.requisito21}
                   name="requisito21"
                 />
               </>
             )}
-            {values.observacion21 && (
+            {arqueo.observacion21.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   observacion{' '}
@@ -1984,13 +1985,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.observacion21}
+                  defaultValue={arqueo.observacion21}
                   name="observacion21"
                 />
               </>
             )}
 
-            {values.requisito22 && (
+            {arqueo.requisito22.length > 0 && (
               <>
                 {' '}
                 <label className="block text-center mt-5 uppercase">
@@ -2002,12 +2003,12 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.requisito22}
+                  defaultValue={arqueo.requisito22}
                   name="requisito22"
                 />
               </>
             )}
-            {values.observacion22 && (
+            {arqueo.observacion22.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   observacion{' '}
@@ -2016,13 +2017,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.observacion22}
+                  defaultValue={arqueo.observacion22}
                   name="observacion22"
                 />
               </>
             )}
 
-            {values.requisito23 && (
+            {arqueo.requisito23.length > 0 && (
               <>
                 {' '}
                 <label className="block text-center mt-5 uppercase">
@@ -2033,12 +2034,12 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.requisito23}
+                  defaultValue={arqueo.requisito23}
                   name="requisito23"
                 />
               </>
             )}
-            {values.observacion23 && (
+            {arqueo.observacion23.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   observacion{' '}
@@ -2047,13 +2048,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.observacion23}
+                  defaultValue={arqueo.observacion23}
                   name="observacion23"
                 />
               </>
             )}
 
-            {values.requisito24 && (
+            {arqueo.requisito24.length > 0 && (
               <>
                 {' '}
                 <label className="block text-center mt-5 uppercase">
@@ -2064,12 +2065,12 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.requisito24}
+                  defaultValue={arqueo.requisito24}
                   name="requisito24"
                 />
               </>
             )}
-            {values.observacion24 && (
+            {arqueo.observacion24.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   observacion{' '}
@@ -2078,13 +2079,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.observacion24}
+                  defaultValue={arqueo.observacion24}
                   name="observacion24"
                 />
               </>
             )}
 
-            {values.requisito25 && (
+            {arqueo.requisito25.length > 0 && (
               <>
                 {' '}
                 <label className="block text-center mt-5 uppercase">
@@ -2094,12 +2095,12 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.requisito25}
+                  defaultValue={arqueo.requisito25}
                   name="requisito25"
                 />
               </>
             )}
-            {values.observacion25 && (
+            {arqueo.observacion25.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   observacion{' '}
@@ -2108,13 +2109,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.observacion25}
+                  defaultValue={arqueo.observacion25}
                   name="observacion25"
                 />
               </>
             )}
 
-            {values.requisito26 && (
+            {arqueo.requisito26.length > 0 && (
               <>
                 {' '}
                 <label className="block text-center mt-5 uppercase">
@@ -2124,12 +2125,12 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.requisito26}
+                  defaultValue={arqueo.requisito26}
                   name="requisito26"
                 />
               </>
             )}
-            {values.observacion26 && (
+            {arqueo.observacion26.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   observacion{' '}
@@ -2138,13 +2139,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.observacion26}
+                  defaultValue={arqueo.observacion26}
                   name="observacion26"
                 />
               </>
             )}
 
-            {values.requisito27 && (
+            {arqueo.requisito27.length > 0 && (
               <>
                 {' '}
                 <label className="block text-center mt-5 uppercase">
@@ -2155,12 +2156,12 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.requisito27}
+                  defaultValue={arqueo.requisito27}
                   name="requisito27"
                 />
               </>
             )}
-            {values.observacion27 && (
+            {arqueo.observacion27.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   observacion{' '}
@@ -2169,13 +2170,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.observacion27}
+                  defaultValue={arqueo.observacion27}
                   name="observacion27"
                 />
               </>
             )}
 
-            {values.requisito28 && (
+            {arqueo.requisito28.length > 0 && (
               <>
                 {' '}
                 <label className="block text-center mt-5 uppercase">
@@ -2186,12 +2187,12 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.requisito28}
+                  defaultValue={arqueo.requisito28}
                   name="requisito28"
                 />
               </>
             )}
-            {values.requisito29 && (
+            {(arqueo.requisito29.length > 0) && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   VERIFICACION INSUMOS PARA PREVENCION DE COVID 19
@@ -2200,13 +2201,13 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.requisito29}
+                  defaultValue={arqueo.requisito29}
                   name="requisito29"
                 />
               </>
             )}
 
-            {values.requisito30 && (
+            {(arqueo.requisito30.length > 0) && (
               <>
                 {' '}
                 <label className="block text-center mt-5 uppercase">
@@ -2216,7 +2217,7 @@ function ArqueoForm (): JSX.Element {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={values.requisito30}
+                  defaultValue={arqueo.requisito30}
                   name="requisito30"
                 />
               </>
@@ -2227,7 +2228,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.longitud}
+              defaultValue={arqueo.longitud}
               name="longitud"
             />
 
@@ -2238,7 +2239,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.fechavisita}
+              defaultValue={arqueo.fechavisita}
               name="fechavisita"
             />
 
@@ -2249,7 +2250,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.horavisita}
+              defaultValue={arqueo.horavisita}
               name="horavisita"
             />
 
@@ -2258,7 +2259,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.latitud}
+              defaultValue={arqueo.latitud}
               name="latitud"
             />
 
@@ -2267,7 +2268,7 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.longitud}
+              defaultValue={arqueo.longitud}
               name="longitud"
             />
 
@@ -2276,17 +2277,17 @@ function ArqueoForm (): JSX.Element {
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
               disabled
-              defaultValue={values.nombre_observacion}
+              defaultValue={arqueo.nombre_observacion}
               name="nombre observacion"
             />
 
             <div className="grid grid-cols-4 gap-4 mt-5">
               <div className="flex flex-col items-center">
-                {values.imagen_observacion && (
+                {arqueo.imagen_observacion != null && (
                   <>
                     <h4 className="block uppercase">imagen observacion</h4>
                     <img
-                      src={`data:image/png;base64,${values.imagen_observacion}`}
+                      src={`data:image/png;base64,${arqueo.imagen_observacion != null}`}
                       className="w-full h-40 mt-7 rotate-90 object-contain"
                       alt="imagen observacion"
                     />
@@ -2295,11 +2296,11 @@ function ArqueoForm (): JSX.Element {
               </div>
 
               <div>
-                {values.firma_auditoria && (
+                {arqueo.firma_auditoria != null && (
                   <>
                     <h4 className="block uppercase">Firma Colocadora</h4>
                     <img
-                      src={`data:image/png;base64,${values.firma_auditoria}`}
+                      src={`data:image/png;base64,${arqueo.firma_auditoria != null}`}
                       className="w-30 h-20 mt-2"
                       alt="Firma Colocadora"
                     />
@@ -2307,11 +2308,11 @@ function ArqueoForm (): JSX.Element {
                 )}
               </div>
               <div>
-                {values.firma_colocadora && (
+                {arqueo.firma_colocadora != null && (
                   <>
                     <h4 className="block uppercase">Firma Colocadora</h4>
                     <img
-                      src={`data:image/png;base64,${values.firma_colocadora}`}
+                      src={`data:image/png;base64,${arqueo.firma_colocadora != null}`}
                       className="w-30 h-20 mt-2"
                       alt="Firma Colocadora"
                     />
