@@ -1,38 +1,39 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Buffer } from 'buffer'
 import { useAuth } from '../auth/AuthProvider'
 import { useParams } from 'react-router-dom'
-import { type Arqueos } from '../types/arqueo'
+import { type Arqueo } from '../types/arqueo'
 import { type Datos } from '../components/PDF'
 import { Card } from '@tremor/react'
 import { BottonExportItems } from '../components/XportExcel'
 import { PDF } from '../components/PDF'
 import { PDFDownloadLink } from '@react-pdf/renderer'
 import { API_URL } from '../utils/constans'
+// import { API_URL } from '../utils/constans'
 
-const ArqueoForm = ({ arqueos }: { arqueos: Arqueos }): JSX.Element => {
+const ArqueoForm = (): JSX.Element => {
   const { username } = useAuth()
-  const company = username.nombre_empresa
-  const [data, setData] = useState<Arqueos[]>([])
+  const company = username.empresa.nombre_empresa
+  const [data, setData] = useState<Arqueo[]>([])
   const { id } = useParams<{ id: string }>()
 
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
       try {
+        // const response = await axios.get(`http://localhost:3000/arqueos/${company}/${id}`)
         const response = await axios.get(`${API_URL}/arqueos/${company}/${id}`)
-        setData(response.data as Arqueos[])
+        setData(response.data as Arqueo[])
 
         if (response.data != null) {
           const dataWithBase64Images = response.data.map((item: { firma_auditoria: unknown, firma_colocadora: unknown, imagen_observacion: unknown }) => ({
             ...item,
-
             firma_auditoria: item.firma_auditoria != null ? Buffer.from(item.firma_auditoria as string).toString('base64') : null,
             firma_colocadora: item.firma_colocadora != null ? Buffer.from(item.firma_colocadora as string).toString('base64') : null,
             imagen_observacion: item.imagen_observacion != null ? Buffer.from(item.imagen_observacion as string).toString() : null
           }))
 
-          setData(dataWithBase64Images as Arqueos[])
+          setData(dataWithBase64Images as Arqueo[])
         }
       } catch (error) {
         console.error('Error al obtener los datos:', error)
@@ -40,13 +41,13 @@ const ArqueoForm = ({ arqueos }: { arqueos: Arqueos }): JSX.Element => {
     }
 
     void fetchData()
-  }, [])
+  }, [company, id])
 
   return (
 
     <>
       {
-        arqueos.map((arqueo, index) => (
+        data.map((arqueo: Arqueo, index) => (
           <Card key={index} className='dark:bg-dark-tremor-brand-muted dark:text-white'>
             <div className=" bg-blue-500 h-20  rounded-lg ">
               <h1 className="font-bold uppercase text-white text-2xl translate-y-5 translate-x-3 flex flex-col items-center">
@@ -2287,7 +2288,7 @@ const ArqueoForm = ({ arqueos }: { arqueos: Arqueos }): JSX.Element => {
                   <>
                     <h4 className="block uppercase">imagen observacion</h4>
                     <img
-                      src={`data:image/png;base64,${arqueo.imagen_observacion != null}`}
+                      src={`data:image/png;base64,${arqueo.imagen_observacion}`}
                       className="w-full h-40 mt-7 rotate-90 object-contain"
                       alt="imagen observacion"
                     />
@@ -2298,11 +2299,11 @@ const ArqueoForm = ({ arqueos }: { arqueos: Arqueos }): JSX.Element => {
               <div>
                 {arqueo.firma_auditoria != null && (
                   <>
-                    <h4 className="block uppercase">Firma Colocadora</h4>
+                    <h4 className="block uppercase">Firma Auditoria</h4>
                     <img
-                      src={`data:image/png;base64,${arqueo.firma_auditoria != null}`}
+                      src={`data:image/png;base64,${arqueo.firma_auditoria}`}
                       className="w-30 h-20 mt-2"
-                      alt="Firma Colocadora"
+                      alt="Firma Auditoria"
                     />
                   </>
                 )}
@@ -2312,7 +2313,7 @@ const ArqueoForm = ({ arqueos }: { arqueos: Arqueos }): JSX.Element => {
                   <>
                     <h4 className="block uppercase">Firma Colocadora</h4>
                     <img
-                      src={`data:image/png;base64,${arqueo.firma_colocadora != null}`}
+                      src={`data:image/png;base64,${arqueo.firma_colocadora}`}
                       className="w-30 h-20 mt-2"
                       alt="Firma Colocadora"
                     />

@@ -1,19 +1,23 @@
+
 import { useAuth } from '../auth/AuthProvider'
 import { CambiarCompany } from '../components/DefineCompany'
-import DahsBoard from '../components/DashBoard'
-import { type Empresa } from '../types/user'
+import DashBoard from '../components/DashBoard'
 
 function EmpresaPage (): JSX.Element {
-  const { username } = useAuth()
-  const company = username.nombre_empresa!
+  const { username } = useAuth() // Obtén el objeto user desde useAuth
+  const company = username.empresa // Accede a empresa desde user
+
+  console.log('Empresa seleccionada:', company.nombre_empresa)
 
   return (
     <>
-    {
-         company === 'Multired Y Servired'
-           ? (<CambiarCompany />)
-           : (<DahsBoard company={company}/>)
-    }
+      {company.nombre_empresa === 'Multired Y Servired'
+        ? (
+        <CambiarCompany />
+          )
+        : (
+        <DashBoard company={company} />
+          )}
     </>
   )
 }

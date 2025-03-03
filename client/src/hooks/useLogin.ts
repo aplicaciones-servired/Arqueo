@@ -22,14 +22,14 @@ export function useLogin (): {
   const handleSubmit = (ev: React.FormEvent): void => {
     ev.preventDefault()
     void getLogin({ username, password })
-      .then(res => {
+      .then((res) => {
         if (res !== null && res !== undefined) {
           login()
           setUsernames(res as User)
           navigate('/home')
         }
       })
-      .catch(error => {
+      .catch((error) => {
         const errorMessage = (error.response?.data?.message ?? error.message) as string | undefined
         setErrorString(errorMessage ?? 'Error al iniciar sesión')
         setTimeout(() => {

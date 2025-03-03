@@ -5,7 +5,10 @@ module.exports = {
   },
   extends: [
     'standard-with-typescript',
-    'plugin:react/recommended'
+    'plugin:react/recommended',
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:@typescript-eslint/recommended'
   ],
   overrides: [
     {
@@ -23,12 +26,19 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
-    project: ['./tsconfig.json', './.eslintrc.cjs']
+    project: ['./tsconfig.eslint.json']
   },
   plugins: [
-    'react'
+    'react',
+    '@typescript-eslint'
   ],
   rules: {
-    'react/react-in-jsx-scope': 'off'
+    'react/react-in-jsx-scope': 'off',
+    'no-unused-vars': ['error', { varsIgnorePattern: 'React' }]
+  },
+  settings: {
+    react: {
+      version: 'detect'
+    }
   }
 }

@@ -1,8 +1,5 @@
-import React from 'react'
-import { useTheme } from '../contexts/ThemeContext'
 import { useAuth } from '../auth/AuthProvider'
 import { NavLink } from 'react-router-dom'
-import { Switch } from '@tremor/react'
 import { Button } from './iu'
 
 const Links = [
@@ -19,10 +16,9 @@ const LinkComponent = ({ link, name }: { link: string, name: string }): JSX.Elem
 
 function NavBar (): JSX.Element {
   const { logout } = useAuth()
-  const { toggleTheme } = useTheme()
 
   return (
-    <nav className='bg-blue-300 py-3 dark:bg-slate-900 dark:text-white'>
+    <nav className='bg-blue-300 py-3 dark:bg-slate-900 dark:text-white rounded-lg'>
       <ul className='flex items-center justify-around'>
 
         <figure className='flex'>
@@ -34,7 +30,6 @@ function NavBar (): JSX.Element {
         </div>
 
         <article className='flex gap-4'>
-          <Switch onChange={toggleTheme} />
           <Button onClick={logout}>Cerrar Sesión</Button>
         </article>
 

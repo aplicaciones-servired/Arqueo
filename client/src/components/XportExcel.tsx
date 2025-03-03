@@ -1,4 +1,3 @@
-import React from 'react'
 import * as XLSX from 'xlsx'
 import type { Arqueo } from '../types/arqueo'
 

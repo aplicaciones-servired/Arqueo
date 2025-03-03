@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { type User } from '../types/user'
 
 interface IAuthContext {
@@ -16,14 +15,32 @@ interface Props {
 
 const InitialUser: User = {
   cc_persona: '',
-  id_empresa: '',
   nombre_persona: '',
   apellido_persona: '',
-  nombre_cargo: '',
-  nombre_proceso: '',
-  nombre_rol: '',
+  id_empresa: '',
+  id_cargo: '',
+  id_proceso: '',
+  id_rol: '',
+  username: '',
   password: '',
-  username: ''
+  id_estado: '',
+  empresa: {
+    id_empresa: '',
+    nombre_empresa: 'Multired' // or any other valid value of type 'Empresas'
+  },
+  rol: {
+    id_rol: '',
+    nombre_rol: ''
+  },
+  cargo: {
+    id_cargo: '',
+    nombre_cargo: ''
+  },
+  proceso: {
+    id_proceso: '',
+    nombre_proceso: ''
+  }
+
 }
 
 const AuthContext = createContext<IAuthContext | undefined>(undefined)
@@ -37,8 +54,6 @@ export const AuthProvider = ({ children }: Props): JSX.Element => {
     const storedUser = localStorage.getItem('username')
     return (storedUser != null) ? JSON.parse(storedUser) : InitialUser
   })
-
-  const navigate = useNavigate()
 
   let inactivityTimer: ReturnType<typeof setTimeout>
 
@@ -81,12 +96,10 @@ export const AuthProvider = ({ children }: Props): JSX.Element => {
 
   const login = (): void => {
     setIsAuthenticated(true)
-    navigate('/home')
   }
 
   const logout = (): void => {
     setIsAuthenticated(false)
-    navigate('/')
   }
 
   return (
