@@ -1,18 +1,16 @@
-FROM node:lts
+# Base de Node.js versión 18
+FROM node:slim
 
+# Cambiar a la carpeta de la aplicación
 WORKDIR /app
 
-# Copiar el resto del código de la aplicación
+# Instalar dependencias
 COPY . .
 
-# Instalar dependencias necesarias
-RUN npm install
+RUN yarn
 
-# Construir la aplicación
-RUN npm run build
+# Exponer el puerto
+EXPOSE 3000
 
-# Exponer el puerto en el que correrá la aplicación
-EXPOSE 80
-
-# Comando para iniciar la aplicación
-CMD ["npm", "start"]
+# Comando para ejecutar la aplicación
+CMD ["yarn", "start"]
