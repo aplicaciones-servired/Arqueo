@@ -4,15 +4,10 @@ FROM node:slim
 # Cambiar a la carpeta de la aplicación
 WORKDIR /app
 
-# Copiar package.json e instalar dependencias
-COPY package.json yarn.lock ./
-RUN yarn install
-
-# Copiar el resto del código fuente
+# Instalar dependencias
 COPY . .
 
-# Compilar TypeScript antes de ejecutar la aplicación
-RUN yarn build
+RUN yarn
 
 # Exponer el puerto
 EXPOSE 3000
