@@ -1,23 +1,16 @@
-# Use Node.js 18 as the base image
-FROM node:18
+# Base de Node.js versión 18
+FROM node:slim
 
-# Set the working directory
+# Cambiar a la carpeta de la aplicación
 WORKDIR /app
 
-# Copy package.json and yarn.lock first to leverage layer caching
-COPY package.json yarn.lock ./
-
-# Install dependencies
-RUN yarn install
-
-# Copy the rest of the application files
+# Instalar dependencias
 COPY . .
 
-# Debug: List files in the container
-RUN ls -R /app
+RUN yarn
 
-# Expose the port
+# Exponer el puerto
 EXPOSE 3000
 
-# Command to run the application
+# Comando para ejecutar la aplicación
 CMD ["yarn", "start"]
