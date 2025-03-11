@@ -1,13 +1,18 @@
 FROM node:lts
 
-# Create app directory
-WORKDIR /usr/src/app
+WORKDIR /app
 
-# Install app dependencies
+# Copiar el resto del código de la aplicación
 COPY . .
 
-RUN npm install && node --run build
+# Instalar dependencias necesarias
+RUN npm install
 
+# Construir la aplicación
+RUN npm run build
+
+# Exponer el puerto en el que correrá la aplicación
 EXPOSE 80
 
-CMD [ "npm", "start" ]
+# Comando para iniciar la aplicación
+CMD ["npm", "start"]
