@@ -7,7 +7,7 @@ WORKDIR /app
 # Instalar dependencias
 COPY . .
 
-RUN npm install && node --run build
+RUN npm install
 
 # Exponer el puerto
 EXPOSE 3000
