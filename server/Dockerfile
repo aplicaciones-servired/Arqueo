@@ -1,18 +1,13 @@
-# Base de Node.js versión 18
-FROM node:slim
+FROM node:lts
 
-# Cambiar a la carpeta de la aplicación
-WORKDIR /app
+# Create app directory
+WORKDIR /usr/src/app
 
-# Instalar dependencias
-COPY package*.json ./
-RUN npm install
+# Install app dependencies
+COPY . .
 
+RUN npm install && node --run build
 
-RUN npm install
+EXPOSE 80
 
-# Exponer el puerto
-EXPOSE 3000
-
-# Comando para ejecutar la aplicación
 CMD [ "npm", "start" ]
