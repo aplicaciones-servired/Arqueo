@@ -13,6 +13,9 @@ RUN yarn install
 # Copy the rest of the application files
 COPY . .
 
+# Debug: List files in the container
+RUN ls -R /app
+
 # Expose the port
 EXPOSE 3000
 
