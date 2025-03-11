@@ -5,7 +5,9 @@ FROM node:slim
 WORKDIR /app
 
 # Instalar dependencias
-COPY . .
+COPY package*.json ./
+RUN npm install
+
 
 RUN npm install
 
