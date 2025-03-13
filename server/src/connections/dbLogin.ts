@@ -11,7 +11,7 @@ const DB_DIALECT_CHAT = process.env.DB_DIALECT_CHAT as string
 
 const getPoolLogin = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
   host: DB_HOST,
-  dialect: DB_DIALECT_CHAT as any,
+  dialect: "mysql",
   timezone: '-05:00',
 });
 

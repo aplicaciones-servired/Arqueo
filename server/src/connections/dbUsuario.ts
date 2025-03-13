@@ -11,7 +11,7 @@ const DB_DIALECT_USUARIO = process.env.DB_DIALECT_USUARIO as string
 
 const getPoolUsuario = new Sequelize(DB_USUARIO_NAME, DB_USUARIO_USER, DB_USUARIO_PASSWORD, {
   host: DB_USUARIO_HOST,
-  dialect: DB_DIALECT_USUARIO as any,
+  dialect: "mysql",
   timezone: '-05:00',
 });
 

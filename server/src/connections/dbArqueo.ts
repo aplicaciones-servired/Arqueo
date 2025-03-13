@@ -11,7 +11,7 @@ const DB_DIALECT_ARQUEO = process.env.DB_DIALECT_ARQUEO as string
 
 const getPoolArqueo = new Sequelize(DB_ARQUEO_NAME, DB_ARQUEO_USER, DB_ARQUEO_PASSWORD, {
   host: DB_ARQUEO_HOST,
-  dialect: DB_DIALECT_ARQUEO as any,
+  dialect: "mysql",
   timezone: '-05:00',
 });
 
