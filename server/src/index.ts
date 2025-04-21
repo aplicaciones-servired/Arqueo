@@ -19,4 +19,13 @@ app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server is running on http://0.0.0.0:${PORT}`);
 });
 
+app.get('/api/health', (req, res) => {
+  res.json({ 
+      status: 'OK', 
+      message: 'API funcionando',
+      timestamp: new Date().toISOString()
+  });
+});
+
+
 
