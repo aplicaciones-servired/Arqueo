@@ -71,62 +71,10 @@ export interface Datos {
   totalmonedas: string
   totalarqueo: string
   sobrantefaltante: string
-  canti_billete_cienmil: string
-  total_billete_cienmil: string
-  canti_billete_cincuentamil: string
-  total_billete_cincuentamil: string
-  canti_billete_veintemil: string
-  total_billete_veintemil: string
-  canti_billete_diezmil: string
-  total_billete_diezmil: string
-  canti_billete_cincomil: string
-  total_billete_cincomil: string
-  canti_billete_dosmil: string
-  total_billete_dosmil: string
-  canti_billete_mil: string
-  canti_moneda_mil: string
-  total_moneda_mil: string
-  canti_moneda_quinientos: string
-  total_moneda_quinientos: string
-  canti_moneda_docientos: string
-  total_moneda_docientos: string
-  canti_moneda_cien: string
-  total_moneda_cien: string
-  canti_moneda_cincuenta: string
-  total_moneda_ciencuenta: string
-  total_efectivo: string
-  canti_billete_cienmil1: string
-  total_billete_cienmil1: string
-  canti_billete_cincuentamil1: string
-  total_billete_cincuentamil1: string
-  canti_billete_veintemil1: string
-  total_billete_veintemil1: string
-  canti_billete_diezmil1: string
-  total_billete_diezmil1: string
-  canti_billete_cincomil1: string
-  total_billete_cincomil1: string
-  canti_billete_dosmil1: string
-  total_billete_dosmil1: string
-  canti_billete_mil1: string
-  canti_moneda_mil1: string
-  total_moneda_mil1: string
-  canti_moneda_quinientos1: string
-  total_moneda_quinientos1: string
-  canti_moneda_docientos1: string
-  total_moneda_docientos1: string
-  canti_moneda_cien1: string
-  total_moneda_cien1: string
-  canti_moneda_cincuenta1: string
-  total_moneda_ciencuenta1: string
-  total_efectivo1: string
-  total_premios_pagados1: string
+  totalbilletescaja: string
+  totalmonedascaja: string
+  totalpremioscaja: string
   total: string
-  total_premios_pagados: string
-  entrega_colocador: string
-  sobrantefaltante_caja: string
-  base_efectivos: string
-  tirilla_recaudos: string
-  colocador_cajafuerte: string
   rollos_bnet: string
   rollos_fisicos: string
   diferencia: string
@@ -154,6 +102,24 @@ export interface Datos {
   cantidad_faltante4?: string
   cantidad_tiquete4?: string
   descargado4?: string
+  nombre_juego5?: string
+  cantidad_bnet5?: string
+  cantidad_fisicos5?: string
+  cantidad_faltante5?: string
+  cantidad_tiquete5?: string
+  descargado5?: string
+  nombre_juego6?: string
+  cantidad_bnet6?: string
+  cantidad_fisicos6?: string
+  cantidad_faltante6?: string
+  cantidad_tiquete6?: string
+  descargado6?: string
+  nombre_juego7?: string
+  cantidad_bnet7?: string
+  cantidad_fisicos7?: string
+  cantidad_faltante7?: string
+  cantidad_tiquete7?: string
+  descargado7?: string
   totaldescargados?: string
   totalvalor?: string
   requisito1: string
@@ -179,7 +145,7 @@ export interface Datos {
   requisito11: string
   observacion11?: string
   requisito12: string
-  observacion112?: string
+  observacion12?: string
   requisito13: string
   observacion13?: string
   requisito14: string
@@ -213,7 +179,19 @@ export interface Datos {
   requisito28: string
   observacion28?: string
   requisito29: string
+  observacion29?: string
   requisito30: string
+  observacion30?: string
+  requisito31: string
+  observacion31?: string
+  requisito32: string
+  observacion32?: string
+  requisito33?: string
+  observacion33?: string
+  requisito34?: string
+  observacion34?: string
+  requisito35?: string
+  observacion35?: string
   fechavisita: string
   horavisita: string
   nombre_observacion?: string
@@ -254,65 +232,12 @@ export const PDF: React.FC<{ datos: Datos, company: string }> = ({ datos, compan
                     <Text style={styles.text}> totalbilletes: {datos.totalbilletes}</Text>
                     <Text style={styles.text}> totalmonedas: {datos.totalmonedas}</Text>
                     <Text style={styles.text}> totalarqueo: {datos.totalarqueo}</Text>
+                    <Text style={styles.text}> total billetes caja: {datos.totalbilletescaja}</Text>
                     <Text style={styles.text}> sobrantefaltante: {datos.sobrantefaltante}</Text>
-                    <Text style={styles.text}> cantida de billetes cienmil: {datos.canti_billete_cienmil}</Text>
-                    <Text style={styles.text}> total billetes cienmil: {datos.total_billete_cienmil}</Text>
-                    <Text style={styles.text}> cantida de billetes cincuentamil: {datos.canti_billete_cincuentamil}</Text>
-                    <Text style={styles.text}> total billetes cincuentamil: {datos.total_billete_cincuentamil}</Text>
-                    <Text style={styles.text}> cantida de billetes veintemil: {datos.canti_billete_veintemil}</Text>
-                    <Text style={styles.text}> total billetes veintemil: {datos.total_billete_veintemil}</Text>
-                    <Text style={styles.text}> cantida de billetes diezmil: {datos.canti_billete_diezmil}</Text>
-                    <Text style={styles.text}> total billete diezmil: {datos.total_billete_diezmil}</Text>
-                    <Text style={styles.text}> cantida de billetes cincomil: {datos.canti_billete_cincomil}</Text>
-                    <Text style={styles.text}> total billetes  cincomil: {datos.total_billete_cincomil}</Text>
-                    <Text style={styles.text}> cantida de billetes dosmil: {datos.canti_billete_dosmil}</Text>
-                    <Text style={styles.text}> total billetes dosmil: {datos.total_billete_dosmil}</Text>
-                    <Text style={styles.text}> cantida de billetes mil: {datos.canti_billete_mil}</Text>
-                    <Text style={styles.text}> cantida de billetes mil: {datos.canti_billete_mil}</Text>
-                    <Text style={styles.text}> cantida de monedas mil: {datos.canti_moneda_mil}</Text>
-                    <Text style={styles.text}> total monedas mil: {datos.total_moneda_mil}</Text>
-                    <Text style={styles.text}> cantidad de monedas quinientos: {datos.canti_moneda_quinientos}</Text>
-                    <Text style={styles.text}> total  monedas de quinientos: {datos.total_moneda_quinientos}</Text>
-                    <Text style={styles.text}> cantidad de monedas de cientos: {datos.canti_moneda_docientos}</Text>
-                    <Text style={styles.text}> total monedas de docientos: {datos.total_moneda_docientos}</Text>
-                    <Text style={styles.text}> cantidad de moneda cien: {datos.canti_moneda_cien}</Text>
-                    <Text style={styles.text}> total monedas de cien: {datos.total_moneda_cien}</Text>
-                    <Text style={styles.text}> cantidad monedas cincuenta: {datos.canti_moneda_cincuenta}</Text>
-                    <Text style={styles.text}> total monedas de ciencuenta: {datos.total_moneda_ciencuenta}</Text>
-                    <Text style={styles.text}> total efectivo: {datos.total_efectivo}</Text>
-                    <Text style={styles.text}> cantida de billetes cienmil caja personal: {datos.canti_billete_cienmil1}</Text>
-                    <Text style={styles.text}> total billetes cienmil caja personal: {datos.total_billete_cienmil1}</Text>
-                    <Text style={styles.text}> cantida de billetes cincuentamil caja personal: {datos.canti_billete_cincuentamil1}</Text>
-                    <Text style={styles.text}> total billetes cincuentamil caja personal: {datos.total_billete_cincuentamil1}</Text>
-                    <Text style={styles.text}> cantida de billetes veintemil caja personal: {datos.canti_billete_veintemil1}</Text>
-                    <Text style={styles.text}> total billetes veintemil caja personal: {datos.total_billete_veintemil1}</Text>
-                    <Text style={styles.text}> cantida de billetes diezmil caja personal: {datos.canti_billete_diezmil1}</Text>
-                    <Text style={styles.text}> total_billete_diezmil caja personal: {datos.total_billete_diezmil1}</Text>
-                    <Text style={styles.text}> cantida de billetes cincomil caja personal: {datos.canti_billete_cincomil1}</Text>
-                    <Text style={styles.text}> total billetes  cincomil caja personal: {datos.total_billete_cincomil1}</Text>
-                    <Text style={styles.text}> cantida de billetes dosmil caja personal: {datos.canti_billete_dosmil1}</Text>
-                    <Text style={styles.text}> total billetes dosmil caja personal: {datos.total_billete_dosmil1}</Text>
-                    <Text style={styles.text}> cantida de billetes mil caja personal: {datos.canti_billete_mil1}</Text>
-                    <Text style={styles.text}> cantida de billetes mil caja personal: {datos.canti_billete_mil1}</Text>
-                    <Text style={styles.text}> cantida de monedas mil caja personal: {datos.canti_moneda_mil1}</Text>
-                    <Text style={styles.text}> total monedas mil caja personal: {datos.total_moneda_mil}</Text>
-                    <Text style={styles.text}> cantidad de monedas quinientos caja personal: {datos.canti_moneda_quinientos1}</Text>
-                    <Text style={styles.text}> total  monedas de quinientos caja personal: {datos.total_moneda_quinientos1}</Text>
-                    <Text style={styles.text}> cantidad de monedas de cientos caja personal: {datos.canti_moneda_docientos1}</Text>
-                    <Text style={styles.text}> total monedas de docientos caja personal: {datos.total_moneda_docientos1}</Text>
-                    <Text style={styles.text}> cantidad de moneda cien caja personal: {datos.canti_moneda_cien1}</Text>
-                    <Text style={styles.text}> total monedas de cien caja personal: {datos.total_moneda_cien1}</Text>
-                    <Text style={styles.text}> cantidad monedas cincuenta caja personal: {datos.canti_moneda_cincuenta1}</Text>
-                    <Text style={styles.text}> total monedas de ciencuenta caja personal: {datos.total_moneda_ciencuenta1}</Text>
-                    <Text style={styles.text}> total efectivo caja personal: {datos.total_efectivo1}</Text>
-                    <Text style={styles.text}> total premios pagados caja personal: {datos.total_premios_pagados1}</Text>
-                    <Text style={styles.text}> total caja personal: {datos.total}</Text>
-                    <Text style={styles.text}> total premios pagados: {datos.total_premios_pagados}</Text>
-                    <Text style={styles.text}> entrega colocador: {datos.entrega_colocador}</Text>
-                    <Text style={styles.text}> sobrantefaltante en caja: {datos.sobrantefaltante_caja}</Text>
-                    <Text style={styles.text}> base efectivos: {datos.base_efectivos}</Text>
-                    <Text style={styles.text}> tirilla recaudos: {datos.tirilla_recaudos}</Text>
-                    <Text style={styles.text}> colocador cajafuerte : {datos.colocador_cajafuerte}</Text>
+                    <Text style={styles.text}> total billetes caja {datos.totalbilletescaja}</Text>
+                    <Text style={styles.text}> total monedas caja: {datos.totalmonedascaja}</Text>
+                    <Text style={styles.text}> total premios caja: {datos.totalpremioscaja}</Text>
+                    <Text style={styles.text}> total: {datos.total}</Text>
                     <Text style={styles.text}> rollos en bnet: {datos.rollos_bnet}</Text>
                     <Text style={styles.text}> rollos fisicos: {datos.rollos_fisicos}</Text>
                     <Text style={styles.text}> diferencia: {datos.diferencia}</Text>
@@ -335,7 +260,7 @@ export const PDF: React.FC<{ datos: Datos, company: string }> = ({ datos, compan
                         <Text style={styles.text}> valor descargado por juego : {datos.descargado} </Text>
                     }
                     if ({datos.nombre_juego2}) {
-                        <Text style={styles.text}> nombre del juego 1: {datos.nombre_juego2} </Text>
+                        <Text style={styles.text}> nombre del juego 2: {datos.nombre_juego2} </Text>
                     }
                     if ({datos.cantidad_bnet2}) {
                         <Text style={styles.text}> cantidad en bnet: {datos.cantidad_bnet2} </Text>
@@ -353,7 +278,7 @@ export const PDF: React.FC<{ datos: Datos, company: string }> = ({ datos, compan
                         <Text style={styles.text}> valor descargado por juego : {datos.descargado2} </Text>
                     }
                     if ({datos.nombre_juego3}) {
-                        <Text style={styles.text}> nombre del juego 1: {datos.nombre_juego3} </Text>
+                        <Text style={styles.text}> nombre del juego 3: {datos.nombre_juego3} </Text>
                     }
                     if ({datos.cantidad_bnet3}) {
                         <Text style={styles.text}> cantidad en bnet: {datos.cantidad_bnet3} </Text>
@@ -371,7 +296,7 @@ export const PDF: React.FC<{ datos: Datos, company: string }> = ({ datos, compan
                         <Text style={styles.text}> valor descargado por juego : {datos.descargado3} </Text>
                     }
                     if ({datos.nombre_juego4}) {
-                        <Text style={styles.text}> nombre del juego 1: {datos.nombre_juego4} </Text>
+                        <Text style={styles.text}> nombre del juego 4: {datos.nombre_juego4} </Text>
                     }
                     if ({datos.cantidad_bnet4}) {
                         <Text style={styles.text}> cantidad en bnet: {datos.cantidad_bnet4} </Text>
@@ -388,126 +313,245 @@ export const PDF: React.FC<{ datos: Datos, company: string }> = ({ datos, compan
                     if ({datos.descargado4}) {
                         <Text style={styles.text}> valor descargado por juego : {datos.descargado4} </Text>
                     }
+                    if ({datos.nombre_juego5}) {
+                        <Text style={styles.text}> nombre del juego 5: {datos.nombre_juego5} </Text>
+                    }
+                    if ({datos.cantidad_bnet5}) {
+                        <Text style={styles.text}> cantidad en bnet: {datos.cantidad_bnet5} </Text>
+                    }
+                    if ({datos.cantidad_fisicos5}) {
+                        <Text style={styles.text}> cantidad en fisicos: {datos.cantidad_fisicos5} </Text>
+                    }
+                    if ({datos.cantidad_faltante5}) {
+                        <Text style={styles.text}> cantidad faltante a descargar: {datos.cantidad_faltante5} </Text>
+                    }
+                    if ({datos.cantidad_tiquete5}) {
+                        <Text style={styles.text}> valor del tiquete: {datos.cantidad_tiquete5} </Text>
+                    }
+                    if ({datos.descargado5}) {
+                        <Text style={styles.text}> valor descargado por juego : {datos.descargado5} </Text>
+                    }
+                    if ({datos.nombre_juego6}) {
+                        <Text style={styles.text}> nombre del juego 6: {datos.nombre_juego6} </Text>
+                    }
+                    if ({datos.cantidad_bnet6}) {
+                        <Text style={styles.text}> cantidad en bnet: {datos.cantidad_bnet6} </Text>
+                    }
+                    if ({datos.cantidad_fisicos6}) {
+                        <Text style={styles.text}> cantidad en fisicos: {datos.cantidad_fisicos6} </Text>
+                    }
+                    if ({datos.cantidad_faltante6}) {
+                        <Text style={styles.text}> cantidad faltante a descargar: {datos.cantidad_faltante6} </Text>
+                    }
+                    if ({datos.cantidad_tiquete6}) {
+                        <Text style={styles.text}> valor del tiquete: {datos.cantidad_tiquete6} </Text>
+                    }
+                    if ({datos.descargado6}) {
+                        <Text style={styles.text}> valor descargado por juego : {datos.descargado6} </Text>
+                    }
+                    if ({datos.nombre_juego7}) {
+                        <Text style={styles.text}> nombre del juego 7: {datos.nombre_juego7} </Text>
+                    }
+                    if ({datos.cantidad_bnet7}) {
+                        <Text style={styles.text}> cantidad en bnet: {datos.cantidad_bnet7} </Text>
+                    }
+                    if ({datos.cantidad_fisicos7}) {
+                        <Text style={styles.text}> cantidad en fisicos: {datos.cantidad_fisicos7} </Text>
+                    }
+                    if ({datos.cantidad_faltante7}) {
+                        <Text style={styles.text}> cantidad faltante a descargar: {datos.cantidad_faltante7} </Text>
+                    }
+                    if ({datos.cantidad_tiquete7}) {
+                        <Text style={styles.text}> valor del tiquete: {datos.cantidad_tiquete7} </Text>
+                    }
+                    if ({datos.descargado7}) {
+                        <Text style={styles.text}> valor descargado por juego : {datos.descargado7} </Text>
+                    }
+                    if ({datos.totaldescargados}) {
+                        <Text style={styles.text}> total cantidad descargados: {datos.totaldescargados} </Text>
+                    }
                     if ({datos.totaldescargados}) {
                         <Text style={styles.text}> total cantidad descargados: {datos.totaldescargados} </Text>
                     }
                     if ({datos.totalvalor}) {
                         <Text style={styles.text}> valor total descargado : {datos.totalvalor} </Text>
                     }
-                    <Text style={styles.text}> ¿El punto de venta tiene puerta cerrada con candado y/o seguro?:  {datos.requisito1}</Text>
+
+                    <Text style={styles.text}> ¿Tiene la puerta asegurada?:  {datos.requisito1}</Text>
                     if ({datos.observacion1}) {
                         <Text style={styles.text}> observacion: {datos.observacion1}</Text>
                     }
-                    <Text style={styles.text}> ¿Tiene elementos de aseo, sillas en buen estado?:  {datos.requisito2}</Text>
+
+                    <Text style={styles.text}> ¿Elementos de aseo, sillas, computador, iluminación en buen estado?:  {datos.requisito2}</Text>
                     if ({datos.observacion2}) {
-                        <Text style={styles.text}> observacion: {datos.observacion2} </Text>
+                        <Text style={styles.text}> observacion: {datos.observacion2}</Text>
                     }
-                    <Text style={styles.text}> ¿Tiene aviso de videovigilancia y camaras?:  {datos.requisito3}</Text>
+
+                    <Text style={styles.text}> ¿Aviso de videovigilancia y cámaras?:  {datos.requisito3}</Text>
                     if ({datos.observacion3}) {
                         <Text style={styles.text}> observacion: {datos.observacion3}</Text>
                     }
-                    <Text style={styles.text}> ¿El Colocador cuenta con prendas emblematicas y presentación adecuada?:  {datos.requisito4}</Text>
+
+                    <Text style={styles.text}> ¿Utiliza Superflex?:  {datos.requisito4}</Text>
                     if ({datos.observacion4}) {
                         <Text style={styles.text}> observacion: {datos.observacion4}</Text>
                     }
-                    <Text style={styles.text}> ¿El usuario del colocador corresponde a la cedula del mismo?:  {datos.requisito5}</Text>
+
+                    <Text style={styles.text}> ¿Tiene caja fuerte?:  {datos.requisito5}</Text>
                     if ({datos.observacion5}) {
                         <Text style={styles.text}> observacion: {datos.observacion5}</Text>
                     }
-                    <Text style={styles.text}> ¿La versión del aplicativo BNET esta actualizada?:  {datos.requisito6}</Text>
+
+                    <Text style={styles.text}> ¿Tiene caja digital auxiliar? ¿Conoce las bases de efectivo asignadas?:  {datos.requisito6}</Text>
                     if ({datos.observacion6}) {
                         <Text style={styles.text}> observacion: {datos.observacion6}</Text>
                     }
-                    <Text style={styles.text}> ¿El colocador ofrece los productos y servicios comercializados por la empresa al 100%?:  {datos.requisito7}</Text>
+
+                    <Text style={styles.text}> ¿Las recargas se hacen a través la Red propia de la Cia?:  {datos.requisito7}</Text>
                     if ({datos.observacion7}) {
                         <Text style={styles.text}> observacion: {datos.observacion7}</Text>
                     }
-                    <Text style={styles.text}> ¿La publicidad exhibida en el punto de venta se encuentra actualizada?:  {datos.requisito8}</Text>
+
+                    <Text style={styles.text}> ¿Cumple con los topes de efectivo establecidos en caja digital y principal?:  {datos.requisito8}</Text>
                     if ({datos.observacion8}) {
                         <Text style={styles.text}> observacion: {datos.observacion8}</Text>
                     }
-                    <Text style={styles.text}> ¿El colocador solicita el documento de identificación al cliente?:  {datos.requisito9}</Text>
+
+                    <Text style={styles.text}> ¿Tiene los premios descargados? ¿Conoce los montos máximos para pago?:  {datos.requisito9}</Text>
                     if ({datos.observacion9}) {
                         <Text style={styles.text}> observacion: {datos.observacion9}</Text>
                     }
-                    <Text style={styles.text}> El uso del sistema biométrico esta activo?:  {datos.requisito10}</Text>
+
+                    <Text style={styles.text}> ¿La lotería física tiene impreso el nombre de la Cia?:  {datos.requisito10}</Text>
                     if ({datos.observacion10}) {
                         <Text style={styles.text}> observacion: {datos.observacion10}</Text>
                     }
-                    <Text style={styles.text}> ¿El colocador conoce de Supervoucher, y esta en funcionamiento?:  {datos.requisito11}</Text>
+
+                    <Text style={styles.text}> ¿Publicidad exhibida actualizada?: {datos.requisito11}</Text>
                     if ({datos.observacion11}) {
                         <Text style={styles.text}> observacion: {datos.observacion11}</Text>
                     }
-                    <Text style={styles.text}> ¿El Colocador conoce el procedimiento que debe realizar a remitentes y destinatarios menores de edad?:  {datos.requisito12} </Text>
-                    if ({datos.observacion112}) {
-                        <Text style={styles.text}> observacion: {datos.observacion112}</Text>
+
+                    <Text style={styles.text}> ¿Aviso externo de &quot;Vigilado y Controlado Mintic&quot; y &quot;Colaborador Autorizado&quot;?: {datos.requisito12}</Text>
+                    if ({datos.observacion12}) {
+                        <Text style={styles.text}> observacion: {datos.observacion12}</Text>
                     }
-                    <Text style={styles.text}> ¿El colocador conoce los reportes de operaciones en efectivo (R.O.E) firmas, huellas. (Transacciones =$10.000.000)?:  {datos.requisito13}</Text>
+
+                    <Text style={styles.text}> ¿Afiche MINTIC SUPERGIROS (contiene aviso de canales de comunicación, o tarifario condiciones del servicio, sticker tirilla electronica CRC)?: {datos.requisito13}</Text>
                     if ({datos.observacion13}) {
                         <Text style={styles.text}> observacion: {datos.observacion13}</Text>
                     }
-                    <Text style={styles.text}> ¿Tiene aviso externo que indica Vigilado y Controlado Mintic y Colaborador Autorizado?:  {datos.requisito14}</Text>
+
+                    <Text style={styles.text}> ¿Calendario resultados Superastro diligenciado (tiene que tener los resultados)?: {datos.requisito14}</Text>
                     if ({datos.observacion14}) {
                         <Text style={styles.text}> observacion: {datos.observacion14}</Text>
                     }
-                    <Text style={styles.text}> ¿Tiene cuadro Banner con la marca SuperGIROS (aviso de canales de comunicación)?:  {datos.requisito15}</Text>
+
+                    <Text style={styles.text}> ¿Presta servicio de Western Union (es obligatorio para cajeros digitales)?: {datos.requisito15}</Text>
                     if ({datos.observacion15}) {
                         <Text style={styles.text}> observacion: {datos.observacion15}</Text>
                     }
-                    <Text style={styles.text}> ¿Tiene afiche normativo visible o tarifario con las condiciones del servicio?:  {datos.requisito16}</Text>
+
+                    <Text style={styles.text}> ¿Calendarios de acumulados (Baloto - Miloto - Colorloto)?: {datos.requisito16}</Text>
                     if ({datos.observacion16}) {
                         <Text style={styles.text}> observacion: {datos.observacion16}</Text>
                     }
-                    <Text style={styles.text}> ¿Cuenta con sticker tirilla electronica CRC?:  {datos.requisito17}</Text>
+
+                    <Text style={styles.text}> ¿Tablero de resultados y acumulados actualizados?: {datos.requisito17}</Text>
                     if ({datos.observacion17}) {
                         <Text style={styles.text}> observacion: {datos.observacion17}</Text>
                     }
-                    <Text style={styles.text}> ¿Tiene normativa Giros Internacionales, camara o lector five y Sticker de pagos internacionales?:  {datos.requisito18}</Text>
+
+                    <Text style={styles.text}> ¿Licencia de funcionamiento de Beneficencia del Valle con año actualizado?: {datos.requisito18}</Text>
                     if ({datos.observacion18}) {
                         <Text style={styles.text}> observacion: {datos.observacion18}</Text>
                     }
-                    <Text style={styles.text}> ¿El Supervisor Comercial realiza las visitas constantemente, da buen trato y suministra los insumos a tiempo?  Cantidad de visitas del Supervisor Comercial al mes?:  {datos.requisito19}</Text>
+
+                    <Text style={styles.text}> ¿Tiene equipos de Betplay y/o máquinas de ruta? Si los tiene debe tener el aviso &quot;Autoriza Coljuegos&quot;: {datos.requisito19}</Text>
                     if ({datos.observacion19}) {
                         <Text style={styles.text}> observacion: {datos.observacion19}</Text>
                     }
-                    <Text style={styles.text}> ¿Las recargas efectuadas por el Colocador se trasmiten a través de la red propia de la empresa?:  {datos.requisito20}</Text>
+
+                    <Text style={styles.text}> ¿Tiene aviso código QR para PQR?: {datos.requisito20}</Text>
                     if ({datos.observacion20}) {
                         <Text style={styles.text}> observacion: {datos.observacion20}</Text>
                     }
-                    <Text style={styles.text}> ¿La lotería física tiene impreso el nombre de la empresa, de no ser asi reportar inmediatamente?:  {datos.requisito21}</Text>
+
+                    <Text style={styles.text}> ¿Verificar el cableado?: {datos.requisito21}</Text>
                     if ({datos.observacion21}) {
                         <Text style={styles.text}> observacion: {datos.observacion21}</Text>
                     }
-                    <Text style={styles.text}> ¿El punto de venta tiene caja fuerte y caja digital? el responsable tiene conocimiento sobre las bases de efectivo asignadas para caja auxiliar y caja digital?:  {datos.requisito22}</Text>
+
+                    <Text style={styles.text}> ¿Tiene prendas emblemáticas y presentación adecuada?: {datos.requisito22}</Text>
                     if ({datos.observacion22}) {
                         <Text style={styles.text}> observacion: {datos.observacion22}</Text>
                     }
-                    <Text style={styles.text}> ¿Se cumple con los topes de efectivo establecidos para la caja digital  y caja auxiliar (ptos de venta con giros)?:  {datos.requisito23}</Text>
+
+                    <Text style={styles.text}> ¿El usuario corresponde a la cédula del mismo?: {datos.requisito23}</Text>
                     if ({datos.observacion23}) {
                         <Text style={styles.text}> observacion: {datos.observacion23}</Text>
                     }
-                    <Text style={styles.text}> ¿El colocador tiene conocimiento sobre los montos máximos para pago de premios?:  {datos.requisito24}</Text>
+
+                    <Text style={styles.text}> ¿Tiene usuario de giros? ¿Presta el servicio?: {datos.requisito24}</Text>
                     if ({datos.observacion24}) {
                         <Text style={styles.text}> observacion: {datos.observacion24}</Text>
                     }
-                    <Text style={styles.text}> ¿El colocador conoce los requisitos para pago de premios?:  {datos.requisito25}</Text>
+
+                    <Text style={styles.text}> ¿Tiene usuario de la ONJ (para Baloto, Miloto, Colorloto)?: {datos.requisito25}</Text>
                     if ({datos.observacion25}) {
                         <Text style={styles.text}> observacion: {datos.observacion25}</Text>
                     }
-                    <Text style={styles.text}> ¿Tiene buzon de PQR, formato de gane y de giros?:  {datos.requisito26}</Text>
+
+                    <Text style={styles.text}> ¿Tiene usuario de SUPERFLEX?: {datos.requisito26}</Text>
                     if ({datos.observacion26}) {
                         <Text style={styles.text}> observacion: {datos.observacion26}</Text>
                     }
-                    <Text style={styles.text}> ¿El Colocador cuenta con las bases acerca del SARL, SARLAFT, SARO?:  {datos.requisito27}</Text>
+
+                    <Text style={styles.text}> ¿Tiene usuario de CORREDOR EMPRESARIAL (astro, chance millonario, Betplay)?: {datos.requisito27}</Text>
                     if ({datos.observacion27}) {
                         <Text style={styles.text}> observacion: {datos.observacion27}</Text>
                     }
-                    <Text style={styles.text}> ¿El Colocador conoce la definición de operación inusual y operación sospechosa?:  {datos.requisito28}</Text>
+
+                    <Text style={styles.text}> ¿Está realizando recaudo en tesorería BNET a la compañera?: {datos.requisito28}</Text>
                     if ({datos.observacion28}) {
                         <Text style={styles.text}> observacion: {datos.observacion28}</Text>
                     }
-                    <Text style={styles.text}> VERIFICACION INSUMOS PARA PREVENCION DE COVID 19:  {datos.requisito29}</Text>
-                    <Text style={styles.text}> ¿Tapabocas?:  {datos.requisito30}</Text>
+
+                    <Text style={styles.text}> ¿Está comercializando el portafolio completo?: {datos.requisito29}</Text>
+                    if ({datos.observacion29}) {
+                        <Text style={styles.text}> observacion: {datos.observacion29}</Text>
+                    }
+
+                    <Text style={styles.text}> ¿Solicita el documento de identificación al cliente?: {datos.requisito30}</Text>
+                    if ({datos.observacion30}) {
+                        <Text style={styles.text}> observacion: {datos.observacion30}</Text>
+                    }
+
+                    <Text style={styles.text}> ¿Conoce Supervoucher, funciona?: {datos.requisito31}</Text>
+                    if ({datos.observacion31}) {
+                        <Text style={styles.text}> observacion: {datos.observacion31}</Text>
+                    }
+
+                    <Text style={styles.text}> ¿Conoce el procedimiento para remitentes y destinatarios menores de edad?: {datos.requisito32}</Text>
+                    if ({datos.observacion32}) {
+                        <Text style={styles.text}> observacion: {datos.observacion32}</Text>
+                    }
+
+                    <Text style={styles.text}> ¿Conoce los reportes de operaciones en efectivo (R.O.E) firmas, huellas? (Transacciones &gt;=$10.000.000): {datos.requisito33}</Text>
+                    if ({datos.observacion33}) {
+                        <Text style={styles.text}> observacion: {datos.observacion33}</Text>
+                    }
+
+                    <Text style={styles.text}> ¿El Supervisor Cial realiza las visitas?: {datos.requisito34}</Text>
+                    if ({datos.observacion34}) {
+                        <Text style={styles.text}> observacion: {datos.observacion34}</Text>
+                    }
+
+                    <Text style={styles.text}> ¿Conoce los términos SARL, SARLAFT, SARO, operación inusual y operación sospechosa?: {datos.requisito35}</Text>
+                    if ({datos.observacion35}) {
+                        <Text style={styles.text}> observacion: {datos.observacion35}</Text>
+                    }
+
                     <Text style={styles.text}> fechavisita:  {datos.fechavisita}</Text>
                     <Text style={styles.text}> horavisita:  {datos.horavisita}</Text>
                     if ({datos.nombre_observacion}) {
