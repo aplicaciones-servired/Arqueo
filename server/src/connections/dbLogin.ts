@@ -3,14 +3,14 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const DB_HOST = process.env.DB_HOST as string
-const DB_PASSWORD = process.env.DB_PASSWORD as string
-const DB_USER = process.env.DB_USER as string
-const DB_NAME = process.env.DB_NAME as string
+const DB_HOST_LOGIN = process.env.DB_SERVIRE_HOST as string
+const DB_PASSWORD_LOGIN = process.env.DB_SERVIRE_PASS as string
+const DB_USER_LOGIN = process.env.DB_SERVIRE_USER as string
+const DB_NAME_LOGIN = process.env.DB_SERVIRE_USE as string
 const DB_DIALECT_CHAT = process.env.DB_DIALECT_CHAT as string
 
-const getPoolLogin = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
-  host: DB_HOST,
+const getPoolLogin = new Sequelize(DB_NAME_LOGIN, DB_USER_LOGIN, DB_PASSWORD_LOGIN, {
+  host: DB_HOST_LOGIN,
   dialect: "mysql",
   timezone: '-05:00',
 });

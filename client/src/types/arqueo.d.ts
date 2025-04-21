@@ -20,64 +20,10 @@ interface Arqueo {
   totalmonedas: number
   totalarqueo: number
   sobrantefaltante: number
-  canti_billete_cienmil1: number
-  total_billete_cienmil1: number
-  canti_billete_cincuentamil1: number
-  total_billete_cincuentamil1: number
-  canti_billete_veintemil1: number
-  total_billete_veintemil1: number
-  canti_billete_diezmil1: number
-  total_billete_diezmil1: number
-  canti_billete_cincomil1: number
-  total_billete_cincomil1: number
-  canti_billete_dosmil1: number
-  total_billete_dosmil1: number
-  canti_billete_mil1: number
-  total_billete_mil1: number
-  canti_moneda_mil1: number
-  total_moneda_mil1: number
-  canti_moneda_quinientos1: number
-  total_moneda_quinientos1: number
-  canti_moneda_docientos1: number
-  total_moneda_docientos1: number
-  canti_moneda_cien1: number
-  total_moneda_cien1: number
-  canti_moneda_cincuenta1: number
-  total_moneda_ciencuenta1: number
-  total_efectivo1: number
-  total_premios_pagados1: number
+  totalbilletescaja: number
+  totalmonedascaja: number
+  totalpremioscaja: number
   total: number
-  canti_billete_cienmil: number
-  total_billete_cienmil: number
-  canti_billete_cincuentamil: number
-  total_billete_cincuentamil: number
-  canti_billete_veintemil: number
-  total_billete_veintemil: number
-  canti_billete_diezmil: number
-  total_billete_diezmil: number
-  canti_billete_cincomil: number
-  total_billete_cincomil: number
-  canti_billete_dosmil: number
-  total_billete_dosmil: number
-  canti_billete_mil: number
-  total_billete_mil: number
-  canti_moneda_mil: number
-  total_moneda_mil: number
-  canti_moneda_quinientos: number
-  total_moneda_quinientos: number
-  canti_moneda_docientos: number
-  total_moneda_docientos: number
-  canti_moneda_cien: number
-  total_moneda_cien: number
-  canti_moneda_cincuenta: number
-  total_moneda_ciencuenta: number
-  total_efectivo: number
-  total_premios_pagados: number
-  base_efectivos: number
-  tirilla_recaudos: number
-  entrega_colocador: number
-  sobrantefaltante_caja: number
-  colocador_cajafuerte: number
   rollos_bnet: number
   rollos_fisicos: number
   diferencia: number
@@ -105,6 +51,24 @@ interface Arqueo {
   cantidad_faltante4: number
   cantidad_tiquete4: number
   descargado4: number
+  nombre_juego5: number
+  cantidad_bnet5: number
+  cantidad_fisicos5: number
+  cantidad_faltante5: number
+  cantidad_tiquete5: number
+  descargado5: number
+  nombre_juego6: number
+  cantidad_bnet6: number
+  cantidad_fisicos6: number
+  cantidad_faltante6: number
+  cantidad_tiquete6: number
+  descargado6: number
+  nombre_juego7: number
+  cantidad_bnet7: number
+  cantidad_fisicos7: number
+  cantidad_faltante7: number
+  cantidad_tiquete7: number
+  descargado7: number
   totaldescargados: number
   totalvalor: number
   requisito1: string
@@ -164,7 +128,19 @@ interface Arqueo {
   requisito28: string
   observacion28: string
   requisito29: string
+  observacion29: string
   requisito30: string
+  observacion30: string
+  requisito31: string
+  observacion31: string
+  requisito32: string
+  observacion32: string
+  requisito33: string
+  observacion33: string
+  requisito34: string
+  observacion34: string
+  requisito35: string
+  observacion35: string
   imagen_observacion: Blob
   nombre_observacion: string
   firma_auditoria: Blob

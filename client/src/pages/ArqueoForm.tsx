@@ -10,7 +10,6 @@ import { BottonExportItems } from '../components/XportExcel'
 import { PDF } from '../components/PDF'
 import { PDFDownloadLink } from '@react-pdf/renderer'
 import { API_URL } from '../utils/constans'
-// import { API_URL } from '../utils/constans'
 
 const ArqueoForm = (): JSX.Element => {
   const { username } = useAuth()
@@ -280,289 +279,36 @@ const ArqueoForm = (): JSX.Element => {
             />
 
             <label className="block text-center mt-5 uppercase">
-              cantidad billete cienmil caja personal
+              total billetes caja
             </label>
             <input
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
-              name="canti_billete_cienmil1"
+              name="totalbilletescaja"
               disabled
-              defaultValue={arqueo.canti_billete_cienmil1}
+              defaultValue={arqueo.totalbilletescaja}
             />
 
             <label className="block text-center mt-5 uppercase">
-              total billete cienmil caja personal
+              total monedas caja
             </label>
             <input
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
-              name="total_billete_cienmil1"
+              name="totalmonedascaja"
               disabled
-              defaultValue={arqueo.total_billete_cienmil1}
+              defaultValue={arqueo.totalmonedascaja}
             />
 
             <label className="block text-center mt-5 uppercase">
-              canti billete cincuentamil caja personal
+              total premios caja
             </label>
             <input
               className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
               type="text"
-              name="canti_billete_cincuentamil1"
+              name="totalpremioscaja"
               disabled
-              defaultValue={arqueo.canti_billete_cincuentamil1}
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              total billete cincuentamil caja personal
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              name="total_billete_cincuentamil1"
-              disabled
-              defaultValue={arqueo.total_billete_cincuentamil1}
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              cantidad billetes de veintemil caja personal
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.canti_billete_veintemil1}
-              name="canti_billete_veintemil1"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              total billetes de veintemil caja personal
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.total_billete_veintemil1}
-              name="total_billete_veintemil1"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              cantidad billetes de diezmil caja personal
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.canti_billete_diezmil1}
-              name="canti_billete_diezmil1"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              total billetes de diezmil caja personal
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.total_billete_diezmil1}
-              name="total_billete_diezmil1"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              cantidad billetes de cincomil caja personal
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.canti_billete_cincomil1}
-              name="canti_billete_cincomil1"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              total billetes de cincomil caja personal
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.total_billete_cincomil1}
-              name="total_billete_cincomil1"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              cantidad billetes de dosmil caja personal
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.canti_billete_dosmil}
-              name="canti_billete_dosmil"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              total billete de dosmil caja personal
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.total_billete_dosmil1}
-              name="total_billete_dosmil1"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              cantidad billetes de mil caja personal
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.canti_billete_mil1}
-              name="canti_billete_mil1"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              total billetes de mil caja personal
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.total_billete_mil1}
-              name="total_billete_mil1"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              cantidad monedas de mil caja personal
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.canti_moneda_mil1}
-              name="canti_moneda_mil1"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              total monedas de mil caja personal
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.total_moneda_mil1}
-              name="total_moneda_mil1"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              cantidad monedasde quinientos caja personal
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.canti_moneda_quinientos1}
-              name="canti_moneda_quinientos1"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              total monedas de quinientos caja personal
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.total_moneda_quinientos1}
-              name="total_moneda_quinientos1"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              cantidad monedas de docientos caja personal
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.canti_moneda_docientos1}
-              name="canti_moneda_docientos1"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              total monedas de docientos caja personal
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.total_moneda_docientos1}
-              name="total_moneda_docientos1"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              cantidad monedas de cien caja personal
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.canti_moneda_cien1}
-              name="canti_moneda_cien1"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              total monedas de cien caja personal
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.total_moneda_cien1}
-              name="total_moneda_cien1"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              canti monedas de cincuenta caja personal
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.canti_moneda_cincuenta1}
-              name="canti_moneda_cincuenta1"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              total monedas de ciencuenta caja personal
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.total_moneda_ciencuenta1}
-              name="total_moneda_ciencuenta1"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              total efectivo caja personal
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.total_efectivo1}
-              name="total_efectivo"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              total premios pagados 1
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.total_premios_pagados1}
-              name="total_premios_pagados1"
+              defaultValue={arqueo.totalpremioscaja}
             />
 
             <label className="block text-center mt-5 uppercase">
@@ -574,347 +320,6 @@ const ArqueoForm = (): JSX.Element => {
               disabled
               defaultValue={arqueo.total}
               name="total"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              cantidad billete cienmil
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              name="canti_billete_cienmil"
-              disabled
-              defaultValue={arqueo.canti_billete_cienmil}
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              total billete cienmil
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              name="total_billete_cienmil"
-              disabled
-              defaultValue={arqueo.total_billete_cienmil}
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              canti billete cincuentamil
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              name="canti_billete_cincuentamil"
-              disabled
-              defaultValue={arqueo.canti_billete_cincuentamil}
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              total billete cincuentamil
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              name="total_billete_cincuentamil"
-              disabled
-              defaultValue={arqueo.total_billete_cincuentamil}
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              cantidad billetes de veintemil
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.canti_billete_veintemil}
-              name="canti_billete_veintemil"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              total billetes de veintemil
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.total_billete_veintemil}
-              name="total_billete_veintemil"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              cantidad billetes de diezmil
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.canti_billete_diezmil}
-              name="canti_billete_diezmil"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              total billetes de diezmil
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.total_billete_diezmil}
-              name="total_billete_diezmil"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              cantidad billetes de cincomil
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.canti_billete_cincomil}
-              name="canti_billete_cincomil"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              total billetes de cincomil
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.total_billete_cincomil}
-              name="total_billete_cincomil"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              cantidad billetes de dosmil
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.canti_billete_dosmil}
-              name="canti_billete_dosmil"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              total billete de dosmil
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.total_billete_dosmil}
-              name="total_billete_dosmil"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              cantidad billetes de mil
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.canti_billete_mil}
-              name="canti_billete_mil"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              total billetes de mil
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.total_billete_mil}
-              name="total_billete_mil"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              cantidad monedas de mil
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.canti_moneda_mil}
-              name="canti_moneda_mil"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              total monedas de mil
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.total_moneda_mil}
-              name="total_moneda_mil"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              cantidad monedasde quinientos
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.canti_moneda_quinientos}
-              name="canti_moneda_quinientos"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              total monedas de quinientos
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.total_moneda_quinientos}
-              name="total_moneda_quinientos"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              cantidad monedas de docientos
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.canti_moneda_docientos}
-              name="canti_moneda_docientos"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              total monedas de docientos
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.total_moneda_docientos}
-              name="total_moneda_docientos"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              cantidad monedas de cien
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.canti_moneda_cien}
-              name="canti_moneda_cien"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              total monedas de cien
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.total_moneda_cien}
-              name="total_moneda_cien"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              canti monedas de cincuenta
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.canti_moneda_cincuenta}
-              name="canti_moneda_cincuenta"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              total monedas de ciencuenta
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.total_moneda_ciencuenta}
-              name="total_moneda_ciencuenta"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              total efectivo
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.total_efectivo}
-              name="total_efectivo"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              total premioss de pagados
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.total_premios_pagados}
-              name="año_total_premios_pagadosla"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              base efectivos
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.base_efectivos}
-              name="base_efectivos"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              tirilla recaudos
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.tirilla_recaudos}
-              name="tirilla_recaudos"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              entrega colocador
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.entrega_colocador}
-              name="entrega_colocador"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              sobrante faltante de caja
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.sobrantefaltante_caja}
-              name="sobrantefaltante_caja"
-            />
-
-            <label className="block text-center mt-5 uppercase">
-              colocador caja fuerte
-            </label>
-            <input
-              className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
-              type="text"
-              disabled
-              defaultValue={arqueo.colocador_cajafuerte}
-              name="colocador_cajafuerte"
             />
 
             <label className="block text-center mt-5 uppercase">
@@ -1283,7 +688,7 @@ const ArqueoForm = (): JSX.Element => {
               </>
             )}
 
-            {arqueo.cantidad_tiquete3 !== 0 && (
+            {arqueo.cantidad_tiquete4 !== 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
                   {' '}
@@ -1293,7 +698,7 @@ const ArqueoForm = (): JSX.Element => {
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={arqueo.cantidad_tiquete3}
+                  defaultValue={arqueo.cantidad_tiquete4}
                   name="cantidad_tiquete"
                 />
               </>
@@ -1309,6 +714,279 @@ const ArqueoForm = (): JSX.Element => {
                   type="text"
                   disabled
                   defaultValue={arqueo.descargado4}
+                  name="descargado"
+                />
+              </>
+            )}
+
+            {arqueo.nombre_juego5 !== 0 && (
+              <>
+                <label className="block text-center mt-5 uppercase">
+                  nombre del juego5{' '}
+                </label>
+                <input
+                  className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
+                  type="text"
+                  disabled
+                  defaultValue={arqueo.nombre_juego5}
+                  name="nombre_juego2"
+                />
+              </>
+            )}
+
+            {arqueo.cantidad_bnet5 !== 0 && (
+              <>
+                <label className="block text-center mt-5 uppercase">
+                  cantidad en bnet5{' '}
+                </label>
+                <input
+                  className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
+                  type="text"
+                  disabled
+                  defaultValue={arqueo.cantidad_bnet5}
+                  name="cantidad_bnet"
+                />
+              </>
+            )}
+
+            {arqueo.cantidad_fisicos5 !== 0 && (
+              <>
+                <label className="block text-center mt-5 uppercase">
+                  cantidad en fisicos5{' '}
+                </label>
+                <input
+                  className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
+                  type="text"
+                  disabled
+                  defaultValue={arqueo.cantidad_fisicos5}
+                  name="cantidad_fisicos"
+                />
+              </>
+            )}
+
+            {arqueo.cantidad_faltante5 !== 0 && (
+              <>
+                <label className="block text-center mt-5 uppercase">
+                  cantidad faltante a descargar5{' '}
+                </label>
+                <input
+                  className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
+                  type="text"
+                  disabled
+                  defaultValue={arqueo.cantidad_faltante5}
+                  name="cantidad_faltante"
+                />
+              </>
+            )}
+
+            {arqueo.cantidad_tiquete5 !== 0 && (
+              <>
+                <label className="block text-center mt-5 uppercase">
+                  {' '}
+                  valor del tiquete5{' '}
+                </label>
+                <input
+                  className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
+                  type="text"
+                  disabled
+                  defaultValue={arqueo.cantidad_tiquete5}
+                  name="cantidad_tiquete"
+                />
+              </>
+            )}
+
+            {arqueo.descargado5 !== 0 && (
+              <>
+                <label className="block text-center mt-5 uppercase">
+                  valor descargado por juego5{' '}
+                </label>
+                <input
+                  className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
+                  type="text"
+                  disabled
+                  defaultValue={arqueo.descargado5}
+                  name="descargado"
+                />
+              </>
+            )}
+
+            {arqueo.nombre_juego6 !== 0 && (
+              <>
+                <label className="block text-center mt-5 uppercase">
+                  nombre del juego6{' '}
+                </label>
+                <input
+                  className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
+                  type="text"
+                  disabled
+                  defaultValue={arqueo.nombre_juego6}
+                  name="nombre_juego2"
+                />
+              </>
+            )}
+
+            {arqueo.cantidad_bnet6 !== 0 && (
+              <>
+                <label className="block text-center mt-5 uppercase">
+                  cantidad en bnet6{' '}
+                </label>
+                <input
+                  className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
+                  type="text"
+                  disabled
+                  defaultValue={arqueo.cantidad_bnet6}
+                  name="cantidad_bnet"
+                />
+              </>
+            )}
+
+            {arqueo.cantidad_fisicos6 !== 0 && (
+              <>
+                <label className="block text-center mt-5 uppercase">
+                  cantidad en fisicos6{' '}
+                </label>
+                <input
+                  className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
+                  type="text"
+                  disabled
+                  defaultValue={arqueo.cantidad_fisicos6}
+                  name="cantidad_fisicos"
+                />
+              </>
+            )}
+
+            {arqueo.cantidad_faltante6 !== 0 && (
+              <>
+                <label className="block text-center mt-5 uppercase">
+                  cantidad faltante a descargar6{' '}
+                </label>
+                <input
+                  className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
+                  type="text"
+                  disabled
+                  defaultValue={arqueo.cantidad_faltante6}
+                  name="cantidad_faltante"
+                />
+              </>
+            )}
+
+            {arqueo.cantidad_tiquete6 !== 0 && (
+              <>
+                <label className="block text-center mt-5 uppercase">
+                  {' '}
+                  valor del tiquete6{' '}
+                </label>
+                <input
+                  className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
+                  type="text"
+                  disabled
+                  defaultValue={arqueo.cantidad_tiquete6}
+                  name="cantidad_tiquete"
+                />
+              </>
+            )}
+
+            {arqueo.descargado6 !== 0 && (
+              <>
+                <label className="block text-center mt-5 uppercase">
+                  valor descargado por juego6{' '}
+                </label>
+                <input
+                  className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
+                  type="text"
+                  disabled
+                  defaultValue={arqueo.descargado6}
+                  name="descargado"
+                />
+              </>
+            )}
+
+            {arqueo.nombre_juego7 !== 0 && (
+              <>
+                <label className="block text-center mt-5 uppercase">
+                  nombre del juego7{' '}
+                </label>
+                <input
+                  className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
+                  type="text"
+                  disabled
+                  defaultValue={arqueo.nombre_juego7}
+                  name="nombre_juego2"
+                />
+              </>
+            )}
+
+            {arqueo.cantidad_bnet7 !== 0 && (
+              <>
+                <label className="block text-center mt-5 uppercase">
+                  cantidad en bnet7{' '}
+                </label>
+                <input
+                  className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
+                  type="text"
+                  disabled
+                  defaultValue={arqueo.cantidad_bnet7}
+                  name="cantidad_bnet"
+                />
+              </>
+            )}
+
+            {arqueo.cantidad_fisicos7 !== 0 && (
+              <>
+                <label className="block text-center mt-5 uppercase">
+                  cantidad en fisicos7{' '}
+                </label>
+                <input
+                  className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
+                  type="text"
+                  disabled
+                  defaultValue={arqueo.cantidad_fisicos7}
+                  name="cantidad_fisicos"
+                />
+              </>
+            )}
+
+            {arqueo.cantidad_faltante7 !== 0 && (
+              <>
+                <label className="block text-center mt-5 uppercase">
+                  cantidad faltante a descargar7{' '}
+                </label>
+                <input
+                  className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
+                  type="text"
+                  disabled
+                  defaultValue={arqueo.cantidad_faltante7}
+                  name="cantidad_faltante"
+                />
+              </>
+            )}
+
+            {arqueo.cantidad_tiquete7 !== 0 && (
+              <>
+                <label className="block text-center mt-5 uppercase">
+                  {' '}
+                  valor del tiquete4{' '}
+                </label>
+                <input
+                  className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
+                  type="text"
+                  disabled
+                  defaultValue={arqueo.cantidad_tiquete7}
+                  name="cantidad_tiquete"
+                />
+              </>
+            )}
+
+            {arqueo.descargado7 !== 0 && (
+              <>
+                <label className="block text-center mt-5 uppercase">
+                  valor descargado por juego7{' '}
+                </label>
+                <input
+                  className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
+                  type="text"
+                  disabled
+                  defaultValue={arqueo.descargado7}
                   name="descargado"
                 />
               </>
@@ -1337,10 +1015,14 @@ const ArqueoForm = (): JSX.Element => {
               name="totalvalor"
             />
 
+            <label className="block text-center mt-8 uppercase font-black">
+              Verificacion del PDV{' '}
+            </label>
+
             {(arqueo.requisito1.length > 0) && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  ¿El punto de venta tiene puertacerrada con candado y/o seguro?
+                  ¿Tiene la puerta asegurada?
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1355,7 +1037,7 @@ const ArqueoForm = (): JSX.Element => {
             {(arqueo.observacion1.length > 0) && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  observacion{' '}
+                  observacion
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1370,7 +1052,7 @@ const ArqueoForm = (): JSX.Element => {
             {arqueo.requisito2.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  ¿Tiene elementos de aseo, sillas en buen estado?
+                  ¿Elementos de aseo, sillas, computador, iluminación en buen estado?
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1385,7 +1067,7 @@ const ArqueoForm = (): JSX.Element => {
             {arqueo.observacion2.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  observacion{' '}
+                  observacion
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1400,7 +1082,7 @@ const ArqueoForm = (): JSX.Element => {
             {arqueo.requisito3.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  ¿Tiene aviso de videovigilancia y camaras?
+                  ¿Aviso de videovigilancia y cámaras?
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1415,7 +1097,7 @@ const ArqueoForm = (): JSX.Element => {
             {arqueo.observacion3.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  observacion{' '}
+                  observacion
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1430,8 +1112,7 @@ const ArqueoForm = (): JSX.Element => {
             {arqueo.requisito4.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  ¿El Colocador cuenta con prendas emblematicas y presentación
-                  adecuada?
+                  ¿Utiliza Superflex?
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1446,7 +1127,7 @@ const ArqueoForm = (): JSX.Element => {
             {arqueo.observacion4.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  observacion{' '}
+                  observacion
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1461,14 +1142,14 @@ const ArqueoForm = (): JSX.Element => {
             {arqueo.requisito5.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  ¿El usuario del colocador corresponde a la cedula del mismo?
+                  ¿Tiene caja fuerte?
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
                   defaultValue={arqueo.requisito5}
-                  name="requisito4"
+                  name="requisito5"
                 />
               </>
             )}
@@ -1476,7 +1157,7 @@ const ArqueoForm = (): JSX.Element => {
             {arqueo.observacion5.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  observacion{' '}
+                  observacion
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1491,7 +1172,7 @@ const ArqueoForm = (): JSX.Element => {
             {arqueo.requisito6.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  ¿La versión del aplicativo BNET esta actualizada?
+                  ¿Tiene caja digital auxiliar? ¿Conoce las bases de efectivo asignadas para caja digital y principal?
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1506,7 +1187,7 @@ const ArqueoForm = (): JSX.Element => {
             {arqueo.observacion6.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  observacion{' '}
+                  observacion
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1521,8 +1202,7 @@ const ArqueoForm = (): JSX.Element => {
             {arqueo.requisito7.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  ¿El colocador ofrece los productos y servicios comercializados
-                  por la empresa al 100%?
+                  ¿Las recargas se hacen a través la Red propia de la Cia?
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1537,7 +1217,7 @@ const ArqueoForm = (): JSX.Element => {
             {arqueo.observacion7.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  observacion{' '}
+                  observacion
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1552,8 +1232,7 @@ const ArqueoForm = (): JSX.Element => {
             {arqueo.requisito8.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  ¿La publicidad exhibida en el punto de venta se encuentra
-                  actualizada?
+                  ¿Cumple con los topes de efectivo establecidos en caja digital y principal?
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1568,7 +1247,7 @@ const ArqueoForm = (): JSX.Element => {
             {arqueo.observacion8.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  observacion{' '}
+                  observacion
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1582,10 +1261,8 @@ const ArqueoForm = (): JSX.Element => {
 
             {arqueo.requisito9.length > 0 && (
               <>
-                {' '}
                 <label className="block text-center mt-5 uppercase">
-                  ¿El colocador solicita el documento de identificación al
-                  cliente?
+                  ¿Tiene los premios descargados? ¿Conoce los requisitos y montos máximos para pago de premios?
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1596,11 +1273,11 @@ const ArqueoForm = (): JSX.Element => {
                 />
               </>
             )}
+
             {arqueo.observacion9.length > 0 && (
               <>
-                {' '}
                 <label className="block text-center mt-5 uppercase">
-                  observacion{' '}
+                  observacion
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1614,9 +1291,8 @@ const ArqueoForm = (): JSX.Element => {
 
             {arqueo.requisito10.length > 0 && (
               <>
-                {' '}
                 <label className="block text-center mt-5 uppercase">
-                  ¿El uso del sistema biométrico esta activo?
+                  ¿La lotería física tiene impreso el nombre de la Cia o de Servicios Transaccionales?
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1627,11 +1303,11 @@ const ArqueoForm = (): JSX.Element => {
                 />
               </>
             )}
+
             {arqueo.observacion10.length > 0 && (
               <>
-                {' '}
                 <label className="block text-center mt-5 uppercase">
-                  observacion{' '}
+                  observacion
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1645,10 +1321,8 @@ const ArqueoForm = (): JSX.Element => {
 
             {arqueo.requisito11.length > 0 && (
               <>
-                {' '}
                 <label className="block text-center mt-5 uppercase">
-                  ¿El colocador conoce de Supervoucher, y esta en
-                  funcionamiento?
+                  ¿Publicidad exhibida actualizada?
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1659,17 +1333,17 @@ const ArqueoForm = (): JSX.Element => {
                 />
               </>
             )}
+
             {arqueo.observacion11.length > 0 && (
               <>
-                {' '}
                 <label className="block text-center mt-5 uppercase">
-                  observacion{' '}
+                  observacion
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={arqueo.requisito11}
+                  defaultValue={arqueo.observacion11}
                   name="observacion11"
                 />
               </>
@@ -1677,10 +1351,8 @@ const ArqueoForm = (): JSX.Element => {
 
             {arqueo.requisito12.length > 0 && (
               <>
-                {' '}
                 <label className="block text-center mt-5 uppercase">
-                  ¿El Colocador conoce el procedimiento que debe realizar a
-                  remitentes y destinatarios menores de edad?
+                  ¿Aviso externo de "Vigilado y Controlado Mintic" y "Colaborador Autorizado"?
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1691,11 +1363,11 @@ const ArqueoForm = (): JSX.Element => {
                 />
               </>
             )}
+
             {arqueo.observacion12.length > 0 && (
               <>
-                {' '}
                 <label className="block text-center mt-5 uppercase">
-                  observacion{' '}
+                  observacion
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1709,10 +1381,8 @@ const ArqueoForm = (): JSX.Element => {
 
             {arqueo.requisito13.length > 0 && (
               <>
-                {' '}
                 <label className="block text-center mt-5 uppercase">
-                  ¿El colocador conoce los reportes de operaciones en efectivo
-                  (R.O.E) firmas, huellas. (Transacciones &gt;=$10.000.000)?
+                  ¿Afiche MINTIC SUPERGIROS (contiene aviso de canales de comunicación, o tarifario condiciones del servicio, sticker tirilla electrónica CRC)?
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1723,11 +1393,11 @@ const ArqueoForm = (): JSX.Element => {
                 />
               </>
             )}
-            {arqueo.observacion9.length > 0 && (
+
+            {arqueo.observacion13.length > 0 && (
               <>
-                {' '}
                 <label className="block text-center mt-5 uppercase">
-                  observacion{' '}
+                  observacion
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1741,10 +1411,8 @@ const ArqueoForm = (): JSX.Element => {
 
             {arqueo.requisito14.length > 0 && (
               <>
-                {' '}
                 <label className="block text-center mt-5 uppercase">
-                  ¿Tiene aviso externo que indica Vigilado y Controlado Mintic y
-                  Colaborador Autorizado?
+                  ¿Calendario resultados Superastro diligenciado (tiene que tener los resultados)?
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1755,11 +1423,11 @@ const ArqueoForm = (): JSX.Element => {
                 />
               </>
             )}
+
             {arqueo.observacion14.length > 0 && (
               <>
-                {' '}
                 <label className="block text-center mt-5 uppercase">
-                  observacion{' '}
+                  observacion
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1773,10 +1441,8 @@ const ArqueoForm = (): JSX.Element => {
 
             {arqueo.requisito15.length > 0 && (
               <>
-                {' '}
                 <label className="block text-center mt-5 uppercase">
-                  ¿Tiene cuadro Banner con la marca SuperGIROS (aviso de canales
-                  de comunicación)?
+                  ¿Presta servicio de Western Union (es obligatorio para cajeros digitales)?
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1787,17 +1453,17 @@ const ArqueoForm = (): JSX.Element => {
                 />
               </>
             )}
+
             {arqueo.observacion15.length > 0 && (
               <>
-                {' '}
                 <label className="block text-center mt-5 uppercase">
-                  observacion{' '}
+                  observacion
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
                   type="text"
                   disabled
-                  defaultValue={arqueo.requisito15}
+                  defaultValue={arqueo.observacion15}
                   name="observacion15"
                 />
               </>
@@ -1805,10 +1471,8 @@ const ArqueoForm = (): JSX.Element => {
 
             {arqueo.requisito16.length > 0 && (
               <>
-                {' '}
                 <label className="block text-center mt-5 uppercase">
-                  ¿Tiene afiche normativo visible o tarifario con las
-                  condiciones del servicio?{' '}
+                  ¿Calendarios de acumulados (Baloto - Miloto - Colorloto)?
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1819,11 +1483,11 @@ const ArqueoForm = (): JSX.Element => {
                 />
               </>
             )}
+
             {arqueo.observacion16.length > 0 && (
               <>
-                {' '}
                 <label className="block text-center mt-5 uppercase">
-                  observacion{' '}
+                  observacion
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1837,9 +1501,8 @@ const ArqueoForm = (): JSX.Element => {
 
             {arqueo.requisito17.length > 0 && (
               <>
-                {' '}
                 <label className="block text-center mt-5 uppercase">
-                  ¿Cuenta con sticker tirilla electronica CRC ?
+                  ¿Tablero de resultados y acumulados actualizados?
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1850,11 +1513,11 @@ const ArqueoForm = (): JSX.Element => {
                 />
               </>
             )}
+
             {arqueo.observacion17.length > 0 && (
               <>
-                {' '}
                 <label className="block text-center mt-5 uppercase">
-                  observacion{' '}
+                  observacion
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1868,10 +1531,8 @@ const ArqueoForm = (): JSX.Element => {
 
             {arqueo.requisito18.length > 0 && (
               <>
-                {' '}
                 <label className="block text-center mt-5 uppercase">
-                  ¿Tiene normativa Giros Internacionales, camara o lector five y
-                  Sticker de pagos internacionales?
+                  ¿Licencia de funcionamiento de Beneficencia del Valle con año actualizado?
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1882,11 +1543,11 @@ const ArqueoForm = (): JSX.Element => {
                 />
               </>
             )}
+
             {arqueo.observacion18.length > 0 && (
               <>
-                {' '}
                 <label className="block text-center mt-5 uppercase">
-                  observacion{' '}
+                  observacion
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1900,11 +1561,8 @@ const ArqueoForm = (): JSX.Element => {
 
             {arqueo.requisito19.length > 0 && (
               <>
-                {' '}
                 <label className="block text-center mt-5 uppercase">
-                  ¿El Supervisor Comercial realiza las visitas constantemente,
-                  da buen trato y suministra los insumos a tiempo? Cantidad de
-                  visitas del Supervisor Comercial al mes?
+                  ¿Tiene equipos de Betplay y/o máquinas de ruta? Si los tiene debe tener el aviso "Autoriza Coljuegos"
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1915,10 +1573,11 @@ const ArqueoForm = (): JSX.Element => {
                 />
               </>
             )}
+
             {arqueo.observacion19.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  observacion{' '}
+                  observacion
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1932,10 +1591,8 @@ const ArqueoForm = (): JSX.Element => {
 
             {arqueo.requisito20.length > 0 && (
               <>
-                {' '}
                 <label className="block text-center mt-5 uppercase">
-                  ¿Las recargas efectuadas por el Colocador se trasmiten a
-                  través de la red propia de la empresa?
+                  ¿Tiene aviso código QR para PQR?
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1946,10 +1603,11 @@ const ArqueoForm = (): JSX.Element => {
                 />
               </>
             )}
+
             {arqueo.observacion20.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  observacion{' '}
+                  observacion
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1963,10 +1621,8 @@ const ArqueoForm = (): JSX.Element => {
 
             {arqueo.requisito21.length > 0 && (
               <>
-                {' '}
                 <label className="block text-center mt-5 uppercase">
-                  ¿La lotería física tiene impreso el nombre de la empresa, de
-                  no ser asi reportar inmediatamente?
+                  ¿Verificar el cableado?
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1977,10 +1633,11 @@ const ArqueoForm = (): JSX.Element => {
                 />
               </>
             )}
+
             {arqueo.observacion21.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  observacion{' '}
+                  observacion
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -1992,13 +1649,14 @@ const ArqueoForm = (): JSX.Element => {
               </>
             )}
 
+            <label className="block text-center mt-8 uppercase font-black">
+              Cajero y/o Colocador I:{' '}
+            </label>
+
             {arqueo.requisito22.length > 0 && (
               <>
-                {' '}
                 <label className="block text-center mt-5 uppercase">
-                  ¿El punto de venta tiene caja fuerte y caja digital? el
-                  responsable tiene conocimiento sobre las bases de efectivo
-                  asignadas para caja auxiliar y caja digital?
+                  ¿Tiene prendas emblemáticas y presentación adecuada?
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -2009,10 +1667,11 @@ const ArqueoForm = (): JSX.Element => {
                 />
               </>
             )}
+
             {arqueo.observacion22.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  observacion{' '}
+                  observacion
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -2026,10 +1685,8 @@ const ArqueoForm = (): JSX.Element => {
 
             {arqueo.requisito23.length > 0 && (
               <>
-                {' '}
                 <label className="block text-center mt-5 uppercase">
-                  ¿Se cumple con los topes de efectivo establecidos para la caja
-                  digital y caja auxiliar (ptos de venta con giros)?
+                  ¿El usuario corresponde a la cédula del mismo?
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -2040,10 +1697,11 @@ const ArqueoForm = (): JSX.Element => {
                 />
               </>
             )}
+
             {arqueo.observacion23.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  observacion{' '}
+                  observacion
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -2057,10 +1715,8 @@ const ArqueoForm = (): JSX.Element => {
 
             {arqueo.requisito24.length > 0 && (
               <>
-                {' '}
                 <label className="block text-center mt-5 uppercase">
-                  ¿El colocador tiene conocimiento sobre los montos máximos para
-                  pago de premios?
+                  ¿Tiene usuario de giros? ¿Presta el servicio?
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -2071,10 +1727,11 @@ const ArqueoForm = (): JSX.Element => {
                 />
               </>
             )}
+
             {arqueo.observacion24.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  observacion{' '}
+                  observacion
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -2088,9 +1745,8 @@ const ArqueoForm = (): JSX.Element => {
 
             {arqueo.requisito25.length > 0 && (
               <>
-                {' '}
                 <label className="block text-center mt-5 uppercase">
-                  ¿El colocador conoce los requisitos para pago de premios?
+                  ¿Tiene usuario de la ONJ (para Baloto, Miloto, Colorloto)?
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -2101,10 +1757,11 @@ const ArqueoForm = (): JSX.Element => {
                 />
               </>
             )}
+
             {arqueo.observacion25.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  observacion{' '}
+                  observacion
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -2118,9 +1775,8 @@ const ArqueoForm = (): JSX.Element => {
 
             {arqueo.requisito26.length > 0 && (
               <>
-                {' '}
                 <label className="block text-center mt-5 uppercase">
-                  ¿Tiene buzon de PQR, formato de gane y de giros?{' '}
+                  ¿Tiene usuario de SUPERFLEX?
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -2131,10 +1787,11 @@ const ArqueoForm = (): JSX.Element => {
                 />
               </>
             )}
+
             {arqueo.observacion26.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  observacion{' '}
+                  observacion
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -2148,10 +1805,8 @@ const ArqueoForm = (): JSX.Element => {
 
             {arqueo.requisito27.length > 0 && (
               <>
-                {' '}
                 <label className="block text-center mt-5 uppercase">
-                  ¿El Colocador cuenta con las bases acerca del SARL, SARLAFT,
-                  SARO?
+                  ¿Tiene usuario de CORREDOR EMPRESARIAL (astro, chance millonario, Betplay)?
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -2162,10 +1817,11 @@ const ArqueoForm = (): JSX.Element => {
                 />
               </>
             )}
+
             {arqueo.observacion27.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  observacion{' '}
+                  observacion
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -2179,10 +1835,8 @@ const ArqueoForm = (): JSX.Element => {
 
             {arqueo.requisito28.length > 0 && (
               <>
-                {' '}
                 <label className="block text-center mt-5 uppercase">
-                  ¿El Colocador conoce la definición de operación inusual y
-                  operación sospechosa?
+                  ¿Está realizando recaudo en tesorería BNET a la compañera?
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -2193,10 +1847,26 @@ const ArqueoForm = (): JSX.Element => {
                 />
               </>
             )}
-            {(arqueo.requisito29.length > 0) && (
+
+            {arqueo.observacion28.length > 0 && (
               <>
                 <label className="block text-center mt-5 uppercase">
-                  VERIFICACION INSUMOS PARA PREVENCION DE COVID 19
+                  observacion
+                </label>
+                <input
+                  className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
+                  type="text"
+                  disabled
+                  defaultValue={arqueo.observacion28}
+                  name="observacion28"
+                />
+              </>
+            )}
+
+            {arqueo.requisito29.length > 0 && (
+              <>
+                <label className="block text-center mt-5 uppercase">
+                  ¿Está comercializando el portafolio completo?
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -2208,11 +1878,25 @@ const ArqueoForm = (): JSX.Element => {
               </>
             )}
 
-            {(arqueo.requisito30.length > 0) && (
+            {arqueo.observacion29.length > 0 && (
               <>
-                {' '}
                 <label className="block text-center mt-5 uppercase">
-                  ¿Tapabocas?
+                  observacion
+                </label>
+                <input
+                  className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
+                  type="text"
+                  disabled
+                  defaultValue={arqueo.observacion29}
+                  name="observacion29"
+                />
+              </>
+            )}
+
+            {arqueo.requisito30.length > 0 && (
+              <>
+                <label className="block text-center mt-5 uppercase">
+                  ¿Solicita el documento de identificación al cliente?
                 </label>
                 <input
                   className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
@@ -2220,6 +1904,171 @@ const ArqueoForm = (): JSX.Element => {
                   disabled
                   defaultValue={arqueo.requisito30}
                   name="requisito30"
+                />
+              </>
+            )}
+
+            {arqueo.observacion30.length > 0 && (
+              <>
+                <label className="block text-center mt-5 uppercase">
+                  observacion
+                </label>
+                <input
+                  className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
+                  type="text"
+                  disabled
+                  defaultValue={arqueo.observacion30}
+                  name="observacion30"
+                />
+              </>
+            )}
+
+            {arqueo.requisito31.length > 0 && (
+              <>
+                <label className="block text-center mt-5 uppercase">
+                  ¿Conoce Supervoucher, funciona?
+                </label>
+                <input
+                  className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
+                  type="text"
+                  disabled
+                  defaultValue={arqueo.requisito31}
+                  name="requisito31"
+                />
+              </>
+            )}
+
+            {arqueo.observacion31.length > 0 && (
+              <>
+                <label className="block text-center mt-5 uppercase">
+                  observacion
+                </label>
+                <input
+                  className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
+                  type="text"
+                  disabled
+                  defaultValue={arqueo.observacion31}
+                  name="observacion31"
+                />
+              </>
+            )}
+
+            {arqueo.requisito32.length > 0 && (
+              <>
+                <label className="block text-center mt-5 uppercase">
+                  ¿Conoce el procedimiento para remitentes y destinatarios menores de edad?
+                </label>
+                <input
+                  className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
+                  type="text"
+                  disabled
+                  defaultValue={arqueo.requisito32}
+                  name="requisito32"
+                />
+              </>
+            )}
+
+            {arqueo.observacion32.length > 0 && (
+              <>
+                <label className="block text-center mt-5 uppercase">
+                  observacion
+                </label>
+                <input
+                  className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
+                  type="text"
+                  disabled
+                  defaultValue={arqueo.observacion32}
+                  name="observacion32"
+                />
+              </>
+            )}
+
+            {arqueo.requisito33.length > 0 && (
+              <>
+                <label className="block text-center mt-5 uppercase">
+                  ¿Conoce los reportes de operaciones en efectivo (R.O.E) firmas, huellas? (Transacciones {'>'}= $10.000.000)
+                </label>
+                <input
+                  className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
+                  type="text"
+                  disabled
+                  defaultValue={arqueo.requisito33}
+                  name="requisito33"
+                />
+              </>
+            )}
+
+            {arqueo.observacion33.length > 0 && (
+              <>
+                <label className="block text-center mt-5 uppercase">
+                  observacion
+                </label>
+                <input
+                  className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
+                  type="text"
+                  disabled
+                  defaultValue={arqueo.observacion33}
+                  name="observacion33"
+                />
+              </>
+            )}
+
+            {arqueo.requisito34.length > 0 && (
+              <>
+                <label className="block text-center mt-5 uppercase">
+                  ¿El Supervisor Cial realiza las visitas?
+                </label>
+                <input
+                  className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
+                  type="text"
+                  disabled
+                  defaultValue={arqueo.requisito34}
+                  name="requisito34"
+                />
+              </>
+            )}
+
+            {arqueo.observacion34.length > 0 && (
+              <>
+                <label className="block text-center mt-5 uppercase">
+                  observacion
+                </label>
+                <input
+                  className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
+                  type="text"
+                  disabled
+                  defaultValue={arqueo.observacion34}
+                  name="observacion34"
+                />
+              </>
+            )}
+
+            {arqueo.requisito35.length > 0 && (
+              <>
+                <label className="block text-center mt-5 uppercase">
+                  ¿Conoce los términos SARL, SARLAFT, SARO, operación inusual y operación sospechosa?
+                </label>
+                <input
+                  className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
+                  type="text"
+                  disabled
+                  defaultValue={arqueo.requisito35}
+                  name="requisito35"
+                />
+              </>
+            )}
+
+            {arqueo.observacion35.length > 0 && (
+              <>
+                <label className="block text-center mt-5 uppercase">
+                  observacion
+                </label>
+                <input
+                  className="px-2 py-1 w-full text-center mt-2 dark:bg-dark-tremor-brand-muted dark:text-white bg-slate-300 rounded-full border cursor-not-allowed"
+                  type="text"
+                  disabled
+                  defaultValue={arqueo.observacion35}
+                  name="observacion35"
                 />
               </>
             )}
