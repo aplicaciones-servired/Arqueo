@@ -1,4 +1,3 @@
-import React from 'react'
 import { useAuth } from '../auth/AuthProvider'
 import { CambiarCompany } from '../components/DefineCompany'
 import DashBoard from '../components/DashBoard'
