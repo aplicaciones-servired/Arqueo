@@ -4,14 +4,14 @@ services:
     build:
       context: ./server
       dockerfile: Dockerfile
-    container_name: arqueo-server-1
-    image: arqueo-server
+    container_name: arqueo-server-servired-1
+    image: arqueo-server-servired
     networks:
       - red-gane-int
 
   web-metas:
     image: nginx:stable-alpine3.19-slim
-    container_name: web_arqueo
+    container_name: web_arqueo_servired
     volumes:
       - ./client/dist:/usr/share/nginx/html
       - ./conf/nginx.conf:/etc/nginx/nginx.conf:ro
