@@ -28,7 +28,7 @@ function LoginPage (): JSX.Element {
         <Button>Iniciar Sesión</Button>
       </form >
 
-      {(errorString.length > 0) && ( // <-- Usa safeErrorString aquí
+      {(errorString !== '') &&
         <div className='flex gap-2'>
           <p className="text-center bg-red-600 text-white font-semibold p-2 rounded-md">
             <WarningIcon />
@@ -37,7 +37,7 @@ function LoginPage (): JSX.Element {
             {errorString}
           </p>
         </div>
-      )}
+      }
 
     </section >
   )
