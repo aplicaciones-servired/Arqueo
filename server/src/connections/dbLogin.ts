@@ -13,6 +13,33 @@ const getPoolLogin = new Sequelize(DB_NAME_LOGIN, DB_USER_LOGIN, DB_PASSWORD_LOG
   host: DB_HOST_LOGIN,
   dialect: "mysql",
   timezone: '-05:00',
+  dialectOptions: {
+    connectTimeout: 60000 // 60 segundos de timeout
+  },
+  pool: {
+    max: 5,
+    min: 0,
+    acquire: 30000,
+    idle: 10000
+  },
+  retry: {
+    match: [
+      /ETIMEDOUT/,
+      /ECONNRESET/,
+      /ECONNREFUSED/,
+      /ESOCKETTIMEDOUT/,
+      /EHOSTUNREACH/,
+      /EPIPE/,
+      /EAI_AGAIN/,
+      /SequelizeConnectionError/,
+      /SequelizeConnectionRefusedError/,
+      /SequelizeHostNotFoundError/,
+      /SequelizeHostNotReachableError/,
+      /SequelizeInvalidConnectionError/,
+      /SequelizeConnectionTimedOutError/
+    ],
+    max: 3 // Intentar reconectar 3 veces
+  }
 });
 
 export { getPoolLogin };
