@@ -10,16 +10,6 @@ services:
       - red-gane-int
     env_file:
       - .env
-    environment:
-      DB_SERVIRE_USER: "cliente"
-      DB_SERVIRE_PASS: "adminadmon"
-      DB_SERVIRE_HOST: "172.20.1.92"
-      DB_SERVIRE_USE: "Gane"
-      DB_SERVIRED_USER: "cliente"
-      DB_SERVIRED_PASS: "adminadmon"
-      DB_SERVIRED_HOST: "172.20.1.92"
-      DB_SERVIRED_USE: "appseguimiento"
-      DB_DIALECT_CHAT: "mysql"
 
   web-metas:
     image: nginx:stable-alpine3.19-slim
