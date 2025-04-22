@@ -4,7 +4,7 @@ import { getLogin } from '../services/Login.services'
 import { useNavigate } from 'react-router-dom'
 import { type User } from '../types/user'
 
-export function useLogin (): {
+export function useLogin(): {
   username: string
   setUsername: React.Dispatch<React.SetStateAction<string>>
   password: string
@@ -23,12 +23,14 @@ export function useLogin (): {
     ev.preventDefault()
     void getLogin({ username, password })
       .then((res) => {
+        console.log('Respuesta del login:', res)
         if (res !== null && res !== undefined) {
           login()
           setUsernames(res as User)
           navigate('/home')
         }
       })
+
       .catch((error) => {
         const errorMessage = (error.response?.data?.message ?? error.message) as string | undefined
         setErrorString(errorMessage ?? 'Error al iniciar sesión')
