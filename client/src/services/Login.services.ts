@@ -7,13 +7,7 @@ export const getLogin = async ({ username, password }: { username: string, passw
     // const response: AxiosResponse<{ token: string }> = await axios.post('http://localhost:3000/login', { username, password })
     return response.data
   } catch (error) {
-    console.error(error)
-    if (axios.isAxiosError(error) && error.code === 'ECONNREFUSED') {
-      console.error('Database connection refused')
-      return { message: 'Error de conexión a la base de datos' }
-    } else {
-      console.error('Internal server error')
-      return { message: 'Error interno del servidor' }
-    }
+    console.error('Error en la solicitud de login:', error)
+    throw error
   }
 }
