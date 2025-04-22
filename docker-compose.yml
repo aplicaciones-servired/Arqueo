@@ -8,8 +8,6 @@ services:
     image: arqueo-server
     networks:
       - red-gane-int
-    env_file:
-      - .env
 
   web-metas:
     image: nginx:stable-alpine3.19-slim
