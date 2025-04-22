@@ -9,7 +9,7 @@ services:
     networks:
       - red-gane-int
 
-  web-metas:
+  web_arqueo_servired:
     image: nginx:stable-alpine3.19-slim
     container_name: web_arqueo_servired
     volumes:
