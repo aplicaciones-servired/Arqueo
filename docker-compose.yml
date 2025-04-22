@@ -1,8 +1,8 @@
 version: "3.7"
 services:
-  server:
+  server_arqueo:
     build:
-      context: ./server
+      context: ./server_arqueo
       dockerfile: Dockerfile
     container_name: arqueo-server-servired-1
     image: arqueo-server-servired
