@@ -24,10 +24,12 @@ export function useLogin(): {
     void getLogin({ username, password })
       .then((res) => {
         console.log('Respuesta del login:', res)
-        if (res !== null && res !== undefined) {
+        if (res !== null && typeof res === 'object' && 'username' in res) {
           login()
           setUsernames(res as User)
           navigate('/home')
+        } else {
+          setErrorString('Datos de usuario inválidos.')
         }
       })
 

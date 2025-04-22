@@ -10,7 +10,7 @@ const LoginPage = lazy(async () => await import('../pages/LoginPage'))
 function Root (): JSX.Element {
   const { username, isAuthenticated } = useAuth()
 
-  if ((username.username.length === 0) || !isAuthenticated) {
+  if ((username?.username?.length === 0) || !isAuthenticated) {
     return (
       <Suspense fallback={<div>Loading...</div>}>
         <LoginPage />
