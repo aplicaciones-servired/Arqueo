@@ -19,10 +19,12 @@ export function useLogin (): {
   const [password, setPassword] = useState('')
   const [errorString, setErrorString] = useState('')
 
+  // En tu archivo useLogin.ts
   const handleSubmit = (ev: React.FormEvent): void => {
     ev.preventDefault()
     void getLogin({ username, password })
       .then((res) => {
+        console.log('Respuesta del backend:', res) // <-- Añade esto
         if (res !== null && res !== undefined) {
           login()
           setUsernames(res as User)
@@ -30,6 +32,7 @@ export function useLogin (): {
         }
       })
       .catch((error) => {
+        console.error('Error completo:', error) // <-- Muestra el error completo
         const errorMessage = (error.response?.data?.message ?? error.message) as string | undefined
         setErrorString(errorMessage ?? 'Error al iniciar sesión')
         setTimeout(() => {
