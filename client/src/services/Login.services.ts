@@ -1,4 +1,4 @@
-import axios, { type AxiosResponse } from 'axios'
+import axios from 'axios'
 import { API_URL } from '../utils/constans'
 
 export const getLogin = async ({ username, password }: { username: string, password: string }): Promise<unknown> => {
