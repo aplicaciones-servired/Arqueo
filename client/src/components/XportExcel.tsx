@@ -331,7 +331,7 @@ export const BottonExportItems = ({ datos }: { datos: Arqueo }): JSX.Element => 
 
     hoja['!cols'] = simpiedades
     XLSX.utils.book_append_sheet(libro, hoja, 'Items')
-    XLSX.writeFile(libro, 'ARQUEO.xlsx')
+    XLSX.writeFile(libro, 'ARQUEO_POR_FECHA.xlsx')
   }
 
   return (

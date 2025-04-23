@@ -55,7 +55,7 @@ const ArqueoForm = (): JSX.Element => {
               <div className="flex justify-end  -translate-y-3 -translate-x-3 space-x-2">
                 <BottonExportItems datos={arqueo} />
 
-                <PDFDownloadLink document={<PDF datos={arqueo as unknown as Datos} company={company ?? ''} />} fileName="PRUEBA.PDF">
+                <PDFDownloadLink document={<PDF datos={arqueo as unknown as Datos} company={company ?? ''} />} fileName="ARQUEO.PDF">
                   <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg pl-2 " >descargar PDF</button>
                 </PDFDownloadLink>
               </div>
@@ -2138,7 +2138,7 @@ const ArqueoForm = (): JSX.Element => {
                     <h4 className="block uppercase">imagen observacion</h4>
                     <img
                       src={`data:image/png;base64,${arqueo.imagen_observacion}`}
-                      className="w-full h-40 mt-7 rotate-90 object-contain"
+                      className="w-full h-20 mt-7 rotate-90 object-contain"
                       alt="imagen observacion"
                     />
                   </>
