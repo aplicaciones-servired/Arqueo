@@ -2132,44 +2132,49 @@ const ArqueoForm = (): JSX.Element => {
             />
 
             <div className="grid grid-cols-4 gap-4 mt-5">
+              {/* Imagen Observación */}
               <div className="flex flex-col items-center">
                 {arqueo.imagen_observacion != null && (
                   <>
-                    <h4 className="block uppercase">imagen observacion</h4>
+                    <h4 className="block uppercase mb-2">imagen observacion</h4>
                     <img
                       src={`data:image/png;base64,${arqueo.imagen_observacion}`}
-                      className="w-full h-40 mt-15 rotate-90 object-contain"
+                      className="w-40 h-40 object-contain rotate-90"
                       alt="imagen observacion"
                     />
                   </>
                 )}
               </div>
 
-              <div>
+              {/* Firma Auditoria */}
+              <div className="flex flex-col items-center">
                 {arqueo.firma_auditoria != null && (
                   <>
-                    <h4 className="block uppercase">Firma Auditoria</h4>
+                    <h4 className="block uppercase mb-2">Firma Auditoria</h4>
                     <img
                       src={`data:image/png;base64,${arqueo.firma_auditoria}`}
-                      className="w-30 h-20 mt-2"
+                      className="w-30 h-20 object-contain"
                       alt="Firma Auditoria"
                     />
                   </>
                 )}
               </div>
-              <div>
+
+              {/* Firma Colocadora */}
+              <div className="flex flex-col items-center">
                 {arqueo.firma_colocadora != null && (
                   <>
-                    <h4 className="block uppercase">Firma Colocadora</h4>
+                    <h4 className="block uppercase mb-2">Firma Colocadora</h4>
                     <img
                       src={`data:image/png;base64,${arqueo.firma_colocadora}`}
-                      className="w-30 h-20 mt-2"
+                      className="w-30 h-20 object-contain"
                       alt="Firma Colocadora"
                     />
                   </>
                 )}
               </div>
             </div>
+
           </Card>
         ))
 
