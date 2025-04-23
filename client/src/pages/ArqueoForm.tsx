@@ -2138,7 +2138,7 @@ const ArqueoForm = (): JSX.Element => {
                     <h4 className="block uppercase">imagen observacion</h4>
                     <img
                       src={`data:image/png;base64,${arqueo.imagen_observacion}`}
-                      className="w-full h-20 mt-7 rotate-90 object-contain"
+                      className="w-full h-40 mt-7 rotate-90 object-contain"
                       alt="imagen observacion"
                     />
                   </>
@@ -2151,7 +2151,7 @@ const ArqueoForm = (): JSX.Element => {
                     <h4 className="block uppercase">Firma Auditoria</h4>
                     <img
                       src={`data:image/png;base64,${arqueo.firma_auditoria}`}
-                      className="w-30 h-20 mt-2"
+                      className="w-30 h-20 mt-8"
                       alt="Firma Auditoria"
                     />
                   </>
