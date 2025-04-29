@@ -7,13 +7,13 @@ import ReactPaginate from 'react-paginate'
 import { useFilter } from '../hooks/useFilters'
 import { useNavigate } from 'react-router-dom'
 import { RiSearchEyeLine } from '@remixicon/react'
-import { type Empresa } from '../types/user'
+import { type User } from '../types/user'
 import { exportarAExcel } from '../components/Export'
 import { format, parseISO } from 'date-fns'
 import { es } from 'date-fns/locale'
 import { API_URL } from '../utils/constans'
 
-const DahsBoard = ({ company }: { company: Empresa }): JSX.Element => {
+const DahsBoard = ({ zona }: { zona: User }): JSX.Element => {
   const [data, setData] = useState<Arqueos>([])
   const [currentPage, setCurrentPage] = useState(1)
   const { filteredPDV, setSearchPDV, searchPDV } = useFilter(data)
@@ -21,8 +21,8 @@ const DahsBoard = ({ company }: { company: Empresa }): JSX.Element => {
   const [fechaFin, setFechaFin] = useState('')
 
   const navigate = useNavigate()
-  console.log('first', company.nombre_empresa)
-  const companyname = company.nombre_empresa
+  console.log('first', zona)
+  const companyname = zona.company
 
   useEffect(() => {
     const fetchData = async (): Promise<void> => {

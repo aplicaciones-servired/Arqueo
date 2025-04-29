@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from 'react'
+import React, { createContext, type Dispatch, type SetStateAction, useContext, useEffect, useState } from 'react'
 import { type User } from '../types/user'
 
 interface IAuthContext {
@@ -6,41 +6,12 @@ interface IAuthContext {
   login: () => void
   logout: () => void
   username: User
-  setUsernames: React.Dispatch<React.SetStateAction<User>>
+  setUsernames: Dispatch<SetStateAction<User>>
+  setIsAuthenticated: Dispatch<SetStateAction<boolean>>
 }
 
 interface Props {
   children: React.ReactNode
-}
-
-const InitialUser: User = {
-  cc_persona: '',
-  nombre_persona: '',
-  apellido_persona: '',
-  id_empresa: '',
-  id_cargo: '',
-  id_proceso: '',
-  id_rol: '',
-  username: '',
-  password: '',
-  id_estado: '',
-  empresa: {
-    id_empresa: '',
-    nombre_empresa: 'Multired' // or any other valid value of type 'Empresas'
-  },
-  rol: {
-    id_rol: '',
-    nombre_rol: ''
-  },
-  cargo: {
-    id_cargo: '',
-    nombre_cargo: ''
-  },
-  proceso: {
-    id_proceso: '',
-    nombre_proceso: ''
-  }
-
 }
 
 const AuthContext = createContext<IAuthContext | undefined>(undefined)
@@ -52,7 +23,7 @@ export const AuthProvider = ({ children }: Props): JSX.Element => {
   })
   const [username, setUsernames] = useState<User>(() => {
     const storedUser = localStorage.getItem('username')
-    return (storedUser != null) ? JSON.parse(storedUser) : InitialUser
+    return (storedUser != null) ? JSON.parse(storedUser) : null
   })
 
   let inactivityTimer: ReturnType<typeof setTimeout>
@@ -103,7 +74,7 @@ export const AuthProvider = ({ children }: Props): JSX.Element => {
   }
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout, username, setUsernames }}>
+    <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, login, logout, username, setUsernames }}>
       {children}
     </AuthContext.Provider>
   )

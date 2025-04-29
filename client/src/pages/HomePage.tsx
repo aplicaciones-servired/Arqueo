@@ -3,19 +3,19 @@ import { CambiarCompany } from '../components/DefineCompany'
 import DashBoard from '../components/DashBoard'
 
 function EmpresaPage (): JSX.Element {
-  const { username } = useAuth() // Obtén el objeto user desde useAuth
-  const company = username.empresa // Accede a empresa desde user
+  const { username } = useAuth()
+  const empresa = username?.company ?? ''
 
-  console.log('Empresa seleccionada:', company.nombre_empresa)
+  console.log('Empresa seleccionada:', empresa)
 
   return (
     <>
-      {company.nombre_empresa === 'Multired Y Servired'
+      {(empresa === 'Servired' || empresa === 'Multired')
         ? (
-        <CambiarCompany />
+          <DashBoard zona={username} />
           )
         : (
-        <DashBoard company={company} />
+          <CambiarCompany />
           )}
     </>
   )

@@ -1,10 +1,11 @@
 import { useAuth } from '../auth/AuthProvider'
 import { useState } from 'react'
-import { getLogin } from '../services/Login.services'
 import { useNavigate } from 'react-router-dom'
 import { type User } from '../types/user'
+import { URL_API_LOGIN } from '../utils/constans'
+import axios from 'axios'
 
-export function useLogin(): {
+export function useLogin (): {
   username: string
   setUsername: React.Dispatch<React.SetStateAction<string>>
   password: string
@@ -12,7 +13,7 @@ export function useLogin(): {
   setPassword: React.Dispatch<React.SetStateAction<string>>
   handleSubmit: (ev: React.FormEvent) => void
 } {
-  const { login, setUsernames } = useAuth()
+  const { login, setUsernames, setIsAuthenticated } = useAuth()
   const navigate = useNavigate()
 
   const [username, setUsername] = useState('')
@@ -21,12 +22,13 @@ export function useLogin(): {
 
   const handleSubmit = (ev: React.FormEvent): void => {
     ev.preventDefault()
-    void getLogin({ username, password })
+    axios.post(`${URL_API_LOGIN}/login`, { username, password }) // Reemplaza 'APP_NAME' con el nombre de tu aplicación
       .then((res) => {
-        console.log('Respuesta del login:', res)
-        if (res !== null && typeof res === 'object' && 'username' in res) {
+        console.log('Respuesta del login:', res.data.user)
+        if (res.status === 200) {
+          setIsAuthenticated(true)
           login()
-          setUsernames(res as User)
+          setUsernames(res.data.user as unknown as User)
           navigate('/home')
         } else {
           setErrorString('Datos de usuario inválidos.')

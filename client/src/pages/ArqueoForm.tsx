@@ -13,7 +13,7 @@ import { API_URL } from '../utils/constans'
 
 const ArqueoForm = (): JSX.Element => {
   const { username } = useAuth()
-  const company = username.empresa.nombre_empresa
+  const company = username.company
   const [data, setData] = useState<Arqueo[]>([])
   const { id } = useParams<{ id: string }>()
 

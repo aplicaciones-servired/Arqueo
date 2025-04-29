@@ -1,20 +1,17 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { useAuth } from '../auth/AuthProvider'
-import { type Empresas } from '../types/user'
-import React from 'react'
 
 export function CambiarCompany (): JSX.Element {
   const { username, setUsernames } = useAuth()
 
   const handleEmpresaChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedEmpresa = e.target.value
+
+    // Actualizar el usuario con la empresa seleccionada
     setUsernames({
       ...username,
-      empresa: {
-        ...username.empresa,
-        nombre_empresa: selectedEmpresa as Empresas
-      }
-    }) // Actualiza el contexto de autenticación con la empresa seleccionada
+      company: selectedEmpresa
+    })
   }
 
   return (
