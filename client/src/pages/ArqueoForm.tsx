@@ -2148,16 +2148,16 @@ const ArqueoForm = (): JSX.Element => {
 
               {/* Firma Auditoria */}
               <div className="flex flex-col items-center">
-                {typeof arqueo.firma_auditoria === 'string' && arqueo.firma_auditoria.length < 1000000 && (
-                  <>
-                    <h4 className="block uppercase mb-2">Firma Auditoria</h4>
-                    <img
-                      src={`data:image/png;base64,${arqueo.firma_auditoria}`}
-                      className="w-30 h-20 object-contain"
-                      alt="Firma Auditoria"
-                    />
-                  </>
-                )}
+               {typeof arqueo.firma_auditoria === 'string' && (arqueo.firma_auditoria as string).length < 1000000 && (
+    <>
+      <h4 className="block uppercase mb-2">Firma Auditoria</h4>
+      <img
+        src={`data:image/png;base64,${arqueo.firma_auditoria}`}
+        className="w-30 h-20 object-contain"
+        alt="Firma Auditoria"
+      />
+    </>
+  )}
               </div>
 
               {/* Firma Colocadora */}
