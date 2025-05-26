@@ -27,8 +27,8 @@ const ArqueoForm = (): JSX.Element => {
         if (response.data != null) {
           const dataWithBase64Images = response.data.map((item: { firma_auditoria: unknown, firma_colocadora: unknown, imagen_observacion: unknown }) => ({
             ...item,
-            firma_auditoria: item.firma_auditoria ?? null,
-            firma_colocadora: item.firma_colocadora ?? null,
+            firma_auditoria: item.firma_auditoria != null ? Buffer.from(item.firma_auditoria as string).toString() : null,
+            firma_colocadora: item.firma_colocadora != null ? Buffer.from(item.firma_colocadora as string).toString() : null,
             imagen_observacion: item.imagen_observacion != null ? Buffer.from(item.imagen_observacion as string).toString() : null
           }))
 
