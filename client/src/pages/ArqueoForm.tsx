@@ -29,7 +29,7 @@ const ArqueoForm = (): JSX.Element => {
             ...item,
             firma_auditoria: item.firma_auditoria != null ? Buffer.from(item.firma_auditoria as string).toString('base64') : null,
             firma_colocadora: item.firma_colocadora != null ? Buffer.from(item.firma_colocadora as string).toString('base64') : null,
-            imagen_observacion: item.imagen_observacion != null ? Buffer.from(item.imagen_observacion as string).toString('base64') : null,
+            imagen_observacion: item.imagen_observacion != null ? Buffer.from(item.imagen_observacion as string).toString() : null
           }))
 
           setData(dataWithBase64Images as Arqueo[])
@@ -2148,16 +2148,16 @@ const ArqueoForm = (): JSX.Element => {
 
               {/* Firma Auditoria */}
               <div className="flex flex-col items-center">
-               {typeof arqueo.firma_auditoria === 'string' && (arqueo.firma_auditoria as string).length < 1000000 && (
-    <>
-      <h4 className="block uppercase mb-2">Firma Auditoria</h4>
-      <img
-  src={`data:image/png;base64,${arqueo.firma_auditoria}`}
-  className="w-30 h-20 object-contain"
-  alt="Firma Auditoria"
-/>
-    </>
-  )}
+                {arqueo.firma_auditoria != null && (
+                  <>
+                    <h4 className="block uppercase mb-2">Firma Auditoria</h4>
+                    <img
+                      src={`data:image/png;base64,${arqueo.firma_auditoria}`}
+                      className="w-30 h-20 object-contain"
+                      alt="Firma Auditoria"
+                    />
+                  </>
+                )}
               </div>
 
               {/* Firma Colocadora */}
