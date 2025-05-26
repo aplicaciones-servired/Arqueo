@@ -2134,7 +2134,7 @@ const ArqueoForm = (): JSX.Element => {
             <div className="grid grid-cols-4 gap-4 mt-5">
               {/* Imagen Observación */}
               <div className="flex flex-col items-center">
-                {arqueo.imagen_observacion && arqueo.imagen_observacion.length < 1000000 && (
+                {arqueo.imagen_observacion != null && (
                   <>
                     <h4 className="block uppercase mb-2">imagen observacion</h4>
                     <img
@@ -2148,7 +2148,7 @@ const ArqueoForm = (): JSX.Element => {
 
               {/* Firma Auditoria */}
               <div className="flex flex-col items-center">
-                {arqueo.firma_auditoria && arqueo.firma_auditoria.length < 1000000 && (
+                {typeof arqueo.firma_auditoria === 'string' && arqueo.firma_auditoria.length < 1000000 && (
                   <>
                     <h4 className="block uppercase mb-2">Firma Auditoria</h4>
                     <img
@@ -2162,7 +2162,7 @@ const ArqueoForm = (): JSX.Element => {
 
               {/* Firma Colocadora */}
               <div className="flex flex-col items-center">
-                {arqueo.firma_colocadora && arqueo.firma_colocadora.length < 1000000 && (
+                {arqueo.firma_colocadora != null && (
                   <>
                     <h4 className="block uppercase mb-2">Firma Colocadora</h4>
                     <img
