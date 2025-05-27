@@ -25,12 +25,13 @@ const ArqueoForm = (): JSX.Element => {
         setData(response.data as Arqueo[])
 
         if (response.data != null) {
-          const dataWithBase64Images = response.data.map((item: { firma_auditoria: unknown, firma_colocadora: unknown, imagen_observacion: unknown }) => ({
+         const dataWithBase64Images = response.data.map((item) => ({
             ...item,
-            firma_auditoria: item.firma_auditoria != null ? Buffer.from(item.firma_auditoria as string).toString('base64') : null,
-            firma_colocadora: item.firma_colocadora != null ? Buffer.from(item.firma_colocadora as string).toString('base64') : null,
-            imagen_observacion: item.imagen_observacion != null ? Buffer.from(item.imagen_observacion as string).toString() : null
-          }))
+            // NO recodifiques, solo asigna el base64 puro
+            firma_auditoria: item.firma_auditoria ?? null,
+            firma_colocadora: item.firma_colocadora ?? null,
+            imagen_observacion: item.imagen_observacion ?? null
+          }));
 
           setData(dataWithBase64Images as Arqueo[])
         }
@@ -2151,11 +2152,11 @@ const ArqueoForm = (): JSX.Element => {
                 {arqueo.firma_auditoria != null && (
                   <>
                     <h4 className="block uppercase mb-2">Firma Auditoria</h4>
-                    <img
-                      src={`data:image/png;base64,${arqueo.firma_auditoria}`}
-                      className="w-30 h-20 object-contain"
-                      alt="Firma Auditoria"
-                    />
+                   <img
+  src={`data:image/png;base64,${arqueo.firma_colocadora}`}
+  className="w-30 h-20 object-contain"
+  alt="Firma Colocadora"
+/>
                   </>
                 )}
               </div>
