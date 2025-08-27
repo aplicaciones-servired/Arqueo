@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react'
+import React, { lazy, Suspense } from 'react'
 
 import { useAuth } from '../auth/AuthProvider'
 import { Outlet } from 'react-router-dom'
