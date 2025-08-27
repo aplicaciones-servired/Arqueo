@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { type Cronograma } from '../types/cronograma'
-import { format, parse } from 'date-fns'
+
+import { format, parse, startOfMonth, endOfMonth, isWithinInterval } from 'date-fns'
 
 interface FilterPDV {
   filteredPDV: Cronograma[]
@@ -12,39 +13,49 @@ interface FilterPDV {
   setSearchPVDS: React.Dispatch<React.SetStateAction<string>>
 }
 
-// 🔥 Filtro por el día actual
-function filterByToday (pdv: Cronograma[]): Cronograma[] {
+function filterByPDV (pdv: Cronograma[], searchPDV: string): Cronograma[] {
+  // Fecha de hoy normalizada (yyyy-MM-dd)
   const hoy = format(new Date(), 'yyyy-MM-dd')
 
   return pdv.filter(({ dia }) => {
     if (dia.length === 0) return false
+
     const parsedDate = parse(dia, 'yyyy-MM-dd', new Date())
-    return format(parsedDate, 'yyyy-MM-dd') === hoy
+    const fecha = format(parsedDate, 'yyyy-MM-dd')
+
+    // Si no hay búsqueda -> mostrar SOLO los de hoy
+    if ((searchPDV.length === 0) || searchPDV.trim() === '') {
+      return fecha === hoy
+    }
+
+    // Si hay búsqueda -> mostrar los que coinciden con esa fecha
+    return fecha.includes(searchPDV)
   })
 }
 
-function filterByPDV (pdv: Cronograma[], searchPDV: string): Cronograma[] {
+// 🔥 Nuevo filtro -> filtra los registros del mes actual
+function filterByCurrentMonth (pdv: Cronograma[]): Cronograma[] {
+  const now = new Date()
+  const start = startOfMonth(now)
+  const end = endOfMonth(now)
+
   return pdv.filter(({ dia }) => {
     if (dia.length === 0) return false
+
     const parsedDate = parse(dia, 'yyyy-MM-dd', new Date())
-    const fecha = format(parsedDate, 'yyyy-MM-dd')
-    return fecha.includes(searchPDV)
+    return isWithinInterval(parsedDate, { start, end })
   })
 }
 
 function filterByPVDS (pdv: Cronograma[], searchPVDS: string): Cronograma[] {
   return pdv.filter(({ puntodeventa }) =>
-    puntodeventa.length > 0
-      ? puntodeventa.toLowerCase().includes(searchPVDS.toLowerCase())
-      : false
+    (puntodeventa.length > 0) ? puntodeventa.toLowerCase().includes(searchPVDS.toLowerCase()) : false
   )
 }
 
 function filterByPDS (pdv: Cronograma[], searchPDS: string): Cronograma[] {
   return pdv.filter(({ empresa }) =>
-    empresa.length > 0
-      ? empresa.toLowerCase().includes(searchPDS.toLowerCase())
-      : false
+    (empresa.length > 0) ? empresa.toLowerCase().includes(searchPDS.toLowerCase()) : false
   )
 }
 
@@ -56,10 +67,10 @@ export function useFilterPro (pdv: Cronograma[]): FilterPDV {
   const filteredPDV = useMemo(() => {
     let filtered = pdv
 
-    // 👇 Siempre filtra por el día actual en lugar del mes
-    filtered = filterByToday(filtered)
+    // 👇 Siempre filtra por mes actual en lugar de solo hoy
+    filtered = filterByCurrentMonth(filtered)
 
-    // Si el usuario busca manualmente, sobreescribe el filtro de hoy
+    // Si el usuario busca fecha manualmente, sobreescribe el filtro de mes
     if (searchPDV.length > 0) {
       filtered = filterByPDV(filtered, searchPDV)
     }
@@ -75,13 +86,5 @@ export function useFilterPro (pdv: Cronograma[]): FilterPDV {
     return filtered
   }, [pdv, searchPDV, searchPDS, searchPVDS])
 
-  return {
-    searchPDV,
-    searchPDS,
-    searchPVDS,
-    setSearchPDV,
-    setSearchPDS,
-    setSearchPVDS,
-    filteredPDV
-  }
+  return { searchPDV, searchPDS, searchPVDS, setSearchPDV, setSearchPDS, setSearchPVDS, filteredPDV }
 }
