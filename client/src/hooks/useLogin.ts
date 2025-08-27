@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { type User } from '../types/user'
 // import { URL_API_LOGIN } from '../utils/constans'
 import axios from 'axios'
+import { API_URL } from '../utils/constans'
 
 export function useLogin (): {
   username: string
@@ -23,7 +24,7 @@ export function useLogin (): {
   const handleSubmit = (ev: React.FormEvent): void => {
     ev.preventDefault()
     // axios.post('http://localhost:3000/login', { username, password })
-    axios.post(`${API_URL}/login`, { username, password }) // Reemplaza 'APP_NAME' con el nombre de tu aplicación
+    axios.post(`${API_URL}/login`, { username, password }) // Reemplaza 'APP_NAME' con el nombre de tu aplicaciÃ³n
       .then((res) => {
         console.log('Respuesta del login:', res.data.user)
         if (res.status === 200) {
@@ -32,13 +33,13 @@ export function useLogin (): {
           setUsernames(res.data.user as unknown as User)
           navigate('/home')
         } else {
-          setErrorString('Datos de usuario inválidos.')
+          setErrorString('Datos de usuario invÃ¡lidos.')
         }
       })
 
       .catch((error) => {
         const errorMessage = (error.response?.data?.message ?? error.message) as string | undefined
-        setErrorString(errorMessage ?? 'Error al iniciar sesión')
+        setErrorString(errorMessage ?? 'Error al iniciar sesiÃ³n')
         setTimeout(() => {
           setErrorString('')
         }, 5000)

@@ -1,5 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom'
-import React, { lazy, Suspense } from 'react'
+import { lazy, Suspense } from 'react'
 import Root from './Root'
 
 const ArqueoForm = lazy(async () => await import('../pages/ArqueoForm'))
